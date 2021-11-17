@@ -2,3 +2,18 @@
 	font-family: sans-serif;
 	text-align: center;
 }
+
+.index-logo {
+	position: relative;
+	height: 60px;
+	padding: 0 12px;
+	overflow: hidden;
+	line-height: 64px;
+	background: #002140;
+	transition: all 0.3s;
+}
+
+.index-logo img {
+	display: inline-block;
+	width: 100%;
+}

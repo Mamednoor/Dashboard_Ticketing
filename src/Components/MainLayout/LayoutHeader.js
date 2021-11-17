@@ -8,6 +8,7 @@ const LayoutHeader = () => {
 		<Header
 			style={{
 				width: '100%',
+				background: '#002140',
 			}}
 		></Header>
 	)

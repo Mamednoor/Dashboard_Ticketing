@@ -16,7 +16,6 @@ export const MainLayout = ({ children }) => {
 				<Content
 					style={{
 						minHeight: '83vh',
-
 						margin: '24px 16px 0',
 						overflow: 'initial',
 						background: '#fff',

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Layout, Menu } from 'antd'
 import {
 	DashboardOutlined,
@@ -7,8 +9,10 @@ import {
 	CloudOutlined,
 	BarChartOutlined,
 } from '@ant-design/icons'
-import 'antd/dist/antd.css'
-import { Link } from 'react-router-dom'
+
+import { Wrapper } from '../Wrapper'
+
+import logo from '../../Assets/logo-MAK.png'
 
 const { Sider } = Layout
 
@@ -23,10 +27,16 @@ export const LayoutSider = () => {
 				overflow: 'auto',
 				height: '100vh',
 				position: 'sticky',
-				top: 10,
+				top: 0,
 				left: 0,
 			}}
 		>
+			<Wrapper className="index-logo">
+				<a href="/">
+					<img src={logo} alt="Logo de la societé MAK" />
+					<h1>App</h1>
+				</a>
+			</Wrapper>
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 				<Menu.Item key="1">
 					<Link to="/">

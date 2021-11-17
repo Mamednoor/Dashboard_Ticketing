@@ -9,6 +9,7 @@ import Chart from './Pages/Chart'
 import UsersList from './Pages/UsersList'
 
 import './App.css'
+import 'antd/dist/antd.css'
 
 function App() {
 	return (
