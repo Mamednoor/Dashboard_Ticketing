@@ -9,11 +9,9 @@ export const LayoutFooter = () => {
 		<Footer
 			style={{
 				textAlign: 'center',
-				bottom: '0px',
-				fontSize: '1rem',
 			}}
 		>
-			Ant Design ©2018 Created by Ant UED
+			Copyright &copy; {new Date().getFullYear()}
 		</Footer>
 	)
 }

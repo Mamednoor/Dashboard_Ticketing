@@ -3,6 +3,7 @@ import 'antd/dist/antd.css'
 import { Layout } from 'antd'
 import { LayoutSider } from './LayoutSider'
 import { LayoutFooter } from './LayoutFooter'
+import LayoutHeader from './LayoutHeader'
 
 const { Content } = Layout
 
@@ -11,9 +12,10 @@ export const MainLayout = ({ children }) => {
 		<Layout>
 			<LayoutSider />
 			<Layout>
+				<LayoutHeader />
 				<Content
 					style={{
-						minHeight: '90vh',
+						minHeight: '83vh',
 
 						margin: '24px 16px 0',
 						overflow: 'initial',
