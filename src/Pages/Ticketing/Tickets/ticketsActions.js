@@ -1,5 +1,6 @@
 import {
 	getAllTickets,
+	getAllUserTickets,
 	getTicketDetails,
 	updateTicketMessage,
 	closeTicket,
@@ -34,6 +35,17 @@ export const fetchAllTickets = () => async (dispatch) => {
 
 	try {
 		const result = await getAllTickets()
+		dispatch(fetchTicketsSuccess(result.data?.result))
+	} catch (error) {
+		dispatch(fetchTicketsError(error.message))
+	}
+}
+
+export const fetchAllUserTickets = () => async (dispatch) => {
+	dispatch(fetchTicketsLoading())
+
+	try {
+		const result = await getAllUserTickets()
 		dispatch(fetchTicketsSuccess(result.data?.result))
 	} catch (error) {
 		dispatch(fetchTicketsError(error.message))

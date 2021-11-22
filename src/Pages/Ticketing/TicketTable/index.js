@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Table as AntTable, Tag, Space, Button } from 'antd'
+import { Table as AntTable, /*Tag,*/ Space } from 'antd'
 
 import { P } from '../../../Components/P'
 
 import formatDate from '../../../utils'
-import { UpdateStatus } from './test'
+import { UpdateStatus } from './ActionsButton'
 
 const columns = [
 	{
@@ -71,7 +71,7 @@ const columns = [
 ]
 
 function Table() {
-	const { searchTerm, isLoading, error } = useSelector((state) => state.tickets)
+	const { searchTerm } = useSelector((state) => state.tickets)
 
 	console.log('search term', searchTerm)
 	return (

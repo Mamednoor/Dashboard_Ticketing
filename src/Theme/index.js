@@ -1,35 +1,25 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const lightTheme = {
-	bodyBg: 'white',
-	navBg: 'rgba(218, 218, 236, 0.33)',
-	headings: 'black',
+	bodyBg: 'whitesmoke',
 	text: 'black',
 	borderColor: '#ededed',
-	toggleIcon: '#212121',
 	mutedText: '#b1b1b1',
 	transitionTime: '.25s',
-	lightAccent: 'rgba(218, 218, 236, 0.23)',
-	underLine: '#e2e2e2',
 	links: '#212121',
-	Btn: '#17a2b8',
-	BtnHov: '#1890ff',
+	Btn: '#1890ff',
+	BtnHov: '#1d39c4',
 	Shadow: 'black',
 }
 export const darkTheme = {
 	bodyBg: '#141a2c',
-	navBg: 'rgba(218, 218, 236, 0.08)',
-	headings: 'white',
 	text: '#c1c1c1',
 	borderColor: '#212121',
-	toggleIcon: '#b1b1b1 ',
 	mutedText: '#515151',
 	transitionTime: '.25s',
-	lightAccent: 'rgba(218, 218, 236, 0.05)',
-	underLine: '#e2e2e2',
 	links: '#ededed',
-	Btn: '#177887',
-	BtnHov: '#1890ff',
+	Btn: '#1890ff',
+	BtnHovValidate: '#52c41a',
 	Shadow: 'white',
 }
 
@@ -49,4 +39,19 @@ body {
    font-weight:300;
    transition: all ${(props) => props.theme.transitionTime};
  }
+
+ .index-logo {
+	position: relative;
+	height: 60px;
+	padding: 0 12px;
+	overflow: hidden;
+	line-height: 64px;
+	background: #002140;
+	transition: all 0.3s;
+}
+
+.index-logo img {
+	display: inline-block;
+	width: 100%;
+}
 `

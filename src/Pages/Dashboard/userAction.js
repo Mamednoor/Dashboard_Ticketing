@@ -1,5 +1,5 @@
 import { userPending, userSuccess, userError } from './userSlice'
-import { fetchUser } from '../../../api'
+import { fetchUser } from '../../api'
 
 export const getUser = () => async (dispatch) => {
 	try {

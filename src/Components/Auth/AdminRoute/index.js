@@ -10,7 +10,7 @@ import { Spin } from '../../Spin'
 import { Centered } from '../../Centered'
 import { getUser } from '../../../Pages/Dashboard/userAction'
 
-function PrivateRoute({ children, ...rest }) {
+function AdminRoute({ children, ...rest }) {
 	const dispatch = useDispatch()
 	const { isLoading, isAuth } = useSelector((state) => state.login)
 	const { user } = useSelector((state) => state.user)
@@ -53,4 +53,4 @@ function PrivateRoute({ children, ...rest }) {
 	)
 }
 
-export default PrivateRoute
+export default AdminRoute

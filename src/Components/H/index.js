@@ -6,7 +6,7 @@ export const H1 = styled.h1`
 `
 
 export const H2 = styled.h2`
-	color: ${(props) => props.theme.Btn};
+	color: ${(props) => props.theme.text};
 	transition: color ${(props) => props.theme.transitionTime};
 `
 

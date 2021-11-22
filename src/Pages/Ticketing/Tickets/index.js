@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { fetchAllTickets } from './ticketsActions'
+import { fetchAllUserTickets } from './ticketsActions'
 
 import { H1 } from '../../../Components/H'
 import Table from '../TicketTable'
@@ -12,7 +12,7 @@ function Ticketing() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(fetchAllTickets())
+		dispatch(fetchAllUserTickets())
 	}, [dispatch])
 
 	return (

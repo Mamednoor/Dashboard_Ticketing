@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom'
 import { UserVerificationAccount } from '../../../api'
 
 import { Alert } from 'antd'
-import { Centered } from '../../common/Centered'
-import { CenteringCard } from '../../common/Card'
-import { CustomDivider } from '../../common/Divider'
-import { H2 } from '../../common/H'
-import { Spinner } from '../../common/Spin'
-import { CustomLink } from '../../common/Link'
+import { Centered } from '../../Centered'
+import { CenteringCard } from '../../Card'
+import { CustomDivider } from '../../Divider'
+import { H2 } from '../../H'
+import { Spin } from '../../Spin'
+import { CustomLink } from '../../Link'
 
-export const AccountValidation = () => {
+function AccountValidation() {
 	const [response, setResponse] = useState({
 		status: '',
 		message: '',
@@ -37,7 +37,7 @@ export const AccountValidation = () => {
 			</Centered>
 			<CustomDivider />
 			<Centered style={{ padding: ' 20px' }}>
-				{!response.status && <Spinner />}
+				{!response.status && <Spin />}
 
 				{response.status && (
 					<Alert
@@ -51,3 +51,5 @@ export const AccountValidation = () => {
 		</CenteringCard>
 	)
 }
+
+export default AccountValidation

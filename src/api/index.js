@@ -3,12 +3,30 @@ import axios from 'axios'
 /////// Ticket Part
 
 export const getAllTickets = () => {
+	const URL = 'http://localhost:8080/tickets/all'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.get(URL, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const getAllUserTickets = () => {
 	const URL = 'http://localhost:8080/tickets/'
 	return new Promise(async (resolve, reject) => {
 		try {
-			//const accessToken = sessionStorage.getItem('accessToken')
-			const accessToken =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWVkQG1hbWVkLmNvbSIsImlhdCI6MTYzNzU4OTc3OCwiZXhwIjoxNjM3NTk2OTc4fQ.2_Z1ADaSYCUdKx1b8jid1a4jS3fM64P51EGaDvD-oiE'
+			const accessToken = sessionStorage.getItem('accessToken')
+
 			const result = await axios.get(URL, {
 				headers: {
 					Authorization: accessToken,
@@ -98,9 +116,7 @@ export const progressTicket = (ticketID, _id, status) => {
 	const URL = 'http://localhost:8080/tickets/inprogress-ticket/'
 	return new Promise(async (resolve, reject) => {
 		try {
-			//const accessToken = sessionStorage.getItem('accessToken')
-			const accessToken =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWVkQG1hbWVkLmNvbSIsImlhdCI6MTYzNzU4OTc3OCwiZXhwIjoxNjM3NTk2OTc4fQ.2_Z1ADaSYCUdKx1b8jid1a4jS3fM64P51EGaDvD-oiE'
+			const accessToken = sessionStorage.getItem('accessToken')
 
 			const result = await axios.patch(URL + ticketID, status, {
 				headers: {
@@ -119,9 +135,7 @@ export const deleteTicket = (ticketID, _id) => {
 	const URL = 'http://localhost:8080/tickets/delete/'
 	return new Promise(async (resolve, reject) => {
 		try {
-			//const accessToken = sessionStorage.getItem('accessToken')
-			const accessToken =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWVkQG1hbWVkLmNvbSIsImlhdCI6MTYzNzU4OTc3OCwiZXhwIjoxNjM3NTk2OTc4fQ.2_Z1ADaSYCUdKx1b8jid1a4jS3fM64P51EGaDvD-oiE'
+			const accessToken = sessionStorage.getItem('accessToken')
 
 			const result = await axios.delete(URL + ticketID, {
 				headers: {
