@@ -60,9 +60,9 @@ export const LayoutSider = () => {
 				</Menu.Item>
 
 				<Menu.Item key="4">
-					<Link to="/reporting">
+					<Link to="/ticketing">
 						<CloudOutlined />
-						<span className="nav-text">Reporting</span>
+						<span className="nav-text">Ticketing</span>
 					</Link>
 				</Menu.Item>
 

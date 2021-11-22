@@ -4,7 +4,7 @@ import PrivateRoute from './Components/Auth/PrivateRoute'
 import Login from './Components/Auth/Login'
 import Dashboard from './Pages/Dashboard'
 import Home from './Pages/Home'
-import Reporting from './Pages/Reporting'
+import Ticketing from './Pages/Ticketing/Tickets'
 import Chart from './Pages/Chart'
 import UsersList from './Pages/UsersList'
 
@@ -21,8 +21,8 @@ function App() {
 				<PrivateRoute exact path="/">
 					<Home />
 				</PrivateRoute>
-				<PrivateRoute exact path="/reporting">
-					<Reporting />
+				<PrivateRoute exact path="/ticketing">
+					<Ticketing />
 				</PrivateRoute>
 				<PrivateRoute exact path="/chart">
 					<Chart />
