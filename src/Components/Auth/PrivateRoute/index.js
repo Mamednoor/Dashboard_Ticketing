@@ -40,12 +40,8 @@ function PrivateRoute({ children, ...rest }) {
 			) : (
 				<Route
 					{...rest}
-					render={({ location }) =>
-						isAuth ? (
-							<MainLayout> {children} </MainLayout>
-						) : (
-							<Redirect to={{ pathname: '/', state: { from: location } }} />
-						)
+					render={() =>
+						isAuth ? <MainLayout> {children} </MainLayout> : <Redirect to="/" />
 					}
 				/>
 			)}

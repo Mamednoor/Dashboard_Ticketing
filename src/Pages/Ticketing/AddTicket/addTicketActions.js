@@ -1,4 +1,4 @@
-import { openNewIssue } from '../../../../api'
+import { openNewIssue } from '../../../api'
 
 import {
 	addNewTicketPending,

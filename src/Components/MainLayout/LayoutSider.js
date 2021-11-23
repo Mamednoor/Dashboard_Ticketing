@@ -1,23 +1,39 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import { Layout, Menu } from 'antd'
+import { userLogout } from '../../api'
+import { loginInit } from '../Auth/Login/loginSlice'
+
+import { Layout, Menu, Button } from 'antd'
 import {
 	DashboardOutlined,
 	TeamOutlined,
 	AppstoreOutlined,
 	CloudOutlined,
 	BarChartOutlined,
+	LogoutOutlined,
 } from '@ant-design/icons'
 
 import { Wrapper } from '../Wrapper'
 
 import logo from '../../Assets/logo-MAK.png'
+import { Btn } from '../Button'
 
 const { Sider } = Layout
 
 export const LayoutSider = () => {
+	const history = useHistory()
+	const dispatch = useDispatch()
 	const [collapsed, setCollapsed] = useState(true)
+
+	const logOut = () => {
+		userLogout()
+		dispatch(loginInit())
+		history.push('/')
+	}
+
 	return (
 		<Sider
 			collapsible
@@ -39,7 +55,7 @@ export const LayoutSider = () => {
 			</Wrapper>
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 				<Menu.Item key="1">
-					<Link to="/">
+					<Link to="/home">
 						<AppstoreOutlined />
 						<span className="nav-text">Acceuil</span>
 					</Link>
@@ -71,6 +87,13 @@ export const LayoutSider = () => {
 						<TeamOutlined />
 						<span className="nav-text">UserList</span>
 					</Link>
+				</Menu.Item>
+
+				<Menu.Item key="6">
+					<Button style={{ padding: 0 }} onClick={() => logOut()} type="link">
+						<LogoutOutlined />
+						<span className="nav-text">Déconnexion</span>
+					</Button>
 				</Menu.Item>
 			</Menu>
 		</Sider>

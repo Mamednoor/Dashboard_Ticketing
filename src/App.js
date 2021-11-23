@@ -8,7 +8,7 @@ import UpdatePassword from './Components/Auth/ResetPassword/UpdatePassword'
 import AccountValidation from './Components/Auth/AccountValidation/AccountValidation'
 import Dashboard from './Pages/Dashboard'
 import Home from './Pages/Home'
-import Ticketing from './Pages/Ticketing/Tickets'
+import Ticketing from './Pages/Ticketing'
 import Chart from './Pages/Chart'
 import UsersList from './Pages/UsersList'
 
@@ -17,6 +17,8 @@ import { lightTheme, darkTheme, GlobalStyle } from './Theme/index'
 
 import './App.css'
 import 'antd/dist/antd.css'
+import AddTicket from './Pages/Ticketing/AddTicket'
+import { Ticket } from './Pages/Ticketing/Tickets'
 
 function App() {
 	const [theme] = useState('light')
@@ -48,6 +50,12 @@ function App() {
 					</PrivateRoute>
 					<PrivateRoute exact path="/ticketing">
 						<Ticketing />
+					</PrivateRoute>
+					<PrivateRoute exact path="/ticket/:ticketID">
+						<Ticket />
+					</PrivateRoute>
+					<PrivateRoute exact path="/add-ticket">
+						<AddTicket />
 					</PrivateRoute>
 					<PrivateRoute exact path="/chart">
 						<Chart />

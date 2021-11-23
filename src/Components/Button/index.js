@@ -5,11 +5,10 @@ export const Btn = styled.button`
 	cursor: pointer;
 	transition: color ${(props) => props.theme.transitionTime};
 	transition: background ${(props) => props.theme.transitionTime};
-	color: black;
+	color: white;
 	border-radius: 0.25rem;
 	border: 0px;
 	&:hover {
-		color: white;
 		background: ${(props) => props.theme.BtnHov};
 	}
 `

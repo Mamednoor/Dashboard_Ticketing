@@ -73,100 +73,98 @@ function Login() {
 		}
 	}
 	return (
-		<>
-			<CenteringCard>
-				{error && (
-					<Centered>
-						<Alert
-							message="Ooops... Une erreur est survenue, veuillez essayer ultérieurement"
-							description={message}
-							type="error"
-							showIcon
-						/>
-					</Centered>
-				)}
-
-				{isAuth && (
-					<Centered>
-						<Alert message="Connexion réussie" type="success" showIcon />
-					</Centered>
-				)}
+		<CenteringCard>
+			{error && (
 				<Centered>
-					<H2>Connexion</H2>
+					<Alert
+						message="Ooops... Une erreur est survenue, veuillez essayer ultérieurement"
+						description={message}
+						type="error"
+						showIcon
+					/>
 				</Centered>
+			)}
 
-				<CustomDivider />
-				<Centered style={{ padding: ' 20px' }}>
-					<Form
-						autoComplete="off"
-						onFinish={handleSubmit}
-						layout="horizontal"
-						form={form}
-						{...layout}
-					>
-						<FormItem
-							name="email"
-							label="Adresse Mail"
-							rules={[
-								{
-									required: true,
-									message: 'Veuillez renseigner votre identifiant',
-								},
-							]}
-							onChange={handleChange}
-						>
-							<Input name="email" placeholder="Email" value={email} />
-						</FormItem>
-						<FormItem
-							name="password"
-							label="Mot de passe"
-							rules={[
-								{
-									required: true,
-									message: 'Veuillez renseigner votre mot de passe',
-								},
-							]}
-							onChange={handleChange}
-						>
-							<Input.Password
-								name="password"
-								placeholder="Mot de passe"
-								value={password}
-							/>
-						</FormItem>
-
-						<FormItem name="remember" valuePropName="checked">
-							<Checkbox>Remember me</Checkbox>
-						</FormItem>
-
-						{isLoading ? (
-							<Centered>
-								<Spin />
-							</Centered>
-						) : (
-							<Btn
-								type="submit"
-								style={{ padding: '0.5rem 1rem', width: '100%' }}
-							>
-								Connexion
-							</Btn>
-						)}
-					</Form>
+			{isAuth && (
+				<Centered>
+					<Alert message="Connexion réussie" type="success" showIcon />
 				</Centered>
-				<CustomDivider />
+			)}
+			<Centered>
+				<H2>Connexion</H2>
+			</Centered>
 
-				<Flex
-					style={{
-						flexDirection: 'column',
-						alignItems: 'flex-start',
-						paddingTop: '15px',
-					}}
+			<CustomDivider />
+			<Centered style={{ padding: ' 20px' }}>
+				<Form
+					autoComplete="off"
+					onFinish={handleSubmit}
+					layout="horizontal"
+					form={form}
+					{...layout}
 				>
-					<CustomLink to="/forget-password">Mot de passe oublié ?</CustomLink>
-					<CustomLink to="/registration">Créer un compte</CustomLink>
-				</Flex>
-			</CenteringCard>
-		</>
+					<FormItem
+						name="email"
+						label="Adresse Mail"
+						rules={[
+							{
+								required: true,
+								message: 'Veuillez renseigner votre identifiant',
+							},
+						]}
+						onChange={handleChange}
+					>
+						<Input name="email" placeholder="Email" value={email} />
+					</FormItem>
+					<FormItem
+						name="password"
+						label="Mot de passe"
+						rules={[
+							{
+								required: true,
+								message: 'Veuillez renseigner votre mot de passe',
+							},
+						]}
+						onChange={handleChange}
+					>
+						<Input.Password
+							name="password"
+							placeholder="Mot de passe"
+							value={password}
+						/>
+					</FormItem>
+
+					<FormItem name="remember" valuePropName="checked">
+						<Checkbox>Remember me</Checkbox>
+					</FormItem>
+
+					{isLoading ? (
+						<Centered>
+							<Spin />
+						</Centered>
+					) : (
+						<Btn
+							type="submit"
+							style={{ padding: '0.5rem 1rem', width: '100%' }}
+						>
+							Connexion
+						</Btn>
+					)}
+				</Form>
+			</Centered>
+			<CustomDivider />
+
+			<Flex
+				style={{
+					flexDirection: 'column',
+					alignItems: 'flex-start',
+					paddingTop: '15px',
+				}}
+			>
+				<CustomLink to="/forget-password">Mot de passe oublié ?</CustomLink>
+				<CustomLink to="/registration">Créer un compte</CustomLink>
+			</Flex>
+		</CenteringCard>
 	)
 }
 

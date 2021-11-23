@@ -1,29 +1,142 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-import { fetchAllUserTickets } from './ticketsActions'
+import { Alert } from 'antd'
+import { fetchTicketDetails, ticketStatusClose } from './ticketsActions'
 
-import { H1 } from '../../../Components/H'
-import Table from '../TicketTable'
+import { TicketMessageInit } from './ticketsSlice'
+import formatDate from '../../../utils'
 
-import { SearchField } from '../../../Components/InputSearch'
+import MessageHistory from './MessageHistory'
+import ReplyTicket from './UpdateTicket'
 
-function Ticketing() {
+import { Centered } from '../../../Components/Centered'
+import { P } from '../../../Components/P'
+import { Flex } from '../../../Components/Flex'
+import { Btn } from '../../../Components/Button'
+import { ContentCard } from '../../../Components/Card'
+import { Spin } from '../../../Components/Spin'
+import Space from '../../../Components/Space'
+
+export const Ticket = ({ isAuth }) => {
+	const { ticketID } = useParams()
 	const dispatch = useDispatch()
+	const {
+		isLoading,
+		error,
+		ticketSelected,
+		ticketMessageSuccess,
+		ticketMessageError,
+		statusClose,
+	} = useSelector((state) => state.tickets)
 
 	useEffect(() => {
-		dispatch(fetchAllUserTickets())
-	}, [dispatch])
+		dispatch(fetchTicketDetails(ticketID))
+
+		if (ticketMessageError || statusClose || ticketMessageSuccess)
+			setTimeout(() => {
+				dispatch(TicketMessageInit())
+			}, 5000)
+	}, [
+		dispatch,
+		statusClose,
+		ticketID,
+		ticketMessageError,
+		ticketMessageSuccess,
+	])
 
 	return (
-		<div>
-			<H1 style={{ paddingTop: '10px' }}>Ticketing</H1>
+		<Centered style={{ flexDirection: 'column' }}>
+			{(error || ticketMessageError) && (
+				<Centered style={{ paddingTop: '10px' }}>
+					<Alert
+						message="L'opération à échouée"
+						description={
+							error.message ? error.message : ticketMessageError.message
+						}
+						type="error"
+						showIcon
+					/>
+				</Centered>
+			)}
 
-			<SearchField />
+			{statusClose && (
+				<Centered style={{ paddingTop: '10px' }}>
+					<Alert
+						message="Ce ticket à été fermé"
+						description={statusClose.message}
+						type="info"
+						showIcon
+					/>
+				</Centered>
+			)}
 
-			<Table />
-		</div>
+			{isLoading ? (
+				<Centered>
+					<Spin />
+				</Centered>
+			) : (
+				<>
+					<Flex className="action-container">
+						<Space
+							style={{
+								flexDirection: 'column',
+								alignItems: 'flex-start',
+							}}
+						>
+							<P>
+								<strong>Sujet :</strong> {ticketSelected?.subject}
+							</P>
+							<P>
+								<strong>Ticket ouvert le :</strong>{' '}
+								{formatDate(ticketSelected?.createdOn)}
+							</P>
+							<P>
+								<strong>Statut :</strong> {ticketSelected?.status}
+							</P>
+						</Space>
+						<Space>
+							{ticketSelected?.status === 'Fermé' ? (
+								<Btn style={{ padding: '0.5rem 1.5rem' }} disabled>
+									Fermer le ticket
+								</Btn>
+							) : (
+								<Btn
+									style={{ padding: '0.5rem 1.5rem' }}
+									onClick={() => dispatch(ticketStatusClose(ticketID))}
+								>
+									Fermer le ticket
+								</Btn>
+							)}
+						</Space>
+					</Flex>
+
+					<Centered style={{ flexDirection: 'column' }}>
+						<ContentCard>
+							{ticketSelected?.conversations && (
+								<MessageHistory message={ticketSelected?.conversations} />
+							)}
+						</ContentCard>
+					</Centered>
+
+					{ticketMessageSuccess && (
+						<Centered style={{ paddingTop: '10px' }}>
+							<Alert
+								message="Votre message a été envoyé avec succes"
+								type="success"
+								showIcon
+							/>
+						</Centered>
+					)}
+
+					<Centered>
+						<Space>
+							<ReplyTicket ticketID={ticketID} />
+						</Space>
+					</Centered>
+				</>
+			)}
+		</Centered>
 	)
 }
-
-export default Ticketing

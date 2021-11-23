@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Card } from 'antd'
 
 export const ContentCard = styled(Card)`
+	margin: 0 auto;
 	.ant-card-body {
 		border-radius: 0.25rem;
-		box-shadow: 0px 0px 15px -5px ${(props) => props.theme.Shadow};
 		overflow: auto;
 		height: 30rem;
 		width: 1400px;
@@ -19,7 +19,6 @@ export const ContentCard = styled(Card)`
 	font-size: 1.1rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	background-color: ${(props) => props.theme.bodyBg};
 	transition: all ${(props) => props.theme.transitionTime};
 `
 
