@@ -27,10 +27,11 @@ function Ticketing() {
 		if (isAdmin === false) {
 			dispatch(fetchUserTickets())
 		}
+
 		if (statusProgress || statusClose || deleting)
-			setTimeout(() => {
+			return setTimeout(() => {
 				dispatch(TicketMessageInit())
-			}, 5000)
+			}, 2000)
 	}, [deleting, dispatch, isAdmin, statusClose, statusProgress])
 
 	return (
@@ -44,6 +45,7 @@ function Ticketing() {
 					</Btn>
 				</Link>
 			</Space>
+
 			{statusClose && (
 				<Centered style={{ paddingBottom: '30px' }}>
 					<Alert message="Ce ticket à été fermé" type="warning" showIcon />

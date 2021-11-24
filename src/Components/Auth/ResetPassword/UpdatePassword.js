@@ -45,7 +45,7 @@ function UpdatePassword() {
 		if (status === 'success')
 			return setTimeout(() => {
 				dispatch(passwordResetInit()) && history.push('/login')
-			}, 5000)
+			}, 2000)
 	}, [dispatch, history, status])
 
 	const handleChange = (e) => {

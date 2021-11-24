@@ -46,7 +46,7 @@ function Registration() {
 		if (status === 'success') {
 			return setTimeout(() => {
 				dispatch(registrationInit()) && history.push('/')
-			}, 5000)
+			}, 2000)
 		}
 	}, [dispatch, history, status])
 

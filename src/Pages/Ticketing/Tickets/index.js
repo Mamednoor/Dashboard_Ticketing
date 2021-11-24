@@ -33,22 +33,26 @@ export const Ticket = () => {
 		ticketMessageSuccess,
 		ticketMessageError,
 		statusClose,
-		statusProgress,
-		deleting,
 	} = useSelector((state) => state.tickets)
 	const { isAdmin } = useSelector((state) => state.user.user)
 
 	useEffect(() => {
 		if (isAdmin === true) {
-			return dispatch(fetchDetails(ticketID))
-		} else {
-			dispatch(fetchTicketDetails(ticketID))
+			return (
+				dispatch(fetchDetails(ticketID)) &&
+				setTimeout(() => {
+					dispatch(TicketMessageInit())
+				}, 2000)
+			)
 		}
-
-		if (ticketMessageError || statusClose || ticketMessageSuccess)
-			setTimeout(() => {
-				dispatch(TicketMessageInit())
-			}, 5000)
+		if (isAdmin === false) {
+			return (
+				dispatch(fetchTicketDetails(ticketID)) &&
+				setTimeout(() => {
+					dispatch(TicketMessageInit())
+				}, 2000)
+			)
+		}
 	}, [
 		dispatch,
 		isAdmin,
@@ -60,13 +64,11 @@ export const Ticket = () => {
 
 	return (
 		<Centered style={{ flexDirection: 'column' }}>
-			{(error || ticketMessageError) && (
+			{error && (
 				<Centered style={{ paddingTop: '10px' }}>
 					<Alert
 						message="L'opération à échouée"
-						description={
-							error.message ? error.message : ticketMessageError.message
-						}
+						description={ticketMessageError}
 						type="error"
 						showIcon
 					/>
@@ -83,20 +85,12 @@ export const Ticket = () => {
 					/>
 				</Centered>
 			)}
-			{statusProgress && (
-				<Centered style={{ paddingBottom: '30px' }}>
+
+			{ticketMessageSuccess && (
+				<Centered style={{ paddingTop: '10px' }}>
 					<Alert
-						message="Vous avez pris le ticket en compte"
-						type="info"
-						showIcon
-					/>
-				</Centered>
-			)}
-			{deleting && (
-				<Centered style={{ paddingBottom: '30px' }}>
-					<Alert
-						message="Le ticket à été supprimé, cette action est irréversible"
-						type="error"
+						message="Votre message a été envoyé avec succes"
+						type="success"
 						showIcon
 					/>
 				</Centered>
@@ -151,16 +145,6 @@ export const Ticket = () => {
 							)}
 						</ContentCard>
 					</Centered>
-
-					{ticketMessageSuccess && (
-						<Centered style={{ paddingTop: '10px' }}>
-							<Alert
-								message="Votre message a été envoyé avec succes"
-								type="success"
-								showIcon
-							/>
-						</Centered>
-					)}
 
 					<Centered>
 						<Space>

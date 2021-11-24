@@ -2,43 +2,6 @@ import axios from 'axios'
 
 /////// Ticket Part
 
-export const getAllTickets = () => {
-	const URL = 'http://localhost:8080/tickets/all/'
-	return new Promise(async (resolve, reject) => {
-		try {
-			const accessToken = sessionStorage.getItem('accessToken')
-
-			const result = await axios.get(URL, {
-				headers: {
-					Authorization: accessToken,
-				},
-			})
-			resolve(result)
-		} catch (error) {
-			console.log('error message : ', error.message)
-			reject(error.message)
-		}
-	})
-}
-
-export const TicketDetails = (_id) => {
-	const URL = 'http://localhost:8080/tickets/all/'
-	return new Promise(async (resolve, reject) => {
-		try {
-			const accessToken = sessionStorage.getItem('accessToken')
-			const result = await axios.get(URL + _id, {
-				headers: {
-					Authorization: accessToken,
-				},
-			})
-			resolve(result)
-		} catch (error) {
-			console.log('error message : ', error.message)
-			reject(error.message)
-		}
-	})
-}
-
 export const getUserTickets = () => {
 	const URL = 'http://localhost:8080/tickets/'
 	return new Promise(async (resolve, reject) => {
@@ -347,3 +310,62 @@ export const updatePasswordRequest = (formData) => {
 }
 
 /////// Password Part
+
+//////////////// ADMIN /////////////////
+
+export const getAllTickets = () => {
+	const URL = 'http://localhost:8080/tickets/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.get(URL, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const TicketDetails = (_id) => {
+	const URL = 'http://localhost:8080/tickets/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.get(URL + _id, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const ReplyMessage = (ticketID, issueObjt) => {
+	const URL = 'http://localhost:8080/tickets/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.put(URL + ticketID, issueObjt, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result.data)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+//////////////// ADMIN /////////////////

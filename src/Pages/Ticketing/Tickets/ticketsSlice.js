@@ -5,8 +5,8 @@ const initialState = {
 	isLoading: false,
 	error: '',
 	ticketMessageError: '',
+	ticketMessageSuccess: '',
 	ticketSelected: {},
-	ticketMessageSuccess: false,
 	statusClose: false,
 	statusProgress: false,
 	deleting: false,
@@ -46,14 +46,15 @@ const listTicketsSlice = createSlice({
 		updateTicketMessageLoading: (state) => {
 			state.isLoading = true
 		},
-		updateTicketMessageSuccess: (state) => {
+		updateTicketMessageSuccess: (state, { payload }) => {
 			state.isLoading = false
-			state.error = false
+			state.error = payload
 			state.ticketMessageSuccess = true
 		},
 		updateTicketMessageError: (state, { payload }) => {
 			state.isLoading = false
-			state.ticketMessageError = payload
+			state.error = payload
+			state.ticketMessageError = true
 		},
 
 		ticketStatusCloseLoading: (state) => {
@@ -105,6 +106,7 @@ const listTicketsSlice = createSlice({
 
 		TicketMessageInit: (state) => {
 			state.isLoading = false
+			state.error = ''
 			state.ticketMessageSuccess = ''
 			state.ticketMessageError = ''
 			state.statusClose = ''
@@ -126,7 +128,6 @@ export const {
 	updateTicketMessageLoading,
 	updateTicketMessageSuccess,
 	updateTicketMessageError,
-	updateTicketMessageInit,
 	ticketStatusCloseLoading,
 	ticketStatusCloseSuccess,
 	ticketStatusCloseError,

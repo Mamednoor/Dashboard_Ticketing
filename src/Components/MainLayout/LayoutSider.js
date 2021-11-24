@@ -11,7 +11,7 @@ import {
 	DashboardOutlined,
 	TeamOutlined,
 	AppstoreOutlined,
-	CloudOutlined,
+	FolderOutlined,
 	BarChartOutlined,
 	LogoutOutlined,
 } from '@ant-design/icons'
@@ -76,7 +76,7 @@ export const LayoutSider = () => {
 
 				<Menu.Item key="4">
 					<Link to="/ticketing">
-						<CloudOutlined />
+						<FolderOutlined />
 						<span className="nav-text">Ticketing</span>
 					</Link>
 				</Menu.Item>

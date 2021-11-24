@@ -1,6 +1,7 @@
 import {
 	getAllTickets,
 	TicketDetails,
+	ReplyMessage,
 	getUserTickets,
 	getTicketDetails,
 	updateTicketMessage,
@@ -99,6 +100,23 @@ export const replyTicketMessage =
 		}
 	}
 
+/////////// ADMIN ///////////////////////
+export const replyMessage = (ticketID, message, sender) => async (dispatch) => {
+	dispatch(updateTicketMessageLoading())
+
+	try {
+		const result = await ReplyMessage(ticketID, message, sender)
+		console.log(result)
+		if (result.status === 'error') {
+			return dispatch(updateTicketMessageError(result.message.status))
+		}
+		dispatch(TicketDetails(ticketID))
+		dispatch(updateTicketMessageSuccess())
+	} catch (error) {
+		dispatch(updateTicketMessageError(error.message))
+	}
+}
+
 export const ticketStatusClose = (ticketID, _id) => async (dispatch) => {
 	dispatch(ticketStatusCloseLoading())
 
@@ -135,7 +153,7 @@ export const deletingTicket = (ticketID, _id) => async (dispatch) => {
 	dispatch(deleteTicketLoading())
 
 	try {
-		const result = await deleteTicket(ticketID)
+		const result = await (deleteTicket(ticketID) && getAllTickets())
 		if (result.status === 'error') {
 			return dispatch(deleteTicketError(result.message))
 		}
@@ -146,6 +164,8 @@ export const deletingTicket = (ticketID, _id) => async (dispatch) => {
 		dispatch(deleteTicketError(error.message))
 	}
 }
+
+/////////// ADMIN ///////////////////////
 
 export const searchingTicket = (searchTerm) => (dispatch) => {
 	dispatch(searchTicket(searchTerm))

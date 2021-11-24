@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { replyTicketMessage } from '../ticketsActions'
+import { replyTicketMessage, replyMessage } from '../ticketsActions'
 
 import { Form, Input } from 'antd'
 import { FormItem } from '../../../../Components/FormItem'
@@ -13,7 +13,9 @@ import { P } from '../../../../Components/P'
 function ReplyTicket({ ticketID }) {
 	const [form] = Form.useForm()
 	const dispatch = useDispatch()
-	const { firstname, lastname } = useSelector((state) => state.user.user)
+	const { firstname, lastname, isAdmin } = useSelector(
+		(state) => state.user.user,
+	)
 	const [message, setMessage] = useState('')
 
 	const handleChange = (e) => {
@@ -25,6 +27,9 @@ function ReplyTicket({ ticketID }) {
 		const issueObjt = {
 			sender: firstname + ' ' + lastname,
 			message,
+		}
+		if (isAdmin === true) {
+			dispatch(replyMessage(ticketID, issueObjt))
 		}
 		dispatch(replyTicketMessage(ticketID, issueObjt))
 	}

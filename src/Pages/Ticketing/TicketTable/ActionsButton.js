@@ -9,6 +9,7 @@ import {
 
 export function UpdateStatus({ ticketID }) {
 	const dispatch = useDispatch()
+
 	return (
 		<>
 			<Button

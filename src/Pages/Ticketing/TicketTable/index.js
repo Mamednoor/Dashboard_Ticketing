@@ -125,7 +125,6 @@ function Table() {
 	const { searchTerm } = useSelector((state) => state.tickets)
 	const { isAdmin } = useSelector((state) => state.user.user)
 
-	console.log('search term', searchTerm)
 	return (
 		<>
 			{isAdmin === true ? (
