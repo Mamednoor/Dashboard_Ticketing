@@ -3,7 +3,7 @@ import axios from 'axios'
 /////// Ticket Part
 
 export const getAllTickets = () => {
-	const URL = 'http://localhost:8080/tickets/all'
+	const URL = 'http://localhost:8080/tickets/all/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -21,7 +21,25 @@ export const getAllTickets = () => {
 	})
 }
 
-export const getAllUserTickets = () => {
+export const TicketDetails = (_id) => {
+	const URL = 'http://localhost:8080/tickets/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.get(URL + _id, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const getUserTickets = () => {
 	const URL = 'http://localhost:8080/tickets/'
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -94,7 +112,7 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 	})
 }
 
-export const closeTicket = (ticketID, _id, status) => {
+export const closeTicket = (ticketID, _id, isAdmin, status) => {
 	const URL = 'http://localhost:8080/tickets/close-ticket/'
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -112,7 +130,7 @@ export const closeTicket = (ticketID, _id, status) => {
 	})
 }
 
-export const progressTicket = (ticketID, _id, status) => {
+export const progressTicket = (ticketID, _id, isAdmin, status) => {
 	const URL = 'http://localhost:8080/tickets/inprogress-ticket/'
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -131,7 +149,7 @@ export const progressTicket = (ticketID, _id, status) => {
 	})
 }
 
-export const deleteTicket = (ticketID, _id) => {
+export const deleteTicket = (ticketID, _id, isAdmin) => {
 	const URL = 'http://localhost:8080/tickets/delete/'
 	return new Promise(async (resolve, reject) => {
 		try {

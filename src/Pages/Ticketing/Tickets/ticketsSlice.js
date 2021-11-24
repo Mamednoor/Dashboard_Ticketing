@@ -102,6 +102,7 @@ const listTicketsSlice = createSlice({
 				return item?.subject.toLowerCase().includes(payload.toLowerCase())
 			})
 		},
+
 		TicketMessageInit: (state) => {
 			state.isLoading = false
 			state.ticketMessageSuccess = ''

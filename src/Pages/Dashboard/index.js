@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchAllUserTickets } from '../Ticketing/Tickets/ticketsActions'
+import {
+	fetchAllTickets,
+	fetchUserTickets,
+} from '../Ticketing/Tickets/ticketsActions'
 
 import { H2 } from '../../Components/H'
 import { P } from '../../Components/P'
@@ -9,10 +12,16 @@ import { P } from '../../Components/P'
 function Dashboard() {
 	const dispatch = useDispatch()
 	const { tickets } = useSelector((state) => state.tickets)
+	const { isAdmin } = useSelector((state) => state.user.user)
 
 	useEffect(() => {
-		dispatch(fetchAllUserTickets())
-	}, [dispatch])
+		if (isAdmin === true) {
+			dispatch(fetchAllTickets())
+		}
+		if (isAdmin === false) {
+			dispatch(fetchUserTickets())
+		}
+	}, [dispatch, isAdmin])
 
 	// eslint-disable-next-line eqeqeq
 	const pendingTicket = tickets?.filter((elm) => elm?.status == 'En Attente')

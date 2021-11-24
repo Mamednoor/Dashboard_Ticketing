@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { Alert } from 'antd'
-import { fetchTicketDetails, ticketStatusClose } from './ticketsActions'
+import {
+	fetchDetails,
+	fetchTicketDetails,
+	ticketStatusClose,
+} from './ticketsActions'
 
 import { TicketMessageInit } from './ticketsSlice'
 import formatDate from '../../../utils'
@@ -19,7 +23,7 @@ import { ContentCard } from '../../../Components/Card'
 import { Spin } from '../../../Components/Spin'
 import Space from '../../../Components/Space'
 
-export const Ticket = ({ isAuth }) => {
+export const Ticket = () => {
 	const { ticketID } = useParams()
 	const dispatch = useDispatch()
 	const {
@@ -29,10 +33,17 @@ export const Ticket = ({ isAuth }) => {
 		ticketMessageSuccess,
 		ticketMessageError,
 		statusClose,
+		statusProgress,
+		deleting,
 	} = useSelector((state) => state.tickets)
+	const { isAdmin } = useSelector((state) => state.user.user)
 
 	useEffect(() => {
-		dispatch(fetchTicketDetails(ticketID))
+		if (isAdmin === true) {
+			return dispatch(fetchDetails(ticketID))
+		} else {
+			dispatch(fetchTicketDetails(ticketID))
+		}
 
 		if (ticketMessageError || statusClose || ticketMessageSuccess)
 			setTimeout(() => {
@@ -40,6 +51,7 @@ export const Ticket = ({ isAuth }) => {
 			}, 5000)
 	}, [
 		dispatch,
+		isAdmin,
 		statusClose,
 		ticketID,
 		ticketMessageError,
@@ -71,6 +83,24 @@ export const Ticket = ({ isAuth }) => {
 					/>
 				</Centered>
 			)}
+			{statusProgress && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert
+						message="Vous avez pris le ticket en compte"
+						type="info"
+						showIcon
+					/>
+				</Centered>
+			)}
+			{deleting && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert
+						message="Le ticket à été supprimé, cette action est irréversible"
+						type="error"
+						showIcon
+					/>
+				</Centered>
+			)}
 
 			{isLoading ? (
 				<Centered>
@@ -96,20 +126,22 @@ export const Ticket = ({ isAuth }) => {
 								<strong>Statut :</strong> {ticketSelected?.status}
 							</P>
 						</Space>
-						<Space>
-							{ticketSelected?.status === 'Fermé' ? (
-								<Btn style={{ padding: '0.5rem 1.5rem' }} disabled>
-									Fermer le ticket
-								</Btn>
-							) : (
-								<Btn
-									style={{ padding: '0.5rem 1.5rem' }}
-									onClick={() => dispatch(ticketStatusClose(ticketID))}
-								>
-									Fermer le ticket
-								</Btn>
-							)}
-						</Space>
+						{isAdmin === true && (
+							<Space>
+								{ticketSelected?.status === 'Fermé' ? (
+									<Btn style={{ padding: '0.5rem 1.5rem' }} disabled>
+										Fermer le ticket
+									</Btn>
+								) : (
+									<Btn
+										style={{ padding: '0.5rem 1.5rem' }}
+										onClick={() => dispatch(ticketStatusClose(ticketID))}
+									>
+										Fermer le ticket
+									</Btn>
+								)}
+							</Space>
+						)}
 					</Flex>
 
 					<Centered style={{ flexDirection: 'column' }}>

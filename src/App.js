@@ -11,6 +11,7 @@ import Home from './Pages/Home'
 import Ticketing from './Pages/Ticketing'
 import Chart from './Pages/Chart'
 import UsersList from './Pages/UsersList'
+import NotFound from './Components/404'
 
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme, GlobalStyle } from './Theme/index'
@@ -37,10 +38,9 @@ function App() {
 					<Route exact path="/forget-password">
 						<ResetPassword />
 					</Route>
-					<Route exact path="/reset-password">
+					<Route exact path="/reset-password/:_id/:email">
 						<UpdatePassword />
 					</Route>
-
 					<Route exact path="/validation/:_id/:email">
 						<AccountValidation />
 					</Route>
@@ -66,6 +66,9 @@ function App() {
 					<PrivateRoute exact path="/dashboard">
 						<Dashboard />
 					</PrivateRoute>
+					<Route path="*">
+						<NotFound />
+					</Route>
 				</Switch>
 			</ThemeProvider>
 		</>

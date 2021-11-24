@@ -1,22 +1,37 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchAllUserTickets } from './Tickets/ticketsActions'
+import { fetchAllTickets, fetchUserTickets } from './Tickets/ticketsActions'
+
+import { Alert } from 'antd'
 
 import { H2 } from '../../Components/H'
 import Table from './TicketTable'
-
 import { SearchField } from '../../Components/InputSearch'
 import { Btn } from '../../Components/Button'
 import Space from '../../Components/Space'
 import { Link } from 'react-router-dom'
+import { Centered } from '../../Components/Centered'
+import { TicketMessageInit } from './Tickets/ticketsSlice'
 
 function Ticketing() {
 	const dispatch = useDispatch()
-
+	const { isAdmin } = useSelector((state) => state.user.user)
+	const { statusProgress, deleting, statusClose } = useSelector(
+		(state) => state.tickets,
+	)
 	useEffect(() => {
-		dispatch(fetchAllUserTickets())
-	}, [dispatch])
+		if (isAdmin === true) {
+			dispatch(fetchAllTickets())
+		}
+		if (isAdmin === false) {
+			dispatch(fetchUserTickets())
+		}
+		if (statusProgress || statusClose || deleting)
+			setTimeout(() => {
+				dispatch(TicketMessageInit())
+			}, 5000)
+	}, [deleting, dispatch, isAdmin, statusClose, statusProgress])
 
 	return (
 		<>
@@ -29,6 +44,29 @@ function Ticketing() {
 					</Btn>
 				</Link>
 			</Space>
+			{statusClose && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert message="Ce ticket à été fermé" type="warning" showIcon />
+				</Centered>
+			)}
+			{statusProgress && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert
+						message="Vous avez pris le ticket en compte"
+						type="info"
+						showIcon
+					/>
+				</Centered>
+			)}
+			{deleting && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert
+						message="Le ticket à été supprimé, cette action est irréversible"
+						type="error"
+						showIcon
+					/>
+				</Centered>
+			)}
 			<Table />
 		</>
 	)

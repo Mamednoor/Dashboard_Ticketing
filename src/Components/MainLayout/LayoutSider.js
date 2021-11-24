@@ -19,7 +19,6 @@ import {
 import { Wrapper } from '../Wrapper'
 
 import logo from '../../Assets/logo-MAK.png'
-import { Btn } from '../Button'
 
 const { Sider } = Layout
 
