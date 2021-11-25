@@ -106,7 +106,6 @@ export const replyMessage = (ticketID, message, sender) => async (dispatch) => {
 
 	try {
 		const result = await ReplyMessage(ticketID, message, sender)
-		console.log(result)
 		if (result.status === 'error') {
 			return dispatch(updateTicketMessageError(result.message.status))
 		}

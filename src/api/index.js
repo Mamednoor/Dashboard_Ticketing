@@ -140,7 +140,6 @@ export const createUser = (formData) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.post(URL, formData)
-			// console.log('res data connexion : ', res.data.status)
 
 			resolve(res.data)
 
@@ -165,7 +164,6 @@ export const UserVerificationAccount = (formData) => {
 			const res = await axios.patch(URL, formData)
 
 			resolve(res.data)
-			console.log('res.data :', res.data)
 			if (res.data.status === 'success') {
 				resolve(res.data)
 			}
@@ -184,7 +182,6 @@ export const userLogin = (loginData) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.post(URL, loginData)
-			// console.log('res data connexion : ', res.data.status)
 			if (res.data.status === 'success') {
 				sessionStorage.setItem('accessToken', res.data.accessToken)
 				sessionStorage.setItem('refreshToken', res.data.refreshToken)
@@ -287,7 +284,6 @@ export const resetPasswordRequest = (email) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const { data } = await axios.post(URL, { email })
-			//console.log('data forgetPassword', data)
 			resolve(data)
 		} catch (error) {
 			reject(error)

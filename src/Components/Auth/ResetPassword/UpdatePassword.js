@@ -72,15 +72,12 @@ function UpdatePassword() {
 		ANTDmessage.error('Les informations renseignées sont incorrectes')
 	}
 
-	console.log('email : ', email)
-
 	const handleSubmit = (values) => {
 		const formData = {
 			resetCode: values.resetCode,
 			newPassword: values.newPassword,
 			email,
 		}
-		console.log('formData : ', formData)
 		dispatch(updatePassword({ ...formData }))
 	}
 	return (

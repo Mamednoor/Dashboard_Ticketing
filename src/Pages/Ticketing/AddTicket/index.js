@@ -46,12 +46,7 @@ function AddTicket() {
 			//picture: values.picture,
 		}
 		dispatch(openNewTicket({ ...addIssue, sender: firstname + ' ' + lastname }))
-
-		console.log('addIssue :', addIssue)
-		//console.log('value type', values.picture)
 	}
-
-	console.log('Data formulaire', form.getFieldValue())
 
 	return (
 		<>
