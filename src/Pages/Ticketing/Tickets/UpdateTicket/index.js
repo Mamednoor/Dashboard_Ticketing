@@ -31,7 +31,9 @@ function ReplyTicket({ ticketID }) {
 		if (isAdmin === true) {
 			dispatch(replyMessage(ticketID, issueObjt))
 		}
-		dispatch(replyTicketMessage(ticketID, issueObjt))
+		if (isAdmin === false) {
+			dispatch(replyTicketMessage(ticketID, issueObjt))
+		}
 	}
 	return (
 		<Form layout="horizontal" size="large" form={form} onFinish={handleSubmit}>

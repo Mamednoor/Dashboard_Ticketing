@@ -75,64 +75,6 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 	})
 }
 
-export const closeTicket = (ticketID, _id, isAdmin, status) => {
-	const URL = 'http://localhost:8080/tickets/close-ticket/'
-	return new Promise(async (resolve, reject) => {
-		try {
-			const accessToken = sessionStorage.getItem('accessToken')
-			const result = await axios.patch(URL + ticketID, status, {
-				headers: {
-					Authorization: accessToken,
-				},
-			})
-			resolve(result)
-		} catch (error) {
-			console.log('error message : ', error.message)
-			reject(error.message)
-		}
-	})
-}
-
-export const progressTicket = (ticketID, _id, isAdmin, status) => {
-	const URL = 'http://localhost:8080/tickets/inprogress-ticket/'
-	return new Promise(async (resolve, reject) => {
-		try {
-			const accessToken = sessionStorage.getItem('accessToken')
-
-			const result = await axios.patch(URL + ticketID, status, {
-				headers: {
-					Authorization: accessToken,
-				},
-			})
-			resolve(result)
-		} catch (error) {
-			console.log('error message : ', error.message)
-			reject(error.message)
-		}
-	})
-}
-
-export const deleteTicket = (ticketID, _id, isAdmin) => {
-	const URL = 'http://localhost:8080/tickets/delete/'
-	return new Promise(async (resolve, reject) => {
-		try {
-			const accessToken = sessionStorage.getItem('accessToken')
-
-			const result = await axios.delete(URL + ticketID, {
-				headers: {
-					Authorization: accessToken,
-				},
-			})
-			resolve(result)
-		} catch (error) {
-			console.log('error message : ', error.message)
-			reject(error.message)
-		}
-	})
-}
-
-/////// Ticket Part
-
 /////// Registration Part
 
 export const createUser = (formData) => {
@@ -153,8 +95,6 @@ export const createUser = (formData) => {
 	})
 }
 
-/////// Registration Part
-
 /////// Accounte verification Part
 
 export const UserVerificationAccount = (formData) => {
@@ -172,8 +112,6 @@ export const UserVerificationAccount = (formData) => {
 		}
 	})
 }
-
-/////// Accounte verification Part
 
 /////// User Part
 
@@ -275,8 +213,6 @@ export const refreshAccessToken = () => {
 	})
 }
 
-/////// User Part
-
 /////// Password Part
 
 export const resetPasswordRequest = (email) => {
@@ -304,8 +240,6 @@ export const updatePasswordRequest = (formData) => {
 		}
 	})
 }
-
-/////// Password Part
 
 //////////////// ADMIN /////////////////
 
@@ -356,7 +290,64 @@ export const ReplyMessage = (ticketID, issueObjt) => {
 					Authorization: accessToken,
 				},
 			})
+			console.log(result.data)
 			resolve(result.data)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const closeTicket = (ticketID, _id, isAdmin, status) => {
+	const URL = 'http://localhost:8080/tickets/close-ticket/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.patch(URL + ticketID, status, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const progressTicket = (ticketID, _id, isAdmin, status) => {
+	const URL = 'http://localhost:8080/tickets/inprogress-ticket/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.patch(URL + ticketID, status, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const deleteTicket = (ticketID, _id, isAdmin) => {
+	const URL = 'http://localhost:8080/tickets/delete/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.delete(URL + ticketID, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
 		} catch (error) {
 			console.log('error message : ', error.message)
 			reject(error.message)

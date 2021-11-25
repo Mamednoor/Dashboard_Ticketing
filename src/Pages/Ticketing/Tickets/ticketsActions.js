@@ -93,7 +93,7 @@ export const replyTicketMessage =
 			if (result.status === 'error') {
 				return dispatch(updateTicketMessageError(result.message.status))
 			}
-			dispatch(fetchTicketDetails(ticketID))
+			//dispatch(fetchTicketDetails(ticketID))
 			dispatch(updateTicketMessageSuccess())
 		} catch (error) {
 			dispatch(updateTicketMessageError(error.message))
@@ -109,7 +109,7 @@ export const replyMessage = (ticketID, message, sender) => async (dispatch) => {
 		if (result.status === 'error') {
 			return dispatch(updateTicketMessageError(result.message.status))
 		}
-		dispatch(TicketDetails(ticketID))
+		//dispatch(TicketDetails(ticketID))
 		dispatch(updateTicketMessageSuccess())
 	} catch (error) {
 		dispatch(updateTicketMessageError(error.message))
