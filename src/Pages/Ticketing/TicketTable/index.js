@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Table as AntTable, /*Tag,*/ Space } from 'antd'
+import { Table as AntTable, Tag, Space } from 'antd'
 
 import { P } from '../../../Components/P'
 
@@ -19,7 +19,7 @@ const Admincolumns = [
 		title: 'Sujets',
 		dataIndex: 'subject',
 		key: '_id',
-		render: (subject, tickets, _id) => (
+		render: (subject, tickets) => (
 			<Link to={`/ticket/${tickets._id}`}>{subject}</Link>
 		),
 	},
@@ -28,6 +28,44 @@ const Admincolumns = [
 		dataIndex: 'status',
 		key: 'status',
 		width: '10%',
+		render: (status) => (
+			<>
+				{status === 'En Attente' && (
+					<Tag color="geekblue" key={status}>
+						{status}
+					</Tag>
+				)}
+				{status === 'En Cours' && (
+					<Tag color="green" key={status}>
+						{status}
+					</Tag>
+				)}
+				{status === 'Fermé' && (
+					<Tag color="volcano" key={status}>
+						{status}
+					</Tag>
+				)}
+			</>
+		),
+		filters: [
+			{
+				text: 'En Attente',
+				value: 'En Attente',
+				color: 'volcano',
+			},
+			{
+				text: 'En Cours',
+				value: 'En Cours',
+			},
+			{
+				text: 'Fermé',
+				value: 'Fermé',
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.status === value
+		},
 	},
 	{
 		title: 'Date de création',
@@ -36,27 +74,7 @@ const Admincolumns = [
 		width: '10%',
 		render: (date) => <P>{formatDate(date)}</P>,
 	},
-	// {
-	// 	title: 'Tags',
-	// 	key: 'tags',
-	// 	dataIndex: 'tags',
-	// 	width: '20%',
-	// 	render: (tags) => (
-	// 		<>
-	// 			{tags.map((tag) => {
-	// 				let color = tag.length > 5 ? 'geekblue' : 'green'
-	// 				if (tag === 'loser') {
-	// 					color = 'volcano'
-	// 				}
-	// 				return (
-	// 					<Tag color={color} key={tag}>
-	// 						{tag.toUpperCase()}
-	// 					</Tag>
-	// 				)
-	// 			})}
-	// 		</>
-	// 	),
-	// },
+
 	{
 		title: 'Actions',
 		dataIndex: '_id',
@@ -90,6 +108,44 @@ const columns = [
 		dataIndex: 'status',
 		key: 'status',
 		width: '10%',
+		render: (status) => (
+			<>
+				{status === 'En Attente' && (
+					<Tag color="geekblue" key={status}>
+						{status}
+					</Tag>
+				)}
+				{status === 'En Cours' && (
+					<Tag color="green" key={status}>
+						{status}
+					</Tag>
+				)}
+				{status === 'Fermé' && (
+					<Tag color="volcano" key={status}>
+						{status}
+					</Tag>
+				)}
+			</>
+		),
+		filters: [
+			{
+				text: 'En Attente',
+				value: 'En Attente',
+				color: 'volcano',
+			},
+			{
+				text: 'En Cours',
+				value: 'En Cours',
+			},
+			{
+				text: 'Fermé',
+				value: 'Fermé',
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.status === value
+		},
 	},
 	{
 		title: 'Date de création',
@@ -98,27 +154,6 @@ const columns = [
 		width: '10%',
 		render: (date) => <P>{formatDate(date)}</P>,
 	},
-	// {
-	// 	title: 'Tags',
-	// 	key: 'tags',
-	// 	dataIndex: 'tags',
-	// 	width: '20%',
-	// 	render: (tags) => (
-	// 		<>
-	// 			{tags.map((tag) => {
-	// 				let color = tag.length > 5 ? 'geekblue' : 'green'
-	// 				if (tag === 'loser') {
-	// 					color = 'volcano'
-	// 				}
-	// 				return (
-	// 					<Tag color={color} key={tag}>
-	// 						{tag.toUpperCase()}
-	// 					</Tag>
-	// 				)
-	// 			})}
-	// 		</>
-	// 	),
-	// },
 ]
 
 function Table() {
@@ -129,6 +164,7 @@ function Table() {
 		<>
 			{isAdmin === true ? (
 				<AntTable
+					rowKey="_id"
 					columns={Admincolumns}
 					dataSource={searchTerm}
 					bordered
@@ -136,6 +172,7 @@ function Table() {
 				/>
 			) : (
 				<AntTable
+					rowKey="_id"
 					columns={columns}
 					dataSource={searchTerm}
 					bordered

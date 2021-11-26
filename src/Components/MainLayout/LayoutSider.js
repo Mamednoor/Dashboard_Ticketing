@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { userLogout } from '../../api'
 import { loginInit } from '../Auth/Login/loginSlice'
@@ -25,6 +25,8 @@ const { Sider } = Layout
 export const LayoutSider = () => {
 	const history = useHistory()
 	const dispatch = useDispatch()
+	const { isAdmin } = useSelector((state) => state.user.user)
+
 	const [collapsed, setCollapsed] = useState(true)
 
 	const logOut = () => {
@@ -47,10 +49,9 @@ export const LayoutSider = () => {
 			}}
 		>
 			<Wrapper className="index-logo">
-				<a href="/">
+				<Link to="/">
 					<img src={logo} alt="Logo de la societé MAK" />
-					<h1>App</h1>
-				</a>
+				</Link>
 			</Wrapper>
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 				<Menu.Item key="1">
@@ -68,25 +69,29 @@ export const LayoutSider = () => {
 				</Menu.Item>
 
 				<Menu.Item key="3">
-					<Link to="/chart">
-						<BarChartOutlined />
-						<span className="nav-text">Statistique</span>
-					</Link>
-				</Menu.Item>
-
-				<Menu.Item key="4">
 					<Link to="/ticketing">
 						<FolderOutlined />
 						<span className="nav-text">Ticketing</span>
 					</Link>
 				</Menu.Item>
 
-				<Menu.Item key="5">
-					<Link to="/userslist">
-						<TeamOutlined />
-						<span className="nav-text">UserList</span>
-					</Link>
-				</Menu.Item>
+				{isAdmin && (
+					<>
+						<Menu.Item key="4">
+							<Link to="/chart">
+								<BarChartOutlined />
+								<span className="nav-text">Statistique</span>
+							</Link>
+						</Menu.Item>
+
+						<Menu.Item key="5">
+							<Link to="/userslist">
+								<TeamOutlined />
+								<span className="nav-text">UserList</span>
+							</Link>
+						</Menu.Item>
+					</>
+				)}
 
 				<Menu.Item key="6">
 					<Button style={{ padding: 0 }} onClick={() => logOut()} type="link">

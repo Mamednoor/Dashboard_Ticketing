@@ -40,3 +40,10 @@ export const CenteringCard = styled(Card)`
 	background-color: ${(props) => props.theme.bodyBg};
 	transition: all ${(props) => props.theme.transitionTime};
 `
+export const UserCard = styled(Card)`
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	margin: 15px;
+	border: 1px solid black;
+`

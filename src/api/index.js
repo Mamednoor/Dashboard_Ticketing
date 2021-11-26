@@ -355,4 +355,41 @@ export const deleteTicket = (ticketID, _id, isAdmin) => {
 	})
 }
 
+export const getUsersList = () => {
+	const URL = 'http://localhost:8080/users/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.get(URL, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
+export const getUserDetails = (_id) => {
+	const URL = 'http://localhost:8080/users/all/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.get(URL + _id, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			console.log('error message : ', error.message)
+			reject(error.message)
+		}
+	})
+}
+
 //////////////// ADMIN /////////////////

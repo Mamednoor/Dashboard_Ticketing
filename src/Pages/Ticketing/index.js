@@ -7,15 +7,17 @@ import { Alert } from 'antd'
 
 import { H2 } from '../../Components/H'
 import Table from './TicketTable'
-import { SearchField } from '../../Components/InputSearch'
+import { SearchFieldTicket } from '../../Components/InputSearch'
 import { Btn } from '../../Components/Button'
 import Space from '../../Components/Space'
 import { Link } from 'react-router-dom'
 import { Centered } from '../../Components/Centered'
 import { TicketMessageInit } from './Tickets/ticketsSlice'
+import TicketCount from '../../Components/TicketCount'
 
 function Ticketing() {
 	const dispatch = useDispatch()
+	const { tickets } = useSelector((state) => state.tickets)
 	const { isAdmin } = useSelector((state) => state.user.user)
 	const { statusProgress, deleting, statusClose } = useSelector(
 		(state) => state.tickets,
@@ -37,14 +39,16 @@ function Ticketing() {
 	return (
 		<>
 			<H2 style={{ padding: '10px' }}>Listes des tickets</H2>
+
 			<Space>
-				<SearchField />
+				<SearchFieldTicket />
 				<Link to="/add-ticket">
 					<Btn style={{ padding: '0.5rem 1rem' }}>
 						Ajouter un nouveau ticket
 					</Btn>
 				</Link>
 			</Space>
+			<TicketCount tickets={tickets} />
 
 			{statusClose && (
 				<Centered style={{ paddingBottom: '30px' }}>

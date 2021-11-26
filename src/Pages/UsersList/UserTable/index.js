@@ -1,88 +1,135 @@
 import React from 'react'
-import { Table as AntTable, Tag, Space } from 'antd'
+import { useSelector } from 'react-redux'
+import { Table as AntTable, Tag } from 'antd'
+import { Link } from 'react-router-dom'
 
 const columns = [
 	{
-		title: 'Name',
-		dataIndex: 'name',
-		key: 'name',
-		render: (text) => <a href="!#">{text}</a>,
+		title: 'ID',
+		dataIndex: '_id',
+		key: '_id',
+		width: '25%',
 	},
 	{
-		title: 'Age',
-		dataIndex: 'age',
-		key: 'age',
-	},
-	{
-		title: 'Address',
-		dataIndex: 'address',
-		key: 'address',
-	},
-	{
-		title: 'Tags',
-		key: 'tags',
-		dataIndex: 'tags',
-		render: (tags) => (
-			<>
-				{tags.map((tag) => {
-					let color = tag.length > 5 ? 'geekblue' : 'green'
-					if (tag === 'loser') {
-						color = 'volcano'
-					}
-					return (
-						<Tag color={color} key={tag}>
-							{tag.toUpperCase()}
-						</Tag>
-					)
-				})}
-			</>
+		title: 'Nom',
+		dataIndex: 'firstname',
+		key: '_id',
+		render: (firstname, usersList) => (
+			<Link to={`/user/${usersList._id}`}>
+				{firstname} {usersList?.lastname}
+			</Link>
 		),
 	},
 	{
-		title: 'Action',
-		key: 'action',
-		render: (text, record) => (
-			<Space size="middle">
-				<a href="!#">Invite {record.name}</a>
-				<a href="!#">Delete</a>
-			</Space>
+		title: 'Email',
+		dataIndex: 'email',
+		key: 'email',
+	},
+	{
+		title: 'Téléphone',
+		dataIndex: 'phone',
+		key: 'phone',
+	},
+	{
+		title: 'Status',
+		dataIndex: 'isVerified',
+		key: 'isVerified',
+		render: (isVerified) => (
+			<Tag color={isVerified ? 'green' : 'volcano'} key={isVerified}>
+				{isVerified ? 'Validé' : 'En attente'}
+			</Tag>
 		),
-	},
-]
-
-const data = [
-	{
-		key: '1',
-		name: 'John Brown',
-		age: 32,
-		address: 'New York No. 1 Lake Park',
-		tags: ['nice', 'developer'],
-	},
-	{
-		key: '2',
-		name: 'Jim Green',
-		age: 42,
-		address: 'London No. 1 Lake Park',
-		tags: ['loser'],
+		filters: [
+			{
+				text: 'Validé',
+				value: true,
+			},
+			{
+				text: 'En attente',
+				value: false,
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.isVerified === value
+		},
 	},
 	{
-		key: '3',
-		name: 'Joe Black',
-		age: 32,
-		address: 'Sidney No. 1 Lake Park',
-		tags: ['cool', 'teacher'],
+		title: 'Rôle',
+		dataIndex: 'isAdmin',
+		key: 'isAdmin',
+		render: (isAdmin) => (
+			<Tag color={isAdmin ? 'purple' : 'geekblue'} key={isAdmin}>
+				{isAdmin ? 'Admin' : 'Utilisateur'}
+			</Tag>
+		),
+		filters: [
+			{
+				text: 'Admin',
+				value: true,
+			},
+			{
+				text: 'Utilisateur',
+				value: false,
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.isAdmin === value
+		},
 	},
+	// {
+	// 	title: 'Address',
+	// 	dataIndex: 'address',
+	// 	key: 'address',
+	// },
+	// {
+	// 	title: 'Tags',
+	// 	key: 'tags',
+	// 	dataIndex: 'tags',
+	// 	render: (tags) => (
+	// 		<>
+	// 			{tags.map((tag) => {
+	// 				let color = tag.length > 5 ? 'geekblue' : 'green'
+	// 				if (tag === 'loser') {
+	// 					color = 'volcano'
+	// 				}
+	// 				return (
+	// 					<Tag color={color} key={tag}>
+	// 						{tag.toUpperCase()}
+	// 					</Tag>
+	// 				)
+	// 			})}
+	// 		</>
+	// 	),
+	// },
+	// {
+	// 	title: 'Action',
+	// 	key: 'action',
+	// 	render: (text, record) => (
+	// 		<Space size="middle">
+	// 			<a href="!#">Invite {record.name}</a>
+	// 			<a href="!#">Delete</a>
+	// 		</Space>
+	// 	),
+	// },
 ]
 
 function UserTable() {
+	const { searchTerm } = useSelector((state) => state.userList)
+	const { isAdmin } = useSelector((state) => state.user.user)
+
 	return (
 		<>
-			<AntTable
-				columns={columns}
-				dataSource={data}
-				bordered
-				pagination={{ position: ['bottomCenter'] }}
-			/>
+			{isAdmin && (
+				<AntTable
+					rowKey="_id"
+					columns={columns}
+					dataSource={searchTerm}
+					bordered
+					pagination={{ position: ['bottomCenter'] }}
+				/>
+			)}
 		</>
 	)
 }

@@ -20,6 +20,7 @@ import './App.css'
 import 'antd/dist/antd.css'
 import AddTicket from './Pages/Ticketing/AddTicket'
 import { Ticket } from './Pages/Ticketing/Tickets'
+import UserDetails from './Pages/UsersList/UserDetails'
 
 function App() {
 	const [theme] = useState('light')
@@ -48,6 +49,12 @@ function App() {
 					<PrivateRoute exact path="/home">
 						<Home />
 					</PrivateRoute>
+					<PrivateRoute exact path="/dashboard">
+						<Dashboard />
+					</PrivateRoute>
+					<PrivateRoute exact path="/chart">
+						<Chart />
+					</PrivateRoute>
 					<PrivateRoute exact path="/ticketing">
 						<Ticketing />
 					</PrivateRoute>
@@ -57,15 +64,13 @@ function App() {
 					<PrivateRoute exact path="/add-ticket">
 						<AddTicket />
 					</PrivateRoute>
-					<PrivateRoute exact path="/chart">
-						<Chart />
-					</PrivateRoute>
 					<PrivateRoute exact path="/userslist">
 						<UsersList />
 					</PrivateRoute>
-					<PrivateRoute exact path="/dashboard">
-						<Dashboard />
+					<PrivateRoute exact path="/user/:userID">
+						<UserDetails />
 					</PrivateRoute>
+
 					<Route path="*">
 						<NotFound />
 					</Route>
