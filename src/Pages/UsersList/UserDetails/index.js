@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { fetchUserInfo } from '../usersListActions'
 
-import { Tag } from 'antd'
+import { Alert, Tag } from 'antd'
 
 import { H2 } from '../../../Components/H'
 import { P } from '../../../Components/P'
@@ -27,9 +27,6 @@ function UserDetails() {
 		dispatch(fetchUserInfo(userID))
 		dispatch(fetchAllTickets())
 	}, [dispatch, userID])
-
-	console.log('user selected :', userSelected)
-	console.log('tickets :', tickets)
 
 	const TotalUserTickets = tickets?.filter(
 		// eslint-disable-next-line eqeqeq
@@ -55,6 +52,17 @@ function UserDetails() {
 		<>
 			<H2 style={{ padding: '10px' }}>Profil utilisateur</H2>
 
+			{error && (
+				<Centered style={{ paddingTop: '10px' }}>
+					<Alert
+						message="Ooops... Une erreur est survenue, veuillez essayer ultérieurement"
+						description={error}
+						type="error"
+						showIcon
+					/>
+				</Centered>
+			)}
+
 			{isLoading ? (
 				<Centered>
 					<Spin />
@@ -63,8 +71,6 @@ function UserDetails() {
 				<UserCard
 					title={
 						<>
-							<P>{userSelected?._id}</P>
-
 							<Tag
 								color={userSelected?.isAdmin ? 'purple' : 'geekblue'}
 								key={userSelected?.isAdmin}

@@ -15,7 +15,6 @@ export const getUserTickets = () => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -33,7 +32,6 @@ export const getTicketDetails = (_id) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -51,7 +49,6 @@ export const openNewIssue = (formData) => {
 			})
 			resolve(result.data)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -69,7 +66,6 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 			})
 			resolve(result.data)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -89,8 +85,7 @@ export const createUser = (formData) => {
 				resolve(res.data)
 			}
 		} catch (error) {
-			reject(error)
-			console.log('error message : ', error)
+			reject(error.message)
 		}
 	})
 }
@@ -135,7 +130,6 @@ export const userLogin = (loginData) => {
 			}
 			resolve(res.data)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -157,7 +151,6 @@ export const fetchUser = () => {
 			})
 			resolve(res.data)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -177,9 +170,7 @@ export const userLogout = async () => {
 		await axios.delete(URL, {
 			headers: { Authorization: [...logInfo] },
 		})
-	} catch (error) {
-		console.log('error logout', error)
-	}
+	} catch (error) {}
 }
 
 export const refreshAccessToken = () => {
@@ -207,7 +198,6 @@ export const refreshAccessToken = () => {
 				localStorage.removeItem('refreshToken')
 				sessionStorage.removeItem('refreshToken')
 			}
-			console.log('erreur refreshtoken : ', error.message)
 			reject(false)
 		}
 	})
@@ -232,8 +222,6 @@ export const updatePasswordRequest = (formData) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const { data } = await axios.patch(URL, formData)
-			console.log('data resetingPassword', data)
-
 			resolve(data)
 		} catch (error) {
 			reject(error)
@@ -256,7 +244,6 @@ export const getAllTickets = () => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -274,7 +261,6 @@ export const TicketDetails = (_id) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -290,10 +276,8 @@ export const ReplyMessage = (ticketID, issueObjt) => {
 					Authorization: accessToken,
 				},
 			})
-			console.log(result.data)
 			resolve(result.data)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -311,7 +295,6 @@ export const closeTicket = (ticketID, _id, isAdmin, status) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -330,7 +313,6 @@ export const progressTicket = (ticketID, _id, isAdmin, status) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -349,7 +331,6 @@ export const deleteTicket = (ticketID, _id, isAdmin) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -368,7 +349,6 @@ export const getUsersList = () => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})
@@ -386,7 +366,6 @@ export const getUserDetails = (_id) => {
 			})
 			resolve(result)
 		} catch (error) {
-			console.log('error message : ', error.message)
 			reject(error.message)
 		}
 	})

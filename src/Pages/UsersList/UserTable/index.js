@@ -1,7 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import { Table as AntTable, Tag } from 'antd'
 import { Link } from 'react-router-dom'
+import Space from '../../../Components/Space'
 
 const columns = [
 	{
@@ -78,47 +81,20 @@ const columns = [
 			return record.isAdmin === value
 		},
 	},
-	// {
-	// 	title: 'Address',
-	// 	dataIndex: 'address',
-	// 	key: 'address',
-	// },
-	// {
-	// 	title: 'Tags',
-	// 	key: 'tags',
-	// 	dataIndex: 'tags',
-	// 	render: (tags) => (
-	// 		<>
-	// 			{tags.map((tag) => {
-	// 				let color = tag.length > 5 ? 'geekblue' : 'green'
-	// 				if (tag === 'loser') {
-	// 					color = 'volcano'
-	// 				}
-	// 				return (
-	// 					<Tag color={color} key={tag}>
-	// 						{tag.toUpperCase()}
-	// 					</Tag>
-	// 				)
-	// 			})}
-	// 		</>
-	// 	),
-	// },
-	// {
-	// 	title: 'Action',
-	// 	key: 'action',
-	// 	render: (text, record) => (
-	// 		<Space size="middle">
-	// 			<a href="!#">Invite {record.name}</a>
-	// 			<a href="!#">Delete</a>
-	// 		</Space>
-	// 	),
-	// },
+	{
+		title: 'Action',
+		key: 'action',
+		render: (text, record) => (
+			<Space size="middle">
+				<a href="!#">Invite {record.name}</a>
+				<a href="!#">Delete</a>
+			</Space>
+		),
+	},
 ]
 
-function UserTable() {
-	const { searchTerm } = useSelector((state) => state.userList)
+function UserTable({ searchTerm }) {
 	const { isAdmin } = useSelector((state) => state.user.user)
-
 	return (
 		<>
 			{isAdmin && (
@@ -135,3 +111,7 @@ function UserTable() {
 }
 
 export default UserTable
+
+UserTable.propTypes = {
+	searchTerm: PropTypes.array.isRequired,
+}

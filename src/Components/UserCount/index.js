@@ -1,12 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { P } from '../P'
 import { Centered } from '../Centered'
 
 function UserCount({ usersList }) {
-	// eslint-disable-next-line eqeqeq
-	const verifiedUser = usersList?.filter((elm) => elm?.isVerified == true)
-	// eslint-disable-next-line eqeqeq
-	const pendingUser = usersList?.filter((elm) => elm?.isVerified == false)
+	const verifiedUser = usersList?.filter((elm) => elm?.isVerified === true)
+	const pendingUser = usersList?.filter((elm) => elm?.isVerified === false)
 
 	return (
 		<Centered style={{ justifyContent: 'space-around' }}>
@@ -17,3 +17,7 @@ function UserCount({ usersList }) {
 	)
 }
 export default UserCount
+
+UserCount.propTypes = {
+	usersList: PropTypes.array.isRequired,
+}

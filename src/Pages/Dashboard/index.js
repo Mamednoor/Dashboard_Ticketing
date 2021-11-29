@@ -18,7 +18,6 @@ function Dashboard() {
 	const { isAdmin } = useSelector((state) => state.user.user)
 	const { usersList } = useSelector((state) => state.userList)
 
-	console.log(usersList)
 	useEffect(() => {
 		if (isAdmin === true) {
 			dispatch(fetchAllTickets())

@@ -34,12 +34,11 @@ const UsersListSlice = createSlice({
 		fetchUserDetailsSuccess: (state, { payload }) => {
 			state.isLoading = false
 			state.userSelected = payload
-			state.error = payload
+			state.error = false
 		},
 		fetchUserDetailsError: (state, { payload }) => {
 			state.isLoading = false
-			state.fail = true
-			state.error = payload
+			state.error = true
 		},
 
 		searchUser: (state, { payload }) => {

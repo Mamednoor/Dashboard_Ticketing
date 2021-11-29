@@ -9,7 +9,7 @@ import UserTable from './UserTable'
 
 function UserList() {
 	const dispatch = useDispatch()
-	const { usersList } = useSelector((state) => state.userList)
+	const { usersList, searchTerm } = useSelector((state) => state.userList)
 
 	useEffect(() => {
 		dispatch(fetchAllUsers())
@@ -20,7 +20,7 @@ function UserList() {
 			<H2 style={{ padding: '10px' }}>Liste des utilisateurs</H2>
 			<SearchFieldUser />
 			<UserCount usersList={usersList} />
-			<UserTable />
+			<UserTable searchTerm={searchTerm} key={searchTerm?._id} />
 		</>
 	)
 }
