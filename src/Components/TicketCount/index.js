@@ -2,6 +2,8 @@ import React from 'react'
 import { P } from '../P'
 import { Centered } from '../Centered'
 
+import { Tag } from 'antd'
+
 function TicketCount({ tickets }) {
 	// eslint-disable-next-line eqeqeq
 	const pendingTicket = tickets?.filter((elm) => elm?.status == 'En Attente')
@@ -12,10 +14,24 @@ function TicketCount({ tickets }) {
 
 	return (
 		<Centered style={{ justifyContent: 'space-around' }}>
-			<P>Nombre de tickets total: {tickets?.length}</P>
-			<P>Nombre de tickets en attente: {pendingTicket?.length}</P>
-			<P>Nombre de tickets en cours: {inProgressTicket?.length}</P>
-			<P>Nombre de tickets en fermé: {closeTicket?.length}</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag>Nombre de tickets total: {tickets?.length}</Tag>
+			</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag color="geekblue">
+					Nombre de tickets en attente: {pendingTicket?.length}
+				</Tag>
+			</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag color="green">
+					Nombre de tickets en cours: {inProgressTicket?.length}
+				</Tag>
+			</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag color="volcano">
+					Nombre de tickets en fermé: {closeTicket?.length}
+				</Tag>
+			</P>
 		</Centered>
 	)
 }

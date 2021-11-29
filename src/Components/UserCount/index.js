@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Tag } from 'antd'
+
 import { P } from '../P'
 import { Centered } from '../Centered'
 
@@ -10,9 +12,19 @@ function UserCount({ usersList }) {
 
 	return (
 		<Centered style={{ justifyContent: 'space-around' }}>
-			<P>Nombre d'utilisateur: {usersList?.length}</P>
-			<P>Nombre d'utilisateur validé: {verifiedUser?.length}</P>
-			<P>Nombre d'utilisateur en attente: {pendingUser?.length}</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag>Nombre d'utilisateur: {usersList?.length}</Tag>
+			</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag color="green">
+					Nombre d'utilisateur validé: {verifiedUser?.length}
+				</Tag>
+			</P>
+			<P style={{ fontWeight: 'bold' }}>
+				<Tag color="volcano">
+					Nombre d'utilisateur en attente: {pendingUser?.length}
+				</Tag>
+			</P>
 		</Centered>
 	)
 }

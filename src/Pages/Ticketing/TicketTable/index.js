@@ -13,7 +13,7 @@ const Admincolumns = [
 		title: 'ID',
 		dataIndex: '_id',
 		key: '_id',
-		width: '25%',
+		width: '15%',
 	},
 	{
 		title: 'Sujets',
@@ -31,17 +31,17 @@ const Admincolumns = [
 		render: (status) => (
 			<>
 				{status === 'En Attente' && (
-					<Tag color="geekblue" key={status}>
+					<Tag color="geekblue" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
 				{status === 'En Cours' && (
-					<Tag color="green" key={status}>
+					<Tag color="green" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
 				{status === 'Fermé' && (
-					<Tag color="volcano" key={status}>
+					<Tag color="volcano" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
@@ -71,10 +71,9 @@ const Admincolumns = [
 		title: 'Date de création',
 		dataIndex: 'createdOn',
 		key: 'createdOn',
-		width: '10%',
+		width: '15%',
 		render: (date) => <P>{formatDate(date)}</P>,
 	},
-
 	{
 		title: 'Actions',
 		dataIndex: '_id',
@@ -90,15 +89,10 @@ const Admincolumns = [
 
 const columns = [
 	{
-		title: 'ID',
-		dataIndex: '_id',
-		key: '_id',
-		width: '25%',
-	},
-	{
 		title: 'Sujets',
 		dataIndex: 'subject',
 		key: '_id',
+		width: '25%',
 		render: (subject, tickets, _id) => (
 			<Link to={`/ticket/${tickets._id}`}>{subject}</Link>
 		),
@@ -107,21 +101,21 @@ const columns = [
 		title: 'Status',
 		dataIndex: 'status',
 		key: 'status',
-		width: '10%',
+		width: '15%',
 		render: (status) => (
 			<>
 				{status === 'En Attente' && (
-					<Tag color="geekblue" key={status}>
+					<Tag color="geekblue" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
 				{status === 'En Cours' && (
-					<Tag color="green" key={status}>
+					<Tag color="green" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
 				{status === 'Fermé' && (
-					<Tag color="volcano" key={status}>
+					<Tag color="volcano" key={status} style={{ fontWeight: 'bold' }}>
 						{status}
 					</Tag>
 				)}
@@ -151,7 +145,7 @@ const columns = [
 		title: 'Date de création',
 		dataIndex: 'createdOn',
 		key: 'createdOn',
-		width: '10%',
+		width: '15%',
 		render: (date) => <P>{formatDate(date)}</P>,
 	},
 ]

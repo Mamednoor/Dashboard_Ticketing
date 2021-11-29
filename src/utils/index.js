@@ -7,10 +7,12 @@ export default function formatDate(date) {
 	let d = new Date(date),
 		month = '' + (d.getMonth() + 1),
 		day = '' + d.getDate(),
-		year = d.getFullYear()
+		year = d.getFullYear(),
+		hour = d.getHours() + 1,
+		minute = d.getMinutes()
 	if (month.length < 2) month = '0' + month
 	if (day.length < 2) day = '0' + day
-	return [day, month, year].join('-')
+	return [[day, month, year].join('/'), [hour, minute].join(':')].join(' - ')
 }
 // possibiliter de le faire d'une autre manière new Date (variable de la date).toLocalString()
 

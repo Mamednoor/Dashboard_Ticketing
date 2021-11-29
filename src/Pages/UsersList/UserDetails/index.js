@@ -68,45 +68,49 @@ function UserDetails() {
 					<Spin />
 				</Centered>
 			) : (
-				<UserCard
-					title={
-						<>
-							<Tag
-								color={userSelected?.isAdmin ? 'purple' : 'geekblue'}
-								key={userSelected?.isAdmin}
-							>
-								{userSelected?.isAdmin ? 'Admin' : 'Utilisateur'}
-							</Tag>
-
-							<Tag
-								color={userSelected?.isVerified ? 'green' : 'volcano'}
-								key={userSelected?.isVerified}
-							>
-								{userSelected?.isVerified ? 'Validé' : 'En attente'}
-							</Tag>
-						</>
-					}
+				<Centered
+					style={{
+						marginTop: '20vh',
+						justifyContent: 'space-around',
+						alignItems: 'center',
+					}}
 				>
-					<P>Prénom : {userSelected?.firstname}</P>
-					<P>Nom : {userSelected?.lastname}</P>
-					<P>Email : {userSelected?.email}</P>
-					<P>Téléphone : {userSelected?.phone}</P>
-				</UserCard>
-			)}
+					<UserCard
+						title={
+							<>
+								<Tag
+									color={userSelected?.isAdmin ? 'purple' : 'geekblue'}
+									key={userSelected?.isAdmin}
+								>
+									{userSelected?.isAdmin ? 'Admin' : 'Utilisateur'}
+								</Tag>
 
-			{isLoading ? (
-				<Centered>
-					<Spin />
+								<Tag
+									color={userSelected?.isVerified ? 'green' : 'volcano'}
+									key={userSelected?.isVerified}
+								>
+									{userSelected?.isVerified ? 'Validé' : 'En attente'}
+								</Tag>
+							</>
+						}
+					>
+						<P>Prénom : {userSelected?.firstname}</P>
+						<P>Nom : {userSelected?.lastname}</P>
+						<P>Email : {userSelected?.email}</P>
+						<P>Téléphone : {userSelected?.phone}</P>
+					</UserCard>
+
+					<UserCard title={<P>Nombre de ticket</P>}>
+						<P>Nombre total de ticket : {TotalUserTickets?.length}</P>
+						<P>
+							Nombre de ticket en cours : {TotalUserInProgressTickets?.length}
+						</P>
+						<P>Nombre de ticket fermé : {TotalUserCloseTickets?.length}</P>
+						<P>
+							Nombre de ticket en attente : {TotalUserPendingTickets?.length}
+						</P>
+					</UserCard>
 				</Centered>
-			) : (
-				<UserCard title={<P>Nombre de ticket</P>}>
-					<P>Nombre total de ticket : {TotalUserTickets?.length}</P>
-					<P>
-						Nombre de ticket en cours : {TotalUserInProgressTickets?.length}
-					</P>
-					<P>Nombre de ticket fermé : {TotalUserCloseTickets?.length}</P>
-					<P>Nombre de ticket en attente : {TotalUserPendingTickets?.length}</P>
-				</UserCard>
 			)}
 		</>
 	)

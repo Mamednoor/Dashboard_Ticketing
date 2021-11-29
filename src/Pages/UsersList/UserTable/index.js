@@ -5,13 +5,15 @@ import PropTypes from 'prop-types'
 import { Table as AntTable, Tag } from 'antd'
 import { Link } from 'react-router-dom'
 import Space from '../../../Components/Space'
+import { EraseUser } from './ActionsButton'
+import formatDate from '../../../utils'
+import { P } from '../../../Components/P'
 
 const columns = [
 	{
 		title: 'ID',
 		dataIndex: '_id',
 		key: '_id',
-		width: '25%',
 	},
 	{
 		title: 'Nom',
@@ -38,7 +40,11 @@ const columns = [
 		dataIndex: 'isVerified',
 		key: 'isVerified',
 		render: (isVerified) => (
-			<Tag color={isVerified ? 'green' : 'volcano'} key={isVerified}>
+			<Tag
+				color={isVerified ? 'green' : 'volcano'}
+				key={isVerified}
+				style={{ fontWeight: 'bold' }}
+			>
 				{isVerified ? 'Validé' : 'En attente'}
 			</Tag>
 		),
@@ -62,7 +68,11 @@ const columns = [
 		dataIndex: 'isAdmin',
 		key: 'isAdmin',
 		render: (isAdmin) => (
-			<Tag color={isAdmin ? 'purple' : 'geekblue'} key={isAdmin}>
+			<Tag
+				color={isAdmin ? 'purple' : 'geekblue'}
+				key={isAdmin}
+				style={{ fontWeight: 'bold' }}
+			>
 				{isAdmin ? 'Admin' : 'Utilisateur'}
 			</Tag>
 		),
@@ -82,12 +92,18 @@ const columns = [
 		},
 	},
 	{
+		title: 'Date de création',
+		dataIndex: 'createdOn',
+		key: 'createdOn',
+		render: (date) => <P>{formatDate(date)}</P>,
+	},
+	{
 		title: 'Action',
-		key: 'action',
-		render: (text, record) => (
+		dataIndex: '_id',
+		key: '_id',
+		render: (_id) => (
 			<Space size="middle">
-				<a href="!#">Invite {record.name}</a>
-				<a href="!#">Delete</a>
+				<EraseUser userID={_id} />
 			</Space>
 		),
 	},

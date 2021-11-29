@@ -1,4 +1,4 @@
-import { getUsersList, getUserDetails } from '../../api'
+import { getUsersList, getUserDetails, deleteUser } from '../../api'
 
 import {
 	fetchUsersLoading,
@@ -7,6 +7,9 @@ import {
 	fetchUserDetailsLoading,
 	fetchUserDetailsSuccess,
 	fetchUserDetailsError,
+	deleteUserLoading,
+	deleteUserSuccess,
+	deleteUserError,
 	searchUser,
 } from './usersListSlice'
 
@@ -33,6 +36,22 @@ export const fetchUserInfo = (_id) => async (dispatch) => {
 		)
 	} catch (error) {
 		dispatch(fetchUserDetailsError(error.message))
+	}
+}
+
+export const deletingUser = (userID, _id) => async (dispatch) => {
+	dispatch(deleteUserLoading())
+
+	try {
+		const result = await (deleteUser(userID) && getUsersList())
+		if (result.status === 'error') {
+			return dispatch(deleteUserError(result.message))
+		}
+
+		dispatch(fetchUserInfo(userID))
+		dispatch(deleteUserSuccess(result.message))
+	} catch (error) {
+		dispatch(deleteUserError(error.message))
 	}
 }
 

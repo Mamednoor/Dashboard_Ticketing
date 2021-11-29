@@ -371,4 +371,22 @@ export const getUserDetails = (_id) => {
 	})
 }
 
+export const deleteUser = (userID, _id, isAdmin) => {
+	const URL = 'http://localhost:8080/users/delete/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+
+			const result = await axios.delete(URL + userID, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
+			resolve(result)
+		} catch (error) {
+			reject(error.message)
+		}
+	})
+}
+
 //////////////// ADMIN /////////////////

@@ -5,8 +5,9 @@ const initialState = {
 	isLoading: false,
 	userSelected: {},
 	success: false,
-	fail: false,
-	error: '',
+	fail: '',
+	error: false,
+	deleting: false,
 	searchTerm: [],
 }
 
@@ -25,8 +26,8 @@ const UsersListSlice = createSlice({
 		},
 		fetchUsersError: (state, { payload }) => {
 			state.isLoading = false
-			state.error = payload
-			state.fail = true
+			state.error = true
+			state.fail = payload
 		},
 		fetchUserDetailsLoading: (state) => {
 			state.isLoading = true
@@ -41,6 +42,20 @@ const UsersListSlice = createSlice({
 			state.error = true
 		},
 
+		deleteUserLoading: (state) => {
+			state.isLoading = true
+		},
+		deleteUserSuccess: (state, { payload }) => {
+			state.isLoading = false
+			state.error = payload
+			state.deleting = true
+		},
+		deleteUserError: (state, { payload }) => {
+			state.isLoading = false
+			state.error = payload
+			state.deleting = false
+		},
+
 		searchUser: (state, { payload }) => {
 			state.searchTerm = state?.usersList.filter((item) => {
 				if (!payload) return item
@@ -49,6 +64,14 @@ const UsersListSlice = createSlice({
 					item?.lastname.toLowerCase().includes(payload.toLowerCase())
 				)
 			})
+		},
+
+		UserMessageInit: (state) => {
+			state.isLoading = false
+			state.success = ''
+			state.fail = ''
+			state.error = ''
+			state.deleting = ''
 		},
 	},
 })
@@ -62,7 +85,11 @@ export const {
 	fetchUserDetailsLoading,
 	fetchUserDetailsSuccess,
 	fetchUserDetailsError,
+	deleteUserLoading,
+	deleteUserSuccess,
+	deleteUserError,
 	searchUser,
+	UserMessageInit,
 } = actions
 
 export default reducer
