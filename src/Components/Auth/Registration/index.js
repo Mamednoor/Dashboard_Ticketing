@@ -138,7 +138,7 @@ function Registration() {
 							{
 								required: true,
 								message: 'Veuillez renseigner un prénom',
-								min: 5,
+								min: 4,
 							},
 						]}
 					>

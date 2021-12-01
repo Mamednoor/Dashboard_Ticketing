@@ -7,8 +7,11 @@ export function EraseUser({ userID }) {
 	const dispatch = useDispatch()
 
 	return (
-		<Button danger type="link" onClick={() => dispatch(deletingUser(userID))}>
-			Suppression
-		</Button>
+		<>
+			<Button type="link">Modifier</Button>
+			<Button danger type="link" onClick={() => dispatch(deletingUser(userID))}>
+				Suppression
+			</Button>
+		</>
 	)
 }

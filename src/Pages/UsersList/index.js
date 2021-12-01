@@ -11,6 +11,9 @@ import { SearchFieldUser } from '../../Components/InputSearch'
 import UserCount from '../../Components/UserCount'
 import UserTable from './UserTable'
 import { ContentHeader } from '../../Components/ContentHeader'
+import { Link } from 'react-router-dom'
+import { Btn } from '../../Components/Button'
+import Space from '../../Components/Space'
 
 function UserList() {
 	const dispatch = useDispatch()
@@ -50,7 +53,14 @@ function UserList() {
 					/>
 				</Centered>
 			)}
-			<SearchFieldUser />
+			<Space>
+				<SearchFieldUser />
+				<Link to="/adduser">
+					<Btn style={{ padding: '0.5rem 1rem' }}>
+						Ajouter un nouvel utilisateur
+					</Btn>
+				</Link>
+			</Space>
 			<UserCount usersList={usersList} />
 			<UserTable searchTerm={searchTerm} />
 		</>

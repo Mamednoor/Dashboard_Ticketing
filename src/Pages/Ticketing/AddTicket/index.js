@@ -7,11 +7,10 @@ import { addNewTicketInit } from './addTicketSlice'
 
 import { Form, Input, Alert } from 'antd'
 import { Centered } from '../../../Components/Centered'
-import { CustomDivider } from '../../../Components/Divider'
 import { Spin } from '../../../Components/Spin'
 import { Btn } from '../../../Components/Button'
-import { H2 } from '../../../Components/H'
 import { Container } from '../../../Components/Container'
+import { ContentHeader } from '../../../Components/ContentHeader'
 
 function AddTicket() {
 	const dispatch = useDispatch()
@@ -50,7 +49,17 @@ function AddTicket() {
 
 	return (
 		<>
-			<H2 style={{ padding: '10px' }}>Ajouter un ticket</H2>
+			<ContentHeader
+				breadcrumbItems={[
+					{
+						name: 'Liste des tickets',
+						path: `/ticketing`,
+					},
+					{
+						name: 'Ajouter un ticket',
+					},
+				]}
+			/>
 			<Container style={{ width: '50%', margin: '0 auto' }}>
 				{status && (
 					<Centered style={{ paddingBottom: '30px' }}>
@@ -62,7 +71,6 @@ function AddTicket() {
 					</Centered>
 				)}
 
-				<CustomDivider />
 				<Centered>
 					<Form
 						layout="vertical"

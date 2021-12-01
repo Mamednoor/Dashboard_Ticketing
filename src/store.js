@@ -7,6 +7,7 @@ import newTicketReducer from './Pages/Ticketing/AddTicket/addTicketSlice'
 import registrationReducer from './Components/Auth/Registration/registrationSlice'
 import resetPasswordReducer from './Components/Auth/ResetPassword/passwordSlice'
 import usersListReducer from './Pages/UsersList/usersListSlice'
+import addNewUserReducer from './Pages/UsersList/AddUser/adduserSlice'
 
 const store = configureStore({
 	reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
 		registration: registrationReducer,
 		resetPassword: resetPasswordReducer,
 		userList: usersListReducer,
+		addNewUser: addNewUserReducer,
 	},
 })
 

@@ -1,4 +1,4 @@
-import { createUser } from '../../../api'
+import { registrationUser } from '../../../api'
 
 import {
 	registrationPending,
@@ -10,7 +10,7 @@ export const userRegistration = (formData) => async (dispatch) => {
 	try {
 		dispatch(registrationPending())
 
-		const result = await createUser(formData)
+		const result = await registrationUser(formData)
 
 		result.status === 'success'
 			? dispatch(registrationSuccess(result.message))

@@ -73,7 +73,7 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 
 /////// Registration Part
 
-export const createUser = (formData) => {
+export const registrationUser = (formData) => {
 	const URL = 'http://localhost:8080/users/'
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -230,6 +230,23 @@ export const updatePasswordRequest = (formData) => {
 }
 
 //////////////// ADMIN /////////////////
+
+export const createNewUser = (formData) => {
+	const URL = 'http://localhost:8080/users/create-user'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const res = await axios.post(URL, formData)
+
+			resolve(res.data)
+
+			if (res.data.status === 'success') {
+				resolve(res.data)
+			}
+		} catch (error) {
+			reject(error.message)
+		}
+	})
+}
 
 export const getAllTickets = () => {
 	const URL = 'http://localhost:8080/tickets/all/'

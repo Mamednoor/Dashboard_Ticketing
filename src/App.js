@@ -21,6 +21,7 @@ import 'antd/dist/antd.css'
 import AddTicket from './Pages/Ticketing/AddTicket'
 import { Ticket } from './Pages/Ticketing/Tickets'
 import UserDetails from './Pages/UsersList/UserDetails'
+import AddUser from './Pages/UsersList/AddUser'
 
 function App() {
 	const [theme] = useState('light')
@@ -69,6 +70,9 @@ function App() {
 					</PrivateRoute>
 					<PrivateRoute exact path="/user/:userID">
 						<UserDetails />
+					</PrivateRoute>
+					<PrivateRoute exact path="/adduser">
+						<AddUser />
 					</PrivateRoute>
 
 					<Route path="*">
