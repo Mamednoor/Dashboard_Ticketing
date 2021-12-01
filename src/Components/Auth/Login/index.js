@@ -67,7 +67,7 @@ function Login() {
 
 			dispatch(loginSuccess())
 			dispatch(getUser())
-			history.push('/dashboard')
+			history.push('/home')
 		} catch (error) {
 			dispatch(loginError(error.message))
 		}

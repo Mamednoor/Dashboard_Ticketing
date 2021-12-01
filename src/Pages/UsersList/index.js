@@ -6,11 +6,11 @@ import { UserMessageInit } from './usersListSlice'
 
 import { Alert } from 'antd'
 
-import { H2 } from '../../Components/H'
 import { Centered } from '../../Components/Centered'
 import { SearchFieldUser } from '../../Components/InputSearch'
 import UserCount from '../../Components/UserCount'
 import UserTable from './UserTable'
+import { ContentHeader } from '../../Components/ContentHeader'
 
 function UserList() {
 	const dispatch = useDispatch()
@@ -29,7 +29,18 @@ function UserList() {
 
 	return (
 		<>
-			<H2 style={{ padding: '10px' }}>Liste des utilisateurs</H2>
+			<ContentHeader
+				breadcrumbItems={[
+					{
+						name: 'Dashboard',
+						path: `/dashboard`,
+					},
+					{
+						name: 'Liste des utilisateurs',
+					},
+				]}
+			/>
+
 			{deleting && (
 				<Centered style={{ paddingTop: '10px' }}>
 					<Alert

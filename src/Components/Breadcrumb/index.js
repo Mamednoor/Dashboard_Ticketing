@@ -30,7 +30,7 @@ export const BreadcrumbComponent = ({ items }) => {
 	return (
 		<Container>
 			<Item>
-				<Link to="/dashboard">Acceuil</Link>
+				<Link to="/home">Acceuil</Link>
 			</Item>
 			{items?.map((item, i) => (
 				<Item key={item.name}>

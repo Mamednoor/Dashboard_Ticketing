@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { fetchUserInfo } from '../usersListActions'
+import { fetchAllTickets } from '../../Ticketing/Tickets/ticketsActions'
 
 import { Alert, Tag } from 'antd'
 
-import { H2 } from '../../../Components/H'
 import { P } from '../../../Components/P'
 import { UserCard } from '../../../Components/Card'
 import { Centered } from '../../../Components/Centered'
 import { Spin } from '../../../Components/Spin'
-import { fetchAllTickets } from '../../Ticketing/Tickets/ticketsActions'
+import { ContentHeader } from '../../../Components/ContentHeader'
 
 function UserDetails() {
 	const dispatch = useDispatch()
@@ -50,7 +50,17 @@ function UserDetails() {
 
 	return (
 		<>
-			<H2 style={{ padding: '10px' }}>Profil utilisateur</H2>
+			<ContentHeader
+				breadcrumbItems={[
+					{
+						name: 'Liste des utilisateurs',
+						path: `/userslist`,
+					},
+					{
+						name: "Détails d'un utilisateur",
+					},
+				]}
+			/>
 
 			{error && (
 				<Centered style={{ paddingTop: '10px' }}>

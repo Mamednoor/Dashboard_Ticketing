@@ -1,19 +1,28 @@
 import React from 'react'
 import { P } from '../P'
-import { Centered } from '../Centered'
+import { Flex } from '../Flex'
 
 import { Tag } from 'antd'
 
 function TicketCount({ tickets }) {
+	const pendingTicket = tickets?.filter(
+		// eslint-disable-next-line eqeqeq
+		(ticket) => ticket?.status == 'En Attente',
+	)
+	const inProgressTicket = tickets?.filter(
+		// eslint-disable-next-line eqeqeq
+		(ticket) => ticket?.status == 'En Cours',
+	)
 	// eslint-disable-next-line eqeqeq
-	const pendingTicket = tickets?.filter((elm) => elm?.status == 'En Attente')
-	// eslint-disable-next-line eqeqeq
-	const inProgressTicket = tickets?.filter((elm) => elm?.status == 'En Cours')
-	// eslint-disable-next-line eqeqeq
-	const closeTicket = tickets?.filter((elm) => elm?.status == 'Fermé')
+	const closeTicket = tickets?.filter((ticket) => ticket?.status == 'Fermé')
 
 	return (
-		<Centered style={{ justifyContent: 'space-around' }}>
+		<Flex
+			style={{
+				flexWrap: 'wrap',
+				justifyContent: 'space-around',
+			}}
+		>
 			<P style={{ fontWeight: 'bold' }}>
 				<Tag>Nombre de tickets total: {tickets?.length}</Tag>
 			</P>
@@ -32,7 +41,7 @@ function TicketCount({ tickets }) {
 					Nombre de tickets en fermé: {closeTicket?.length}
 				</Tag>
 			</P>
-		</Centered>
+		</Flex>
 	)
 }
 export default TicketCount

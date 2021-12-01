@@ -1,8 +1,13 @@
 import React from 'react'
-import { H2 } from '../../Components/H'
+import { ContentHeader } from '../../Components/ContentHeader'
 
 function Home() {
-	return <H2 style={{ padding: '10px' }}>Accueil</H2>
+	return (
+		// eslint-disable-next-line no-unreachable
+		<>
+			<ContentHeader breadcrumbItems={[]} />
+		</>
+	)
 }
 
 export default Home

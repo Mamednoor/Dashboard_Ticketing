@@ -5,7 +5,6 @@ import { fetchAllTickets, fetchUserTickets } from './Tickets/ticketsActions'
 
 import { Alert } from 'antd'
 
-import { H2 } from '../../Components/H'
 import Table from './TicketTable'
 import { SearchFieldTicket } from '../../Components/InputSearch'
 import { Btn } from '../../Components/Button'
@@ -14,6 +13,7 @@ import { Link } from 'react-router-dom'
 import { Centered } from '../../Components/Centered'
 import { TicketMessageInit } from './Tickets/ticketsSlice'
 import TicketCount from '../../Components/TicketCount'
+import { ContentHeader } from '../../Components/ContentHeader'
 
 function Ticketing() {
 	const dispatch = useDispatch()
@@ -38,8 +38,17 @@ function Ticketing() {
 
 	return (
 		<>
-			<H2 style={{ padding: '10px' }}>Listes des tickets</H2>
-
+			<ContentHeader
+				breadcrumbItems={[
+					{
+						name: 'Dashboard',
+						path: `/dashboard`,
+					},
+					{
+						name: 'Listes des Tickets',
+					},
+				]}
+			/>
 			<Space>
 				<SearchFieldTicket />
 				<Link to="/add-ticket">

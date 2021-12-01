@@ -11,6 +11,7 @@ import { P } from '../../Components/P'
 import { Flex } from '../../Components/Flex'
 import { fetchAllUsers } from '../UsersList/usersListActions'
 import Space from '../../Components/Space'
+import { ContentHeader } from '../../Components/ContentHeader'
 
 function Dashboard() {
 	const dispatch = useDispatch()
@@ -41,9 +42,16 @@ function Dashboard() {
 
 	return (
 		<>
+			<ContentHeader
+				breadcrumbItems={[
+					{
+						name: 'Dashboard',
+					},
+				]}
+			/>
 			<H2 style={{ padding: '10px' }}>Dashboard</H2>
 
-			<Flex>
+			<Flex style={{ flexWrap: 'wrap' }}>
 				<Space>
 					<div>
 						<P>Nombre de tickets total: {tickets?.length}</P>
