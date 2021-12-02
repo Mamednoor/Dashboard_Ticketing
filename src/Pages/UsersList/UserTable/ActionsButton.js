@@ -1,7 +1,9 @@
-import { Button } from 'antd'
-import { useDispatch } from 'react-redux'
 import React from 'react'
+
+import { useDispatch } from 'react-redux'
 import { deletingUser } from '../usersListActions'
+
+import { Button } from 'antd'
 
 export function EraseUser({ userID }) {
 	const dispatch = useDispatch()

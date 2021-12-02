@@ -5,15 +5,15 @@ import { useHistory } from 'react-router-dom'
 import { userRegistration } from './registrationActions'
 import { registrationInit } from './registrationSlice'
 
-import { Centered } from '../../Centered'
-import { CustomDivider } from '../../Divider'
-import { Spin } from '../../Spin'
 import { Btn } from '../../Button'
-import { H2 } from '../../H'
-import { Flex } from '../../Flex'
+import { Centered } from '../../Centered'
 import { CenteringCard } from '../../Card'
+import { CustomDivider } from '../../Divider'
 import { CustomLink } from '../../Link'
+import { Flex } from '../../Flex'
 import { FormItem } from '../../FormItem'
+import { H2 } from '../../H'
+import { Spin } from '../../Spin'
 
 import { Alert, Form, Input, Typography, message } from 'antd'
 
@@ -38,7 +38,9 @@ const VerificationError = {
 function Registration() {
 	const dispatch = useDispatch()
 	const history = useHistory()
-	const { isLoading, status } = useSelector((state) => state.registration)
+	const { isLoading, status, message } = useSelector(
+		(state) => state.registration,
+	)
 	const [form] = Form.useForm()
 	const [validationError, setValidationError] = useState(VerificationError)
 
@@ -102,7 +104,7 @@ function Registration() {
 				<Centered>
 					<Alert
 						message="Ooops... Une erreur est survenue"
-						description="L'adresse email est déjà utilisée"
+						description={message}
 						type="error"
 						showIcon
 					/>

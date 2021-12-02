@@ -1,9 +1,11 @@
 import React from 'react'
-import 'antd/dist/antd.css'
 import { Layout } from 'antd'
+
+import { LayoutHeader } from './LayoutHeader'
 import { LayoutSider } from './LayoutSider'
 import { LayoutFooter } from './LayoutFooter'
-import LayoutHeader from './LayoutHeader'
+
+import 'antd/dist/antd.css'
 
 const { Content } = Layout
 

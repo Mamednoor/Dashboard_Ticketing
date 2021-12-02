@@ -6,11 +6,13 @@ import { openNewTicket } from './addTicketActions'
 import { addNewTicketInit } from './addTicketSlice'
 
 import { Form, Input, Alert } from 'antd'
-import { Centered } from '../../../Components/Centered'
-import { Spin } from '../../../Components/Spin'
 import { Btn } from '../../../Components/Button'
-import { Container } from '../../../Components/Container'
+import { Centered } from '../../../Components/Centered'
 import { ContentHeader } from '../../../Components/ContentHeader'
+import { Flex } from '../../../Components/Flex'
+import { FormItem } from '../../../Components/FormItem'
+import Space from '../../../Components/Space'
+import { Spin } from '../../../Components/Spin'
 
 function AddTicket() {
 	const dispatch = useDispatch()
@@ -60,41 +62,42 @@ function AddTicket() {
 					},
 				]}
 			/>
-			<Container style={{ width: '50%', margin: '0 auto' }}>
-				{status && (
-					<Centered style={{ paddingBottom: '30px' }}>
-						<Alert
-							message={addMessage}
-							type={status === 'success' ? 'success' : 'error'}
-							showIcon
-						/>
-					</Centered>
-				)}
+			{status && (
+				<Centered style={{ paddingBottom: '30px' }}>
+					<Alert
+						message={addMessage}
+						type={status === 'success' ? 'success' : 'error'}
+						showIcon
+					/>
+				</Centered>
+			)}
 
-				<Centered>
-					<Form
-						layout="vertical"
-						form={form}
-						onFinish={handleSubmit}
-						autoComplete="off"
-						style={{ paddingTop: '10px', width: '100%' }}
-					>
-						<Form.Item
-							name="subject"
-							label="Sujet"
-							rules={[
-								{
-									required: true,
-									message: 'Champ requis, 10 caractères minimum',
-									min: 10,
-									max: 500,
-								},
-							]}
+			<Centered style={{ paddingTop: ' 150px' }}>
+				<Space>
+					<Flex style={{ padding: '55px', border: '1px solid' }}>
+						<Form
+							layout="vertical"
+							form={form}
+							onFinish={handleSubmit}
+							autoComplete="off"
+							style={{ paddingTop: '10px', width: '100%' }}
 						>
-							<Input name="subject" value={subject} />
-						</Form.Item>
+							<FormItem
+								name="subject"
+								label="Sujet"
+								rules={[
+									{
+										required: true,
+										message: 'Champ requis, 10 caractères minimum',
+										min: 10,
+										max: 500,
+									},
+								]}
+							>
+								<Input name="subject" value={subject} />
+							</FormItem>
 
-						{/* 
+							{/* 
 					<Form.Item
 						name="picture"
 						label="Capture d'écran (facultatif)"
@@ -112,40 +115,46 @@ function AddTicket() {
 						</Upload>
 					</Form.Item> */}
 
-						<Form.Item
-							name="message"
-							label="Description"
-							rules={[
-								{
-									required: true,
-									message: 'Champ requis, 10 caractères minimum',
-									min: 10,
-									max: 500,
-								},
-							]}
-						>
-							<Input.TextArea
+							<FormItem
 								name="message"
-								value={message}
-								maxLength="500"
-								showCount
-							/>
-						</Form.Item>
-						{isLoading ? (
-							<Centered>
-								<Spin />
-							</Centered>
-						) : (
-							<Btn
-								style={{ padding: '0.5rem', width: '100%' }}
-								htmlType="submit"
+								label="Description"
+								rules={[
+									{
+										required: true,
+										message: 'Champ requis, 10 caractères minimum',
+										min: 10,
+										max: 500,
+									},
+								]}
 							>
-								Enregistrer
-							</Btn>
-						)}
-					</Form>
-				</Centered>
-			</Container>
+								<Input.TextArea
+									name="message"
+									value={message}
+									maxLength="500"
+									showCount
+									style={{ width: '500px' }}
+								/>
+							</FormItem>
+							{isLoading ? (
+								<Centered>
+									<Spin />
+								</Centered>
+							) : (
+								<Btn
+									style={{
+										padding: '0.5rem 1rem',
+										width: '100%',
+										marginTop: '25px',
+									}}
+									htmlType="submit"
+								>
+									Enregistrer
+								</Btn>
+							)}
+						</Form>
+					</Flex>
+				</Space>
+			</Centered>
 		</>
 	)
 }

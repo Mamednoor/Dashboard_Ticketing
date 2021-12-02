@@ -26,6 +26,7 @@ const createUserSlice = createSlice({
 		createUserInit: (state) => {
 			state.isLoading = false
 			state.status = ''
+			state.message = ''
 		},
 	},
 })

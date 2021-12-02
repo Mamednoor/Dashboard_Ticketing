@@ -26,6 +26,7 @@ const registrationSlice = createSlice({
 		registrationInit: (state) => {
 			state.isLoading = false
 			state.status = ''
+			state.message = ''
 		},
 	},
 })

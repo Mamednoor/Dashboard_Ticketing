@@ -7,7 +7,7 @@ import { Centered } from '../Centered'
 
 const { Header } = Layout
 
-const LayoutHeader = () => {
+export const LayoutHeader = () => {
 	const { firstname, lastname } = useSelector((state) => state.user.user)
 
 	return (
@@ -23,5 +23,3 @@ const LayoutHeader = () => {
 		</Header>
 	)
 }
-
-export default LayoutHeader

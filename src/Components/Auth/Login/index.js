@@ -161,7 +161,9 @@ function Login() {
 					paddingTop: '15px',
 				}}
 			>
-				<CustomLink to="/forget-password">Mot de passe oublié ?</CustomLink>
+				<CustomLink to="/forget-password">
+					Réinitialisation du mot de passe
+				</CustomLink>
 				<CustomLink to="/registration">Créer un compte</CustomLink>
 			</Flex>
 		</CenteringCard>
