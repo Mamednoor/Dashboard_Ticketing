@@ -2,25 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { addingUser } from './adduserActions'
-import { createUserInit } from './adduserSlice'
+import { fetchUserInfo } from '../UsersList/usersListActions'
+import { profilInit } from './profilSlice'
 
-import { Btn } from '../../../Components/Button'
-import { Centered } from '../../../Components/Centered'
-import { ContentHeader } from '../../../Components/ContentHeader'
-import { Flex } from '../../../Components/Flex'
-import { FormItem } from '../../../Components/FormItem'
-import Space from '../../../Components/Space'
-import { Spin } from '../../../Components/Spin'
+import Marquee from 'react-fast-marquee'
 
-import {
-	Alert,
-	Form,
-	Input,
-	Typography,
-	message as antdMessage,
-	Checkbox,
-} from 'antd'
+import { Alert, Form, Input, Typography } from 'antd'
+import { Btn } from '../../Components/Button'
+import { Centered } from '../../Components/Centered'
+import { ContentHeader } from '../../Components/ContentHeader'
+import { Flex } from '../../Components/Flex'
+import { FormItem } from '../../Components/FormItem'
+import Space from '../../Components/Space'
+import { Spin } from '../../Components/Spin'
 
 const layout = {
 	layout: 'horizontal',
@@ -40,22 +34,24 @@ const VerificationError = {
 	isPhoneValide: false,
 }
 
-function AddUser() {
+function Profil() {
 	const dispatch = useDispatch()
 	const history = useHistory()
-	const { isLoading, status, message } = useSelector(
-		(state) => state.addNewUser,
-	)
+
+	const { _id, firstname, lastname, email, company, address, phone } =
+		useSelector((state) => state.user.user)
+	const { isLoading, status, message } = useSelector((state) => state.profil)
 	const [form] = Form.useForm()
 	const [validationError, setValidationError] = useState(VerificationError)
 
 	useEffect(() => {
+		dispatch(fetchUserInfo(_id))
 		if (status === 'success') {
 			return setTimeout(() => {
-				dispatch(createUserInit()) && history.push('/userslist')
+				dispatch(profilInit())
 			}, 2000)
 		}
-	}, [dispatch, history, status])
+	}, [_id, dispatch, history, status])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
@@ -86,12 +82,6 @@ function AddUser() {
 		}
 	}
 
-	const onFinishFailed = () => {
-		antdMessage.error(
-			"Des informations sont manquantes ou n'ont pas été validés",
-		)
-	}
-
 	const handleSubmit = (values) => {
 		const formData = {
 			firstname: values.firstname,
@@ -103,7 +93,7 @@ function AddUser() {
 			password: values.password,
 			isAdmin: values.isAdmin,
 		}
-		dispatch(addingUser({ ...formData }))
+		console.log('formData', formData)
 	}
 
 	return (
@@ -112,13 +102,23 @@ function AddUser() {
 			<ContentHeader
 				breadcrumbItems={[
 					{
-						name: 'Liste des utilisateurs',
-						path: `/userlist`,
+						name: 'Dashboard',
+						path: `/dashboard`,
 					},
 					{
-						name: 'Ajouter un utilisateur',
+						name: 'Profil',
 					},
 				]}
+			/>
+			<Alert
+				type="info"
+				banner
+				message={
+					<Marquee pauseOnHover gradient={false}>
+						Afin de modifier votre mot de passe veuillez suivre la procédure de
+						réinitialisation
+					</Marquee>
+				}
 			/>
 			{status === 'error' && (
 				<Centered>
@@ -147,9 +147,16 @@ function AddUser() {
 						<Form
 							autoComplete="off"
 							onFinish={handleSubmit}
-							onFinishFailed={onFinishFailed}
 							form={form}
 							{...layout}
+							initialValues={{
+								firstname,
+								lastname,
+								company,
+								address,
+								phone,
+								email,
+							}}
 						>
 							<FormItem
 								name="firstname"
@@ -233,69 +240,8 @@ function AddUser() {
 							>
 								<Input name="email" placeholder="Email" />
 							</FormItem>
-							<FormItem
-								name="password"
-								label="Mot de passe"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner un mot de passe valide',
-										min: 8,
-									},
-								]}
-								hasFeedback
-								onChange={handleChange}
-							>
-								<Input.Password name="password" placeholder="Mot de passe" />
-							</FormItem>
 
-							<FormItem
-								name="confirmPassword"
-								label="Confirmation"
-								dependencies={['password']}
-								hasFeedback
-								rules={[
-									{
-										required: true,
-										message: 'Merci de confirmer votre mot de passe',
-									},
-									({ getFieldValue }) => ({
-										validator(_, value) {
-											if (!value || getFieldValue('password') === value) {
-												return Promise.resolve()
-											}
-
-											return Promise.reject(
-												new Error('Les mots de passe ne sont pas identiques'),
-											)
-										},
-									}),
-								]}
-							>
-								<Input.Password placeholder="Confirmation du mot de passe" />
-							</FormItem>
-							<FormItem name="isAdmin" label="Admin" valuePropName="checked">
-								<Checkbox name="isAdmin">Admin</Checkbox>
-							</FormItem>
-
-							{Object.values(validationError).every((item) => item === true) ? (
-								isLoading ? (
-									<Centered>
-										<Spin />
-									</Centered>
-								) : (
-									<Btn
-										type="submit"
-										style={{
-											padding: '0.5rem 1rem',
-											width: '100%',
-											marginTop: '15px',
-										}}
-									>
-										Enregistrer
-									</Btn>
-								)
-							) : isLoading ? (
+							{isLoading ? (
 								<Centered>
 									<Spin />
 								</Centered>
@@ -307,9 +253,8 @@ function AddUser() {
 										width: '100%',
 										marginTop: '15px',
 									}}
-									disabled
 								>
-									Enregistrer
+									Modifier
 								</Btn>
 							)}
 						</Form>
@@ -374,4 +319,4 @@ function AddUser() {
 	)
 }
 
-export default AddUser
+export default Profil

@@ -22,6 +22,7 @@ import AddTicket from './Pages/Ticketing/AddTicket'
 import { Ticket } from './Pages/Ticketing/Tickets'
 import UserDetails from './Pages/UsersList/UserDetails'
 import AddUser from './Pages/UsersList/AddUser'
+import Profil from './Pages/Profil'
 
 function App() {
 	const [theme] = useState('light')
@@ -73,6 +74,9 @@ function App() {
 					</PrivateRoute>
 					<PrivateRoute exact path="/adduser">
 						<AddUser />
+					</PrivateRoute>
+					<PrivateRoute exact path="/profil">
+						<Profil />
 					</PrivateRoute>
 
 					<Route path="*">

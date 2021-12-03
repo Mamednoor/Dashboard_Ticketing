@@ -13,6 +13,7 @@ import {
 	AppstoreOutlined,
 	FolderOutlined,
 	BarChartOutlined,
+	UserOutlined,
 	LogoutOutlined,
 } from '@ant-design/icons'
 
@@ -94,6 +95,12 @@ export const LayoutSider = () => {
 				)}
 
 				<Menu.Item key="6">
+					<Link to="/profil">
+						<UserOutlined />
+						<span className="nav-text">Profil</span>
+					</Link>
+				</Menu.Item>
+				<Menu.Item key="7">
 					<Button style={{ padding: 0 }} onClick={() => logOut()} type="link">
 						<LogoutOutlined />
 						<span className="nav-text">Déconnexion</span>

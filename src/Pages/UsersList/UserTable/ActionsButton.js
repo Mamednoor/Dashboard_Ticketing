@@ -10,7 +10,6 @@ export function EraseUser({ userID }) {
 
 	return (
 		<>
-			<Button type="link">Modifier</Button>
 			<Button danger type="link" onClick={() => dispatch(deletingUser(userID))}>
 				Suppression
 			</Button>
