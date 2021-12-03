@@ -15,7 +15,7 @@ import { FormItem } from '../../FormItem'
 import { H2 } from '../../H'
 import { Spin } from '../../Spin'
 
-import { Alert, Form, Input, Typography, message } from 'antd'
+import { Alert, Form, Input, Typography, message as ANTDmessage } from 'antd'
 
 const layout = {
 	layout: 'horizontal',
@@ -82,7 +82,9 @@ function Registration() {
 	}
 
 	const onFinishFailed = () => {
-		message.error("Des informations sont manquantes ou n'ont pas été validés")
+		ANTDmessage.error(
+			"Des informations sont manquantes ou n'ont pas été validés",
+		)
 	}
 
 	const handleSubmit = (values) => {

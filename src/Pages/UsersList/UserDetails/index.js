@@ -12,6 +12,7 @@ import { UserCard } from '../../../Components/Card'
 import { Centered } from '../../../Components/Centered'
 import { Spin } from '../../../Components/Spin'
 import { ContentHeader } from '../../../Components/ContentHeader'
+import formatDate from '../../../utils'
 
 function UserDetails() {
 	const dispatch = useDispatch()
@@ -30,22 +31,22 @@ function UserDetails() {
 
 	const TotalUserTickets = tickets?.filter(
 		// eslint-disable-next-line eqeqeq
-		(elm) => elm?.clientId == userSelected?._id,
+		(elm) => elm?.clientId == userID,
 	)
 
 	const TotalUserInProgressTickets = tickets?.filter(
 		// eslint-disable-next-line eqeqeq
-		(elm) => elm?.clientId == userSelected?._id && elm?.status == 'En Cours',
+		(elm) => elm?.clientId == userID && elm?.status == 'En Cours',
 	)
 
 	const TotalUserCloseTickets = tickets?.filter(
 		// eslint-disable-next-line eqeqeq
-		(elm) => elm?.clientId == userSelected?._id && elm?.status == 'Fermé',
+		(elm) => elm?.clientId == userID && elm?.status == 'Fermé',
 	)
 
 	const TotalUserPendingTickets = tickets?.filter(
 		// eslint-disable-next-line eqeqeq
-		(elm) => elm?.clientId == userSelected?._id && elm?.status == 'En Attente',
+		(elm) => elm?.clientId == userID && elm?.status == 'En Attente',
 	)
 
 	return (
@@ -108,9 +109,12 @@ function UserDetails() {
 						<P>Nom : {userSelected?.lastname}</P>
 						<P>Email : {userSelected?.email}</P>
 						<P>Téléphone : {userSelected?.phone}</P>
+						<P>Entreprise : {userSelected?.company}</P>
+						<P>Adresse : {userSelected?.address}</P>
+						<P>Crée le : {formatDate(userSelected?.createdOn)}</P>
 					</UserCard>
 
-					<UserCard title={<P>Nombre de ticket</P>}>
+					<UserCard title={<>Nombre de ticket</>}>
 						<P>Nombre total de ticket : {TotalUserTickets?.length}</P>
 						<P>
 							Nombre de ticket en cours : {TotalUserInProgressTickets?.length}
