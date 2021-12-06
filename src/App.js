@@ -75,7 +75,7 @@ function App() {
 					<PrivateRoute exact path="/adduser">
 						<AddUser />
 					</PrivateRoute>
-					<PrivateRoute exact path="/profil">
+					<PrivateRoute exact path="/profil/:userID">
 						<Profil />
 					</PrivateRoute>
 

@@ -41,12 +41,12 @@ function AddTicket() {
 	}, [dispatch, history, status])
 
 	const handleSubmit = (values) => {
-		const addIssue = {
+		const formData = {
 			subject: values.subject,
 			message: values.message,
 			//picture: values.picture,
 		}
-		dispatch(openNewTicket({ ...addIssue, sender: firstname + ' ' + lastname }))
+		dispatch(openNewTicket({ ...formData, sender: firstname + ' ' + lastname }))
 	}
 
 	return (

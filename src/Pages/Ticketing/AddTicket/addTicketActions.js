@@ -6,12 +6,12 @@ import {
 	addNewTicketError,
 } from './addTicketSlice'
 
-export const openNewTicket = (addIssue) => (dispatch) => {
+export const openNewTicket = (formData) => (dispatch) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			dispatch(addNewTicketPending())
 
-			const result = await openNewIssue(addIssue)
+			const result = await openNewIssue(formData)
 			if (result.status === 'error') {
 				return dispatch(addNewTicketError(result.message))
 			}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
 import { fetchUserInfo } from '../UsersList/usersListActions'
 import { profilInit } from './profilSlice'
@@ -15,6 +14,7 @@ import { Flex } from '../../Components/Flex'
 import { FormItem } from '../../Components/FormItem'
 import Space from '../../Components/Space'
 import { Spin } from '../../Components/Spin'
+import { updateProfilUser } from './profilActions'
 
 const layout = {
 	layout: 'horizontal',
@@ -36,7 +36,6 @@ const VerificationError = {
 
 function Profil() {
 	const dispatch = useDispatch()
-	const history = useHistory()
 
 	const { _id, firstname, lastname, email, company, address, phone } =
 		useSelector((state) => state.user.user)
@@ -48,30 +47,14 @@ function Profil() {
 		dispatch(fetchUserInfo(_id))
 		if (status === 'success') {
 			return setTimeout(() => {
-				dispatch(profilInit())
+				dispatch(profilInit()) && window.location.reload()
 			}, 2000)
 		}
-	}, [_id, dispatch, history, status])
+	}, [_id, dispatch, status])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
-		if (name === 'password') {
-			const isLenthy = value.length >= 8
-			const hasUpper = /[A-Z]/.test(value)
-			const hasLower = /[a-z]/.test(value)
-			const hasNumber = /[0-9]/.test(value)
-			const hasSpclChr = /[@,#,$,%,&,*]/.test(value)
-
-			setValidationError({
-				...validationError,
-				isLenthy,
-				hasUpper,
-				hasLower,
-				hasNumber,
-				hasSpclChr,
-			})
-		}
-		if (name === 'phone') {
+		if (name === 'newPhone') {
 			const isPhoneLenthy = value.length === 10
 			const isPhoneValide = /^(0[6-7])(?:[ _.-]?(\d{2})){4}$/.test(value)
 			setValidationError({
@@ -83,17 +66,17 @@ function Profil() {
 	}
 
 	const handleSubmit = (values) => {
-		const formData = {
-			firstname: values.firstname,
-			lastname: values.lastname,
-			company: values.company,
-			address: values.address,
-			phone: values.phone,
-			email: values.email,
-			password: values.password,
-			isAdmin: values.isAdmin,
-		}
-		console.log('formData', formData)
+		dispatch(
+			updateProfilUser({
+				_id,
+				newFirstname: values.newFirstname,
+				newLastname: values.newLastname,
+				newCompany: values.newCompany,
+				newAddress: values.newAddress,
+				newPhone: values.newPhone,
+				newEmail: values.newEmail,
+			}),
+		)
 	}
 
 	return (
@@ -150,16 +133,16 @@ function Profil() {
 							form={form}
 							{...layout}
 							initialValues={{
-								firstname,
-								lastname,
-								company,
-								address,
-								phone,
-								email,
+								newFirstname: firstname,
+								newLastname: lastname,
+								newCompany: company,
+								newAddress: address,
+								newPhone: phone,
+								newEmail: email,
 							}}
 						>
 							<FormItem
-								name="firstname"
+								name="newFirstname"
 								label="Prénom"
 								rules={[
 									{
@@ -169,11 +152,11 @@ function Profil() {
 									},
 								]}
 							>
-								<Input name="firstname" placeholder="Prénom" />
+								<Input name="newFirstname" placeholder="Prénom" />
 							</FormItem>
 
 							<FormItem
-								name="lastname"
+								name="newLastname"
 								label="Nom"
 								rules={[
 									{
@@ -183,11 +166,11 @@ function Profil() {
 									},
 								]}
 							>
-								<Input name="lastname" placeholder="Nom" />
+								<Input name="newLastname" placeholder="Nom" />
 							</FormItem>
 
 							<FormItem
-								name="company"
+								name="newCompany"
 								label="Société"
 								rules={[
 									{
@@ -197,11 +180,11 @@ function Profil() {
 									},
 								]}
 							>
-								<Input name="company" placeholder="Société" />
+								<Input name="newCompany" placeholder="Société" />
 							</FormItem>
 
 							<FormItem
-								name="address"
+								name="newAddress"
 								label="Adresse"
 								rules={[
 									{
@@ -210,11 +193,11 @@ function Profil() {
 									},
 								]}
 							>
-								<Input name="address" placeholder="Adresse de la société" />
+								<Input name="newAddress" placeholder="Adresse de la société" />
 							</FormItem>
 
 							<FormItem
-								name="phone"
+								name="newPhone"
 								label="Mobile"
 								rules={[
 									{
@@ -225,11 +208,11 @@ function Profil() {
 								]}
 								onChange={handleChange}
 							>
-								<Input name="phone" placeholder="Numéro de téléphone" />
+								<Input name="newPhone" placeholder="Numéro de téléphone" />
 							</FormItem>
 
 							<FormItem
-								name="email"
+								name="newEmail"
 								label="Adresse Mail"
 								rules={[
 									{
@@ -238,7 +221,7 @@ function Profil() {
 									},
 								]}
 							>
-								<Input name="email" placeholder="Email" />
+								<Input name="newEmail" placeholder="Email" />
 							</FormItem>
 
 							{isLoading ? (
@@ -272,34 +255,6 @@ function Profil() {
 					>
 						<Text strong style={{ fontSize: '12px' }} type="info">
 							Validation du formulaire :
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasUpper ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un caractère majuscule
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasLower ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un caractère minuscule
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasNumber ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un chiffre
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasSpclChr ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un de ces caractères spéciale
 						</Text>
 						<Text
 							strong
