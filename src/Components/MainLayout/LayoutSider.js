@@ -26,7 +26,7 @@ const { Sider } = Layout
 export const LayoutSider = () => {
 	const history = useHistory()
 	const dispatch = useDispatch()
-	const { isAdmin, _id } = useSelector((state) => state.user.user)
+	const { isAdmin } = useSelector((state) => state.user.user)
 
 	const [collapsed, setCollapsed] = useState(true)
 
@@ -95,7 +95,7 @@ export const LayoutSider = () => {
 				)}
 
 				<Menu.Item key="6">
-					<Link to={`/profil/${_id}`}>
+					<Link to="/profil">
 						<UserOutlined />
 						<span className="nav-text">Profil</span>
 					</Link>

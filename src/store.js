@@ -9,6 +9,7 @@ import resetPasswordReducer from './Components/Auth/ResetPassword/passwordSlice'
 import usersListReducer from './Pages/UsersList/usersListSlice'
 import addNewUserReducer from './Pages/UsersList/AddUser/adduserSlice'
 import profilReducer from './Pages/Profil/profilSlice'
+import profilUpdateReducer from './Pages/UsersList/UserDetails/updateUserSlice'
 
 const store = configureStore({
 	reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
 		userList: usersListReducer,
 		addNewUser: addNewUserReducer,
 		profil: profilReducer,
+		profilUpdate: profilUpdateReducer,
 	},
 })
 

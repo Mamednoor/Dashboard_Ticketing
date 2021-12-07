@@ -424,47 +424,47 @@ export const getUserDetails = (_id) => {
 	})
 }
 
-// export const userUpdatedByAdmin = (
-// 	_id,
-// 	newFirstname,
-// 	newLastname,
-// 	newCompany,
-// 	newAddress,
-// 	newPhone,
-// 	newEmail,
-// 	newisAdmin,
-// 	newisVerified,
-// ) => {
-// 	const URL = 'http://localhost:8080/users/user/'
-// 	return new Promise(async (resolve, reject) => {
-// 		try {
-// 			const accessToken = sessionStorage.getItem('accessToken')
-// 			const result = await axios.patch(
-// 				URL + _id?._id,
-// 				{
-// 					newFirstname: _id?.newFirstname,
-// 					newLastname: _id?.newLastname,
-// 					newCompany: _id?.newCompany,
-// 					newAddress: _id?.newAddress,
-// 					newPhone: _id?.newPhone,
-// 					newEmail: _id?.newEmail,
-// 					newisAdmin: _id?.newisAdmin,
-// 					newisVerified: _id?.newisVerified,
-// 				},
-// 				{
-// 					headers: {
-// 						Authorization: accessToken,
-// 					},
-// 				},
-// 			)
-// 			resolve(result.data)
-// 		} catch (error) {
-// 			reject(error.message)
-// 		}
-// 	})
-// }
+export const userUpdatedByAdmin = (
+	_id,
+	newFirstname,
+	newLastname,
+	newCompany,
+	newAddress,
+	newPhone,
+	newEmail,
+	newisAdmin,
+	newisVerified,
+) => {
+	const URL = 'http://localhost:8080/users/update-user/'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem('accessToken')
+			const result = await axios.patch(
+				URL + _id?._id,
+				{
+					newFirstname: _id?.newFirstname,
+					newLastname: _id?.newLastname,
+					newCompany: _id?.newCompany,
+					newAddress: _id?.newAddress,
+					newPhone: _id?.newPhone,
+					newEmail: _id?.newEmail,
+					newisAdmin: _id?.newisAdmin,
+					newisVerified: _id?.newisVerified,
+				},
+				{
+					headers: {
+						Authorization: accessToken,
+					},
+				},
+			)
+			resolve(result.data)
+		} catch (error) {
+			reject(error.message)
+		}
+	})
+}
 
-export const deleteUser = (userID, _id, isAdmin) => {
+export const deleteUser = (userID, _id) => {
 	const URL = 'http://localhost:8080/users/delete/'
 	return new Promise(async (resolve, reject) => {
 		try {

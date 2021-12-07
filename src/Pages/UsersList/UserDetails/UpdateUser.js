@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchUserInfo } from '../UsersList/usersListActions'
-import { profilInit } from './profilSlice'
-import { updateProfilUser } from './profilActions'
+import { fetchUserInfo } from '../usersListActions'
+import { updateProfilbyAdmin } from './updateUserActions'
+import { profilUpdateInit } from './updateUserSlice'
 
-import Marquee from 'react-fast-marquee'
-
-import { Alert, Form, Input, message as ANTDmessage } from 'antd'
-import { Btn } from '../../Components/Button'
-import { Centered } from '../../Components/Centered'
-import { ContentHeader } from '../../Components/ContentHeader'
-import { Flex } from '../../Components/Flex'
-import { FormItem } from '../../Components/FormItem'
-import Space from '../../Components/Space'
-import { Spin } from '../../Components/Spin'
+import { Alert, Checkbox, Form, Input, message as ANTDmessage } from 'antd'
+import { Btn } from '../../../Components/Button'
+import { Centered } from '../../../Components/Centered'
+import { ContentHeader } from '../../../Components/ContentHeader'
+import { Flex } from '../../../Components/Flex'
+import { FormItem } from '../../../Components/FormItem'
+import { Spin } from '../../../Components/Spin'
+import Space from '../../../Components/Space'
 
 const layout = {
 	layout: 'horizontal',
@@ -27,23 +26,24 @@ const VerificationError = {
 	isPhoneValide: true,
 }
 
-function Profil() {
+function UpdateUser() {
+	const { userID } = useParams()
 	const dispatch = useDispatch()
-
-	const { _id, firstname, lastname, email, company, address, phone } =
-		useSelector((state) => state.user.user)
-	const { isLoading, status, message } = useSelector((state) => state.profil)
 	const [form] = Form.useForm()
 	const [validationError, setValidationError] = useState(VerificationError)
 
+	const { isLoading, userSelected } = useSelector((state) => state.userList)
+
+	const { condition, message } = useSelector((state) => state.profilUpdate)
+
 	useEffect(() => {
-		dispatch(fetchUserInfo(_id))
-		if (status === 'success') {
+		dispatch(fetchUserInfo(userID))
+		if (condition === 'success') {
 			return setTimeout(() => {
-				dispatch(profilInit()) && window.location.reload()
+				dispatch(profilUpdateInit()) && window.location.reload()
 			}, 2000)
 		}
-	}, [_id, dispatch, status])
+	}, [dispatch, condition, userID])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
@@ -66,43 +66,35 @@ function Profil() {
 
 	const handleSubmit = (values) => {
 		dispatch(
-			updateProfilUser({
-				_id,
+			updateProfilbyAdmin({
+				_id: userID,
 				newFirstname: values.newFirstname,
 				newLastname: values.newLastname,
 				newCompany: values.newCompany,
 				newAddress: values.newAddress,
 				newPhone: values.newPhone,
 				newEmail: values.newEmail,
+				newisAdmin: values.newisAdmin,
+				newisVerified: values.newisVerified,
 			}),
 		)
 	}
 
 	return (
-		// eslint-disable-next-line no-unreachable
 		<>
 			<ContentHeader
 				breadcrumbItems={[
 					{
-						name: 'Dashboard',
-						path: `/dashboard`,
+						name: "Détails d'un l'utilisateur",
+						path: `/user/${userID}`,
 					},
 					{
-						name: 'Profil',
+						name: "Modification de l'utilisateur",
 					},
 				]}
 			/>
-			<Alert
-				type="info"
-				banner
-				message={
-					<Marquee pauseOnHover gradient={false}>
-						Afin de modifier votre mot de passe veuillez suivre la procédure de
-						réinitialisation
-					</Marquee>
-				}
-			/>
-			{status === 'error' && (
+
+			{condition === 'error' && (
 				<Centered>
 					<Alert
 						message="Ooops... Une erreur est survenue"
@@ -113,10 +105,10 @@ function Profil() {
 				</Centered>
 			)}
 
-			{status === 'success' && (
+			{condition === 'success' && (
 				<Centered>
 					<Alert
-						message="Votre compte à été crée avec succes"
+						message="La modification a été effectuée"
 						type="success"
 						showIcon
 					/>
@@ -130,20 +122,23 @@ function Profil() {
 			) : (
 				<Centered style={{ paddingTop: ' 90px' }}>
 					<Space>
-						<Flex style={{ padding: '35px', border: '1px solid' }}>
+						<Flex style={{ padding: '40px', border: '1px solid' }}>
 							<Form
+								style={{ width: '500px' }}
 								autoComplete="off"
 								onFinish={handleSubmit}
 								form={form}
 								onFinishFailed={onFinishFailed}
 								{...layout}
 								initialValues={{
-									newFirstname: firstname,
-									newLastname: lastname,
-									newCompany: company,
-									newAddress: address,
-									newPhone: phone,
-									newEmail: email,
+									newFirstname: userSelected?.firstname,
+									newLastname: userSelected?.lastname,
+									newEmail: userSelected?.email,
+									newPhone: userSelected?.phone,
+									newCompany: userSelected?.company,
+									newAddress: userSelected?.address,
+									newisAdmin: userSelected?.isAdmin,
+									newisVerified: userSelected?.isVerified,
 								}}
 							>
 								<FormItem
@@ -198,7 +193,7 @@ function Profil() {
 										},
 									]}
 								>
-									<Input
+									<Input.TextArea
 										name="newAddress"
 										placeholder="Adresse de la société"
 									/>
@@ -231,6 +226,20 @@ function Profil() {
 									]}
 								>
 									<Input name="newEmail" placeholder="Email" />
+								</FormItem>
+								<FormItem
+									name="newisAdmin"
+									label="Admin"
+									valuePropName="checked"
+								>
+									<Checkbox name="newisAdmin" />
+								</FormItem>
+								<FormItem
+									name="newisVerified"
+									label="Compte validé"
+									valuePropName="checked"
+								>
+									<Checkbox name="newisVerified" />
 								</FormItem>
 
 								{Object.values(validationError).every(
@@ -278,4 +287,4 @@ function Profil() {
 	)
 }
 
-export default Profil
+export default UpdateUser

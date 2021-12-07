@@ -23,6 +23,7 @@ import { Ticket } from './Pages/Ticketing/Tickets'
 import UserDetails from './Pages/UsersList/UserDetails'
 import AddUser from './Pages/UsersList/AddUser'
 import Profil from './Pages/Profil'
+import UpdateUser from './Pages/UsersList/UserDetails/UpdateUser'
 
 function App() {
 	const [theme] = useState('light')
@@ -75,8 +76,11 @@ function App() {
 					<PrivateRoute exact path="/adduser">
 						<AddUser />
 					</PrivateRoute>
-					<PrivateRoute exact path="/profil/:userID">
+					<PrivateRoute exact path="/profil">
 						<Profil />
+					</PrivateRoute>
+					<PrivateRoute exact path="/update-user/:userID">
+						<UpdateUser />
 					</PrivateRoute>
 
 					<Route path="*">

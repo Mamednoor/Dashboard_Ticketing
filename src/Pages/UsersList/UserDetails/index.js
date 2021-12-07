@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { fetchUserInfo } from '../usersListActions'
 import { fetchAllTickets } from '../../Ticketing/Tickets/ticketsActions'
@@ -11,18 +11,18 @@ import { P } from '../../../Components/P'
 import { UserCard } from '../../../Components/Card'
 import { Centered } from '../../../Components/Centered'
 import { Spin } from '../../../Components/Spin'
+import { Flex } from '../../../Components/Flex'
 import { ContentHeader } from '../../../Components/ContentHeader'
 import formatDate from '../../../utils'
 
 function UserDetails() {
+	const { userID } = useParams()
 	const dispatch = useDispatch()
 
+	const { tickets } = useSelector((state) => state.tickets)
 	const { isLoading, error, userSelected } = useSelector(
 		(state) => state.userList,
 	)
-	const { tickets } = useSelector((state) => state.tickets)
-
-	const { userID } = useParams()
 
 	useEffect(() => {
 		dispatch(fetchUserInfo(userID))
@@ -88,7 +88,7 @@ function UserDetails() {
 				>
 					<UserCard
 						title={
-							<>
+							<Flex>
 								<Tag
 									color={userSelected?.isAdmin ? 'purple' : 'geekblue'}
 									key={userSelected?.isAdmin}
@@ -102,7 +102,10 @@ function UserDetails() {
 								>
 									{userSelected?.isVerified ? 'Validé' : 'En attente'}
 								</Tag>
-							</>
+								<Link to={`/update-user/${userID}`} userSelected={userSelected}>
+									Modifier
+								</Link>
+							</Flex>
 						}
 					>
 						<P>Prénom : {userSelected?.firstname}</P>

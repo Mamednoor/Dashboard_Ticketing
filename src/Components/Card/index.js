@@ -43,7 +43,7 @@ export const CenteringCard = styled(Card)`
 export const UserCard = styled(Card)`
 	display: flex;
 	flex-direction: column;
-	width: 400px;
+	width: 450px;
 	margin: 15px;
 	border: 1px solid black;
 `
