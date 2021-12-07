@@ -78,12 +78,12 @@ export const LayoutSider = () => {
 
 				{isAdmin && (
 					<>
-						<Menu.Item key="4">
+						{/* <Menu.Item key="4">
 							<Link to="/chart">
 								<BarChartOutlined />
 								<span className="nav-text">Statistique</span>
 							</Link>
-						</Menu.Item>
+						</Menu.Item> */}
 
 						<Menu.Item key="5">
 							<Link to="/userslist">
