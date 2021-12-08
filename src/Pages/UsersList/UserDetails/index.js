@@ -62,9 +62,9 @@ function UserDetails() {
 			{
 				label: 'Status des tickets',
 				data: [
-					TotalUserPendingTickets.length,
-					TotalUserInProgressTickets.length,
-					TotalUserCloseTickets.length,
+					TotalUserPendingTickets?.length,
+					TotalUserInProgressTickets?.length,
+					TotalUserCloseTickets?.length,
 				],
 				backgroundColor: ['#f0f5ff', '#f6ffed', '#fff2e8'],
 				borderColor: ['#adc6ff', '#b7eb8f', '#ffbb96'],

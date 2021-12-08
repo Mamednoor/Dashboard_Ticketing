@@ -51,9 +51,9 @@ function Dashboard() {
 			{
 				label: 'Tickets',
 				data: [
-					pendingTicket.length,
-					inProgressTicket.length,
-					closeTicket.length,
+					pendingTicket?.length,
+					inProgressTicket?.length,
+					closeTicket?.length,
 				],
 				backgroundColor: ['#f0f5ff', '#f6ffed', '#fff2e8'],
 				borderColor: ['#adc6ff', '#b7eb8f', '#ffbb96'],
@@ -66,7 +66,7 @@ function Dashboard() {
 		datasets: [
 			{
 				label: 'Utilisateurs',
-				data: [verifiedUser.length, pendingUser.length],
+				data: [verifiedUser?.length, pendingUser?.length],
 				backgroundColor: ['#f6ffed', '#fff2e8'],
 				borderColor: ['#b7eb8f', '#ffbb96'],
 			},
@@ -84,7 +84,7 @@ function Dashboard() {
 			/>
 			<Centered
 				style={{
-					marginTop: '20vh',
+					paddingTop: '20vh',
 					justifyContent: 'space-evenly',
 					flexWrap: 'wrap',
 				}}

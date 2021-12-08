@@ -18,17 +18,15 @@ function PrivateRoute({ children, ...rest }) {
 	useEffect(() => {
 		const updateToken = async () => {
 			const result = await refreshAccessToken()
-			result && dispatch(loginSuccess()) /* && dispatch(getUser()) */
+			result && dispatch(loginSuccess())
 		}
+		!user._id && dispatch(getUser())
+
 		!sessionStorage.getItem('accessToken') &&
 			localStorage.getItem('refreshToken') &&
 			updateToken()
 
-		!user._id && dispatch(getUser)
-		!isAuth &&
-			sessionStorage.getItem('accessToken') &&
-			dispatch(loginSuccess()) &&
-			dispatch(getUser())
+		!isAuth && sessionStorage.getItem('accessToken') && dispatch(loginSuccess())
 	}, [dispatch, isAuth, user._id])
 
 	return (
@@ -40,8 +38,17 @@ function PrivateRoute({ children, ...rest }) {
 			) : (
 				<Route
 					{...rest}
-					render={() =>
-						isAuth ? <MainLayout> {children} </MainLayout> : <Redirect to="/" />
+					render={({ location }) =>
+						isAuth ? (
+							<MainLayout> {children} </MainLayout>
+						) : (
+							<Redirect
+								to={{
+									pathname: '/',
+									state: { from: location },
+								}}
+							/>
+						)
 					}
 				/>
 			)}

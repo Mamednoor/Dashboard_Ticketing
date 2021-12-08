@@ -36,7 +36,7 @@ function Login() {
 
 	useEffect(() => {
 		sessionStorage.getItem('accessToken') && history.push('/dashboard')
-	}, [dispatch, history])
+	}, [history])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
