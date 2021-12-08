@@ -10,7 +10,6 @@ import {
 } from '../Ticketing/Tickets/ticketsActions'
 
 import { P } from '../../Components/P'
-import { Flex } from '../../Components/Flex'
 import { fetchAllUsers } from '../UsersList/usersListActions'
 import Space from '../../Components/Space'
 import { ContentHeader } from '../../Components/ContentHeader'

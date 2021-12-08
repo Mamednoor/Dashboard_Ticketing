@@ -9,7 +9,7 @@ import AccountValidation from './Components/Auth/AccountValidation/AccountValida
 import Dashboard from './Pages/Dashboard'
 import Home from './Pages/Home'
 import Ticketing from './Pages/Ticketing'
-//import Chart from './Pages/Chart'
+// import Chart from './Pages/Chart'
 import UsersList from './Pages/UsersList'
 import NotFound from './Components/404'
 
