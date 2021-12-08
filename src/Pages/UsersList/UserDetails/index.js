@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Doughnut } from 'react-chartjs-2'
+
 import { fetchUserInfo } from '../usersListActions'
 import { fetchAllTickets } from '../../Ticketing/Tickets/ticketsActions'
 
@@ -14,6 +17,10 @@ import { Spin } from '../../../Components/Spin'
 import { Flex } from '../../../Components/Flex'
 import { ContentHeader } from '../../../Components/ContentHeader'
 import formatDate from '../../../utils'
+import { Wrapper } from '../../../Components/Wrapper'
+import Space from '../../../Components/Space'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 function UserDetails() {
 	const { userID } = useParams()
@@ -49,6 +56,22 @@ function UserDetails() {
 		(elm) => elm?.clientId == userID && elm?.status == 'En Attente',
 	)
 
+	const dataTickets = {
+		labels: ['En Attente', 'En Cours', 'Fermé'],
+		datasets: [
+			{
+				label: 'Status des tickets',
+				data: [
+					TotalUserPendingTickets.length,
+					TotalUserInProgressTickets.length,
+					TotalUserCloseTickets.length,
+				],
+				backgroundColor: ['#f0f5ff', '#f6ffed', '#fff2e8'],
+				borderColor: ['#adc6ff', '#b7eb8f', '#ffbb96'],
+			},
+		],
+	}
+
 	return (
 		<>
 			<ContentHeader
@@ -82,8 +105,7 @@ function UserDetails() {
 				<Centered
 					style={{
 						marginTop: '20vh',
-						justifyContent: 'space-around',
-						alignItems: 'center',
+						justifyContent: 'space-evenly',
 					}}
 				>
 					<UserCard
@@ -116,17 +138,21 @@ function UserDetails() {
 						<P>Adresse : {userSelected?.address}</P>
 						<P>Crée le : {formatDate(userSelected?.createdOn)}</P>
 					</UserCard>
-
-					<UserCard title={<>Nombre de ticket</>}>
-						<P>Nombre total de ticket : {TotalUserTickets?.length}</P>
-						<P>
-							Nombre de ticket en cours : {TotalUserInProgressTickets?.length}
-						</P>
-						<P>Nombre de ticket fermé : {TotalUserCloseTickets?.length}</P>
-						<P>
-							Nombre de ticket en attente : {TotalUserPendingTickets?.length}
-						</P>
-					</UserCard>
+					<Space>
+						<Wrapper>
+							<P>Nombre total de ticket : {TotalUserTickets?.length}</P>
+							<P>
+								Nombre de ticket en cours : {TotalUserInProgressTickets?.length}
+							</P>
+							<P>Nombre de ticket fermé : {TotalUserCloseTickets?.length}</P>
+							<P>
+								Nombre de ticket en attente : {TotalUserPendingTickets?.length}
+							</P>
+						</Wrapper>
+						<Wrapper style={{ width: '300px' }}>
+							<Doughnut data={dataTickets} />
+						</Wrapper>
+					</Space>
 				</Centered>
 			)}
 		</>

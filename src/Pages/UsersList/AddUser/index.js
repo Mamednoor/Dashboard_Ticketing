@@ -113,7 +113,7 @@ function AddUser() {
 				breadcrumbItems={[
 					{
 						name: 'Liste des utilisateurs',
-						path: `/userlist`,
+						path: `/userslist`,
 					},
 					{
 						name: 'Ajouter un utilisateur',
