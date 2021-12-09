@@ -5,14 +5,15 @@ import { useHistory } from 'react-router-dom'
 import { openNewTicket } from './addTicketActions'
 import { addNewTicketInit } from './addTicketSlice'
 
-import { Form, Input, Alert } from 'antd'
+import { Form, Input, Alert, Select } from 'antd'
 import { Btn } from '../../../Components/Button'
 import { Centered } from '../../../Components/Centered'
 import { ContentHeader } from '../../../Components/ContentHeader'
 import { Flex } from '../../../Components/Flex'
 import { FormItem } from '../../../Components/FormItem'
-import Space from '../../../Components/Space'
 import { Spin } from '../../../Components/Spin'
+
+const { Option } = Select
 
 function AddTicket() {
 	const dispatch = useDispatch()
@@ -25,13 +26,7 @@ function AddTicket() {
 	const [form] = Form.useForm()
 	const [subject] = useState('')
 	const [message] = useState('')
-
-	// const uploadFile = (values) => {
-	// 	console.log('file values', values.file)
-	// 	const data = new FormData()
-	// 	data.append('picture-file', values.file?.originFileObj)
-	// 	return data
-	// }
+	const [priority] = useState('Normal')
 
 	useEffect(() => {
 		if (status === 'success')
@@ -44,7 +39,7 @@ function AddTicket() {
 		const formData = {
 			subject: values.subject,
 			message: values.message,
-			//picture: values.picture,
+			priority: values.priority,
 		}
 		dispatch(openNewTicket({ ...formData, sender: firstname + ' ' + lastname }))
 	}
@@ -62,8 +57,9 @@ function AddTicket() {
 					},
 				]}
 			/>
+
 			{status && (
-				<Centered style={{ paddingBottom: '30px' }}>
+				<Centered style={{ paddingTop: '30px' }}>
 					<Alert
 						message={addMessage}
 						type={status === 'success' ? 'success' : 'error'}
@@ -72,88 +68,76 @@ function AddTicket() {
 				</Centered>
 			)}
 
-			<Centered style={{ paddingTop: ' 150px' }}>
-				<Space>
-					<Flex style={{ padding: '55px', border: '1px solid' }}>
-						<Form
-							layout="vertical"
-							form={form}
-							onFinish={handleSubmit}
-							autoComplete="off"
-							style={{ paddingTop: '10px', width: '100%' }}
-						>
-							<FormItem
-								name="subject"
-								label="Sujet"
-								rules={[
-									{
-										required: true,
-										message: 'Champ requis, 10 caractères minimum',
-										min: 10,
-										max: 500,
-									},
-								]}
-							>
-								<Input name="subject" value={subject} />
-							</FormItem>
-
-							{/* 
-					<Form.Item
-						name="picture"
-						label="Capture d'écran (facultatif)"
-						extra="seul les extensions png, jpeg, jpg sont autorisées"
+			<Centered style={{ paddingTop: ' 120px' }}>
+				<Flex style={{ padding: '50px', border: '1px solid' }}>
+					<Form
+						layout="vertical"
+						form={form}
+						onFinish={handleSubmit}
+						autoComplete="off"
+						style={{ width: '500px' }}
 					>
-						<Upload
-							maxCount={1}
-							listType="picture"
-							action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-							onChange={uploadFile}
+						<FormItem
+							name="subject"
+							label="Sujet"
+							rules={[
+								{
+									required: true,
+									message: 'Champ requis, 10 caractères minimum',
+									min: 10,
+									max: 500,
+								},
+							]}
 						>
-							<Btn style={{ padding: '5px' }} onChange={uploadFile}>
-								Choissez votre image
-							</Btn>
-						</Upload>
-					</Form.Item> */}
+							<Input name="subject" value={subject} />
+						</FormItem>
 
-							<FormItem
+						<FormItem name="priority" label="Priorité">
+							<Select defaultValue="Normal" value={priority}>
+								<Option value="Basse">Basse</Option>
+								<Option value="Normal">Normal</Option>
+								<Option value="Haute">Haute</Option>
+							</Select>
+						</FormItem>
+
+						<FormItem
+							name="message"
+							label="Description"
+							rules={[
+								{
+									required: true,
+									message: 'Champ requis, 10 caractères minimum',
+									min: 10,
+									max: 500,
+								},
+							]}
+						>
+							<Input.TextArea
 								name="message"
-								label="Description"
-								rules={[
-									{
-										required: true,
-										message: 'Champ requis, 10 caractères minimum',
-										min: 10,
-										max: 500,
-									},
-								]}
+								value={message}
+								maxLength="500"
+								showCount
+								style={{ width: '500px' }}
+							/>
+						</FormItem>
+						{isLoading ? (
+							<Centered>
+								<Spin />
+							</Centered>
+						) : (
+							<Btn
+								style={{
+									padding: '0.5rem 1rem',
+									width: '100%',
+									marginTop: '25px',
+								}}
+								htmlType="submit"
 							>
-								<Input.TextArea
-									name="message"
-									value={message}
-									maxLength="500"
-									showCount
-									style={{ width: '500px' }}
-								/>
-							</FormItem>
-							{isLoading ? (
-								<Centered>
-									<Spin />
-								</Centered>
-							) : (
-								<Btn
-									style={{
-										padding: '0.5rem 1rem',
-										width: '100%',
-										marginTop: '25px',
-									}}
-									htmlType="submit"
-								>
-									Enregistrer
-								</Btn>
-							)}
-						</Form>
-					</Flex>
-				</Space>
+								Enregistrer
+							</Btn>
+						)}
+					</Form>
+				</Flex>
 			</Centered>
 		</>
 	)

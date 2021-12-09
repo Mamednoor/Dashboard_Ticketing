@@ -142,160 +142,144 @@ function AddUser() {
 			)}
 
 			<Centered style={{ paddingTop: ' 90px' }}>
-				<Space>
-					<Flex style={{ padding: '35px', border: '1px solid' }}>
-						<Form
-							autoComplete="off"
-							onFinish={handleSubmit}
-							onFinishFailed={onFinishFailed}
-							form={form}
-							{...layout}
+				<Flex style={{ padding: '35px', border: '1px solid' }}>
+					<Form
+						style={{ width: '500px' }}
+						autoComplete="off"
+						onFinish={handleSubmit}
+						onFinishFailed={onFinishFailed}
+						form={form}
+						{...layout}
+					>
+						<FormItem
+							name="firstname"
+							label="Prénom"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner un prénom',
+									min: 4,
+								},
+							]}
 						>
-							<FormItem
-								name="firstname"
-								label="Prénom"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner un prénom',
-										min: 4,
-									},
-								]}
-							>
-								<Input name="firstname" placeholder="Prénom" />
-							</FormItem>
+							<Input name="firstname" placeholder="Prénom" />
+						</FormItem>
 
-							<FormItem
-								name="lastname"
-								label="Nom"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner un nom',
-										min: 2,
-									},
-								]}
-							>
-								<Input name="lastname" placeholder="Nom" />
-							</FormItem>
+						<FormItem
+							name="lastname"
+							label="Nom"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner un nom',
+									min: 2,
+								},
+							]}
+						>
+							<Input name="lastname" placeholder="Nom" />
+						</FormItem>
 
-							<FormItem
-								name="company"
-								label="Société"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner votre société',
-										min: 3,
-									},
-								]}
-							>
-								<Input name="company" placeholder="Société" />
-							</FormItem>
+						<FormItem
+							name="company"
+							label="Société"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner votre société',
+									min: 3,
+								},
+							]}
+						>
+							<Input name="company" placeholder="Société" />
+						</FormItem>
 
-							<FormItem
-								name="address"
-								label="Adresse"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner une adresse',
-									},
-								]}
-							>
-								<Input name="address" placeholder="Adresse de la société" />
-							</FormItem>
+						<FormItem
+							name="address"
+							label="Adresse"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner une adresse',
+								},
+							]}
+						>
+							<Input name="address" placeholder="Adresse de la société" />
+						</FormItem>
 
-							<FormItem
-								name="phone"
-								label="Mobile"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner un numéro valide',
-										min: 10,
-									},
-								]}
-								onChange={handleChange}
-							>
-								<Input name="phone" placeholder="Numéro de téléphone" />
-							</FormItem>
+						<FormItem
+							name="phone"
+							label="Mobile"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner un numéro valide',
+									min: 10,
+								},
+							]}
+							onChange={handleChange}
+						>
+							<Input name="phone" placeholder="Numéro de téléphone" />
+						</FormItem>
 
-							<FormItem
-								name="email"
-								label="Adresse Mail"
-								rules={[
-									{
-										required: true,
-										type: 'email',
-									},
-								]}
-							>
-								<Input name="email" placeholder="Email" />
-							</FormItem>
-							<FormItem
-								name="password"
-								label="Mot de passe"
-								rules={[
-									{
-										required: true,
-										message: 'Veuillez renseigner un mot de passe valide',
-										min: 8,
-									},
-								]}
-								hasFeedback
-								onChange={handleChange}
-							>
-								<Input.Password name="password" placeholder="Mot de passe" />
-							</FormItem>
+						<FormItem
+							name="email"
+							label="Adresse Mail"
+							rules={[
+								{
+									required: true,
+									type: 'email',
+								},
+							]}
+						>
+							<Input name="email" placeholder="Email" />
+						</FormItem>
+						<FormItem
+							name="password"
+							label="Mot de passe"
+							rules={[
+								{
+									required: true,
+									message: 'Veuillez renseigner un mot de passe valide',
+									min: 8,
+								},
+							]}
+							hasFeedback
+							onChange={handleChange}
+						>
+							<Input.Password name="password" placeholder="Mot de passe" />
+						</FormItem>
 
-							<FormItem
-								name="confirmPassword"
-								label="Confirmation"
-								dependencies={['password']}
-								hasFeedback
-								rules={[
-									{
-										required: true,
-										message: 'Merci de confirmer votre mot de passe',
+						<FormItem
+							name="confirmPassword"
+							label="Confirmation"
+							dependencies={['password']}
+							hasFeedback
+							rules={[
+								{
+									required: true,
+									message: 'Merci de confirmer votre mot de passe',
+								},
+								({ getFieldValue }) => ({
+									validator(_, value) {
+										if (!value || getFieldValue('password') === value) {
+											return Promise.resolve()
+										}
+
+										return Promise.reject(
+											new Error('Les mots de passe ne sont pas identiques'),
+										)
 									},
-									({ getFieldValue }) => ({
-										validator(_, value) {
-											if (!value || getFieldValue('password') === value) {
-												return Promise.resolve()
-											}
+								}),
+							]}
+						>
+							<Input.Password placeholder="Confirmation du mot de passe" />
+						</FormItem>
+						<FormItem name="isAdmin" label="Admin" valuePropName="checked">
+							<Checkbox name="isAdmin">Admin</Checkbox>
+						</FormItem>
 
-											return Promise.reject(
-												new Error('Les mots de passe ne sont pas identiques'),
-											)
-										},
-									}),
-								]}
-							>
-								<Input.Password placeholder="Confirmation du mot de passe" />
-							</FormItem>
-							<FormItem name="isAdmin" label="Admin" valuePropName="checked">
-								<Checkbox name="isAdmin">Admin</Checkbox>
-							</FormItem>
-
-							{Object.values(validationError).every((item) => item === true) ? (
-								isLoading ? (
-									<Centered>
-										<Spin />
-									</Centered>
-								) : (
-									<Btn
-										type="submit"
-										style={{
-											padding: '0.5rem 1rem',
-											width: '100%',
-											marginTop: '15px',
-										}}
-									>
-										Enregistrer
-									</Btn>
-								)
-							) : isLoading ? (
+						{Object.values(validationError).every((item) => item === true) ? (
+							isLoading ? (
 								<Centered>
 									<Spin />
 								</Centered>
@@ -307,14 +291,29 @@ function AddUser() {
 										width: '100%',
 										marginTop: '15px',
 									}}
-									disabled
 								>
 									Enregistrer
 								</Btn>
-							)}
-						</Form>
-					</Flex>
-				</Space>
+							)
+						) : isLoading ? (
+							<Centered>
+								<Spin />
+							</Centered>
+						) : (
+							<Btn
+								type="submit"
+								style={{
+									padding: '0.5rem 1rem',
+									width: '100%',
+									marginTop: '15px',
+								}}
+								disabled
+							>
+								Enregistrer
+							</Btn>
+						)}
+					</Form>
+				</Flex>
 
 				<Space>
 					<Flex

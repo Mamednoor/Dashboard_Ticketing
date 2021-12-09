@@ -103,7 +103,7 @@ function Profil() {
 				}
 			/>
 			{status === 'error' && (
-				<Centered>
+				<Centered style={{ paddingTop: '30px' }}>
 					<Alert
 						message="Ooops... Une erreur est survenue"
 						description={message}
@@ -114,7 +114,7 @@ function Profil() {
 			)}
 
 			{status === 'success' && (
-				<Centered>
+				<Centered style={{ paddingTop: '30px' }}>
 					<Alert
 						message="Votre compte à été crée avec succes"
 						type="success"
@@ -128,10 +128,11 @@ function Profil() {
 					<Spin />
 				</Centered>
 			) : (
-				<Centered style={{ paddingTop: ' 90px' }}>
+				<Centered style={{ paddingTop: ' 80px' }}>
 					<Space>
 						<Flex style={{ padding: '35px', border: '1px solid' }}>
 							<Form
+								style={{ width: '500px' }}
 								autoComplete="off"
 								onFinish={handleSubmit}
 								form={form}

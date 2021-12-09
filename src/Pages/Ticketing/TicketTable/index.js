@@ -27,7 +27,6 @@ const Admincolumns = [
 		title: 'Status',
 		dataIndex: 'status',
 		key: 'status',
-		width: '10%',
 		render: (status) => (
 			<>
 				{status === 'En Attente' && (
@@ -51,7 +50,6 @@ const Admincolumns = [
 			{
 				text: 'En Attente',
 				value: 'En Attente',
-				color: 'volcano',
 			},
 			{
 				text: 'En Cours',
@@ -65,6 +63,48 @@ const Admincolumns = [
 		filterMultiple: false,
 		onFilter: (value, record) => {
 			return record.status === value
+		},
+	},
+	{
+		title: 'Priorité',
+		dataIndex: 'priority',
+		key: 'priority',
+		render: (priority) => (
+			<>
+				{priority === 'Basse' && (
+					<Tag color="geekblue" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+				{priority === 'Normal' && (
+					<Tag color="green" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+				{priority === 'Haute' && (
+					<Tag color="volcano" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+			</>
+		),
+		filters: [
+			{
+				text: 'Basse',
+				value: 'Basse',
+			},
+			{
+				text: 'Normal',
+				value: 'Normal',
+			},
+			{
+				text: 'Haute',
+				value: 'Haute',
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.priority === value
 		},
 	},
 	{
@@ -98,7 +138,7 @@ const columns = [
 		),
 	},
 	{
-		title: 'Status',
+		title: 'Statut',
 		dataIndex: 'status',
 		key: 'status',
 		width: '15%',
@@ -139,6 +179,49 @@ const columns = [
 		filterMultiple: false,
 		onFilter: (value, record) => {
 			return record.status === value
+		},
+	},
+	{
+		title: 'Priorité',
+		dataIndex: 'priority',
+		key: 'priority',
+		width: '10%',
+		render: (priority) => (
+			<>
+				{priority === 'Basse' && (
+					<Tag color="geekblue" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+				{priority === 'Normal' && (
+					<Tag color="green" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+				{priority === 'Haute' && (
+					<Tag color="volcano" key={priority} style={{ fontWeight: 'bold' }}>
+						{priority}
+					</Tag>
+				)}
+			</>
+		),
+		filters: [
+			{
+				text: 'Basse',
+				value: 'Basse',
+			},
+			{
+				text: 'Normal',
+				value: 'Normal',
+			},
+			{
+				text: 'Haute',
+				value: 'Haute',
+			},
+		],
+		filterMultiple: false,
+		onFilter: (value, record) => {
+			return record.priority === value
 		},
 	},
 	{

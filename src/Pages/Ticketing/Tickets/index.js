@@ -7,6 +7,7 @@ import {
 	fetchDetails,
 	fetchTicketDetails,
 	ticketStatusClose,
+	ticketStatusProgress,
 } from './ticketsActions'
 
 import { TicketMessageInit } from './ticketsSlice'
@@ -34,6 +35,7 @@ export const Ticket = () => {
 		ticketMessageSuccess,
 		ticketMessageError,
 		statusClose,
+		statusProgress,
 	} = useSelector((state) => state.tickets)
 	const { isAdmin } = useSelector((state) => state.user.user)
 
@@ -58,6 +60,7 @@ export const Ticket = () => {
 		dispatch,
 		isAdmin,
 		statusClose,
+		statusProgress,
 		ticketID,
 		ticketMessageError,
 		ticketMessageSuccess,
@@ -99,6 +102,16 @@ export const Ticket = () => {
 					</Centered>
 				)}
 
+				{statusProgress && (
+					<Centered style={{ paddingBottom: '30px' }}>
+						<Alert
+							message="Vous avez pris le ticket en compte"
+							type="info"
+							showIcon
+						/>
+					</Centered>
+				)}
+
 				{ticketMessageSuccess && (
 					<Centered style={{ paddingTop: '10px' }}>
 						<Alert
@@ -132,12 +145,18 @@ export const Ticket = () => {
 								<P>
 									<strong>Statut :</strong> {ticketSelected?.status}
 								</P>
+								<P>
+									<strong>Priorité :</strong> {ticketSelected?.priority}
+								</P>
 							</Space>
 							{isAdmin === true && (
 								<Space>
 									{ticketSelected?.status === 'Fermé' ? (
-										<Btn style={{ padding: '0.5rem 1.5rem' }} disabled>
-											Fermer le ticket
+										<Btn
+											style={{ padding: '0.5rem 1.5rem' }}
+											onClick={() => dispatch(ticketStatusProgress(ticketID))}
+										>
+											Prise en compte
 										</Btn>
 									) : (
 										<Btn
