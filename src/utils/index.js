@@ -24,3 +24,12 @@ export const getBase64 = (file) =>
 		reader.onload = () => resolve(reader.result)
 		reader.onerror = (error) => reject(error)
 	})
+
+export const codeGenerator = (length) => {
+	let code = ''
+	let possible =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@$!%*#?&'
+	for (let i = 0; i < length; i++)
+		code += possible.charAt(Math.floor(Math.random() * possible.length))
+	return code
+}

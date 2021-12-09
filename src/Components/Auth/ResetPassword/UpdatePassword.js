@@ -44,7 +44,7 @@ function UpdatePassword() {
 	useEffect(() => {
 		if (status === 'success')
 			return setTimeout(() => {
-				dispatch(passwordResetInit()) && history.push('/login')
+				dispatch(passwordResetInit()) && history.push('/')
 			}, 2000)
 	}, [dispatch, history, status])
 
@@ -55,7 +55,7 @@ function UpdatePassword() {
 			const hasUpper = /[A-Z]/.test(value)
 			const hasLower = /[a-z]/.test(value)
 			const hasNumber = /[0-9]/.test(value)
-			const hasSpclChr = /[@,#,$,%,&,*]/.test(value)
+			const hasSpclChr = /[@,$,!,%,*,#,?,&]/.test(value)
 
 			setValidationError({
 				...validationError,

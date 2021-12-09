@@ -10,7 +10,6 @@ import { Centered } from '../../../Components/Centered'
 import { ContentHeader } from '../../../Components/ContentHeader'
 import { Flex } from '../../../Components/Flex'
 import { FormItem } from '../../../Components/FormItem'
-import Space from '../../../Components/Space'
 import { Spin } from '../../../Components/Spin'
 
 import {
@@ -21,6 +20,7 @@ import {
 	message as antdMessage,
 	Checkbox,
 } from 'antd'
+import { codeGenerator } from '../../../utils'
 
 const layout = {
 	layout: 'horizontal',
@@ -31,11 +31,6 @@ const layout = {
 const { Text } = Typography
 
 const VerificationError = {
-	isLenthy: false,
-	hasUpper: false,
-	hasLower: false,
-	hasNumber: false,
-	hasSpclChr: false,
 	isPhoneLenthy: false,
 	isPhoneValide: false,
 }
@@ -59,22 +54,6 @@ function AddUser() {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
-		if (name === 'password') {
-			const isLenthy = value.length >= 8
-			const hasUpper = /[A-Z]/.test(value)
-			const hasLower = /[a-z]/.test(value)
-			const hasNumber = /[0-9]/.test(value)
-			const hasSpclChr = /[@,#,$,%,&,*]/.test(value)
-
-			setValidationError({
-				...validationError,
-				isLenthy,
-				hasUpper,
-				hasLower,
-				hasNumber,
-				hasSpclChr,
-			})
-		}
 		if (name === 'phone') {
 			const isPhoneLenthy = value.length === 10
 			const isPhoneValide = /^(0[6-7])(?:[ _.-]?(\d{2})){4}$/.test(value)
@@ -91,6 +70,7 @@ function AddUser() {
 			"Des informations sont manquantes ou n'ont pas été validés",
 		)
 	}
+	const passlength = 30
 
 	const handleSubmit = (values) => {
 		const formData = {
@@ -100,7 +80,7 @@ function AddUser() {
 			address: values.address,
 			phone: values.phone,
 			email: values.email,
-			password: values.password,
+			password: codeGenerator(passlength),
 			isAdmin: values.isAdmin,
 		}
 		dispatch(addingUser({ ...formData }))
@@ -120,28 +100,27 @@ function AddUser() {
 					},
 				]}
 			/>
-			{status === 'error' && (
-				<Centered>
+
+			<Centered style={{ paddingTop: '30px' }}>
+				{status === 'error' && (
 					<Alert
 						message="Ooops... Une erreur est survenue"
 						description={message}
 						type="error"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
 
-			{status === 'success' && (
-				<Centered>
+				{status === 'success' && (
 					<Alert
 						message="Votre compte à été crée avec succes"
 						type="success"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
+			</Centered>
 
-			<Centered style={{ paddingTop: ' 90px' }}>
+			<Centered style={{ paddingTop: ' 80px' }}>
 				<Flex style={{ padding: '35px', border: '1px solid' }}>
 					<Form
 						style={{ width: '500px' }}
@@ -233,50 +212,30 @@ function AddUser() {
 						>
 							<Input name="email" placeholder="Email" />
 						</FormItem>
-						<FormItem
-							name="password"
-							label="Mot de passe"
-							rules={[
-								{
-									required: true,
-									message: 'Veuillez renseigner un mot de passe valide',
-									min: 8,
-								},
-							]}
-							hasFeedback
-							onChange={handleChange}
-						>
-							<Input.Password name="password" placeholder="Mot de passe" />
-						</FormItem>
 
-						<FormItem
-							name="confirmPassword"
-							label="Confirmation"
-							dependencies={['password']}
-							hasFeedback
-							rules={[
-								{
-									required: true,
-									message: 'Merci de confirmer votre mot de passe',
-								},
-								({ getFieldValue }) => ({
-									validator(_, value) {
-										if (!value || getFieldValue('password') === value) {
-											return Promise.resolve()
-										}
-
-										return Promise.reject(
-											new Error('Les mots de passe ne sont pas identiques'),
-										)
-									},
-								}),
-							]}
-						>
-							<Input.Password placeholder="Confirmation du mot de passe" />
-						</FormItem>
 						<FormItem name="isAdmin" label="Admin" valuePropName="checked">
 							<Checkbox name="isAdmin">Admin</Checkbox>
 						</FormItem>
+						<Flex
+							style={{
+								flexDirection: 'column',
+								alignItems: 'flex-start',
+								padding: '10px',
+								width: '400px',
+							}}
+						>
+							<Text
+								strong
+								style={{ fontSize: '12px' }}
+								type={
+									validationError.isPhoneValide && validationError.isPhoneLenthy
+										? 'success'
+										: 'danger'
+								}
+							>
+								Le format du numéro de téléphone est valide
+							</Text>
+						</Flex>
 
 						{Object.values(validationError).every((item) => item === true) ? (
 							isLoading ? (
@@ -314,60 +273,6 @@ function AddUser() {
 						)}
 					</Form>
 				</Flex>
-
-				<Space>
-					<Flex
-						style={{
-							flexDirection: 'column',
-							alignItems: 'flex-start',
-							padding: '10px',
-							width: '400px',
-						}}
-					>
-						<Text strong style={{ fontSize: '12px' }} type="info">
-							Validation du formulaire :
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasUpper ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un caractère majuscule
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasLower ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un caractère minuscule
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasNumber ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un chiffre
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={validationError.hasSpclChr ? 'success' : 'danger'}
-						>
-							Mot de passe avec au moins un de ces caractères spéciale
-						</Text>
-						<Text
-							strong
-							style={{ fontSize: '12px' }}
-							type={
-								validationError.isPhoneValide && validationError.isPhoneLenthy
-									? 'success'
-									: 'danger'
-							}
-						>
-							Le format du numéro de téléphone est valide
-						</Text>
-					</Flex>
-				</Space>
 			</Centered>
 		</>
 	)

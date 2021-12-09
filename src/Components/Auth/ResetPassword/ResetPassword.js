@@ -28,7 +28,7 @@ function ResetPassword() {
 	useEffect(() => {
 		if (status === 'success')
 			return setTimeout(() => {
-				dispatch(passwordResetInit()) && history.push('/login')
+				dispatch(passwordResetInit()) && history.push('/')
 			}, 2000)
 	}, [dispatch, history, status])
 

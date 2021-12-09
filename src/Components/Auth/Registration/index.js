@@ -59,7 +59,7 @@ function Registration() {
 			const hasUpper = /[A-Z]/.test(value)
 			const hasLower = /[a-z]/.test(value)
 			const hasNumber = /[0-9]/.test(value)
-			const hasSpclChr = /[@,#,$,%,&,*]/.test(value)
+			const hasSpclChr = /[@,$,!,%,*,#,?,&]/.test(value)
 
 			setValidationError({
 				...validationError,
@@ -227,7 +227,6 @@ function Registration() {
 								min: 8,
 							},
 						]}
-						hasFeedback
 						onChange={handleChange}
 					>
 						<Input.Password name="password" placeholder="Mot de passe" />

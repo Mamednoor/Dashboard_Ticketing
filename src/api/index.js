@@ -170,7 +170,9 @@ export const userLogout = async () => {
 		await axios.delete(URL, {
 			headers: { Authorization: [...logInfo] },
 		})
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 export const refreshAccessToken = () => {
@@ -203,28 +205,20 @@ export const refreshAccessToken = () => {
 	})
 }
 
-export const profilUpdate = (
-	_id,
-	newFirstname,
-	newLastname,
-	newCompany,
-	newAddress,
-	newPhone,
-	newEmail,
-) => {
+export const profilUpdate = (_id) => {
 	const URL = 'http://localhost:8080/users/profil/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
 			const result = await axios.patch(
-				URL + _id?._id,
+				URL + _id._id,
 				{
-					newFirstname: _id?.newFirstname,
-					newLastname: _id?.newLastname,
-					newCompany: _id?.newCompany,
-					newAddress: _id?.newAddress,
-					newPhone: _id?.newPhone,
-					newEmail: _id?.newEmail,
+					newFirstname: _id.newFirstname,
+					newLastname: _id.newLastname,
+					newCompany: _id.newCompany,
+					newAddress: _id.newAddress,
+					newPhone: _id.newPhone,
+					newEmail: _id.newEmail,
 				},
 				{
 					headers: {
@@ -424,32 +418,22 @@ export const getUserDetails = (_id) => {
 	})
 }
 
-export const userUpdatedByAdmin = (
-	_id,
-	newFirstname,
-	newLastname,
-	newCompany,
-	newAddress,
-	newPhone,
-	newEmail,
-	newisAdmin,
-	newisVerified,
-) => {
+export const userUpdatedByAdmin = (_id) => {
 	const URL = 'http://localhost:8080/users/update-user/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
 			const result = await axios.patch(
-				URL + _id?._id,
+				URL + _id._id,
 				{
-					newFirstname: _id?.newFirstname,
-					newLastname: _id?.newLastname,
-					newCompany: _id?.newCompany,
-					newAddress: _id?.newAddress,
-					newPhone: _id?.newPhone,
-					newEmail: _id?.newEmail,
-					newisAdmin: _id?.newisAdmin,
-					newisVerified: _id?.newisVerified,
+					newFirstname: _id.newFirstname,
+					newLastname: _id.newLastname,
+					newCompany: _id.newCompany,
+					newAddress: _id.newAddress,
+					newPhone: _id.newPhone,
+					newEmail: _id.newEmail,
+					newisAdmin: _id.newisAdmin,
+					newisVerified: _id.newisVerified,
 				},
 				{
 					headers: {
