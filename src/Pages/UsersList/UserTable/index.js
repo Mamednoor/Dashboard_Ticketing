@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import Space from '../../../Components/Space'
 import { EraseUser } from './ActionsButton'
 import formatDate from '../../../utils'
-import { P } from '../../../Components/P'
 
 const columns = [
 	{
@@ -95,7 +94,7 @@ const columns = [
 		title: 'Date de création',
 		dataIndex: 'createdOn',
 		key: 'createdOn',
-		render: (date) => <P>{formatDate(date)}</P>,
+		render: (date) => <>{formatDate(date)}</>,
 	},
 	{
 		title: 'Action',

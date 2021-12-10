@@ -15,7 +15,7 @@ export const ContentCard = styled(Card)`
 			width: 350px;
 		}
 	}
-	line-height: 1.5;
+	line-height: 1.2;
 	font-size: 1.1rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;

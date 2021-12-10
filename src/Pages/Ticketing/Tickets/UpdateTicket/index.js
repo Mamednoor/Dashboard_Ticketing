@@ -38,11 +38,7 @@ function ReplyTicket({ ticketID }) {
 	return (
 		<Form layout="horizontal" size="large" form={form} onFinish={handleSubmit}>
 			<Flex style={{ alignItems: 'flex-start' }}>
-				<P>
-					<strong>
-						Veuillez écrire votre réponse dans le champs ci-dessous
-					</strong>
-				</P>
+				<P>Veuillez écrire votre réponse dans le champs ci-dessous</P>
 			</Flex>
 			<FormItem
 				name="message"
@@ -56,7 +52,7 @@ function ReplyTicket({ ticketID }) {
 				]}
 			>
 				<Input.TextArea
-					//style={{ width: '45vw' }}
+					style={{ width: '45vw' }}
 					maxLength="500"
 					value={message}
 					onChange={handleChange}
@@ -66,7 +62,11 @@ function ReplyTicket({ ticketID }) {
 			</FormItem>
 			<Flex style={{ justifyContent: 'flex-start' }}>
 				<Btn
-					style={{ padding: '0.5rem 0.5rem', marginTop: '15px' }}
+					style={{
+						padding: '0.5rem 0.5rem',
+						marginTop: '15px',
+						marginBottom: '15px',
+					}}
 					htmlType="submit"
 				>
 					Envoyer

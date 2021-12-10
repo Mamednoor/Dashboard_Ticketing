@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Table as AntTable, Tag, Space } from 'antd'
-
-import { P } from '../../../Components/P'
+import { Table as AntTable, Space } from 'antd'
 
 import formatDate from '../../../utils'
 import { UpdateStatus } from './ActionsButton'
+import { PriorityTag, StatusTag } from '../../../Components/Tag'
 
 const Admincolumns = [
 	{
@@ -27,25 +26,7 @@ const Admincolumns = [
 		title: 'Status',
 		dataIndex: 'status',
 		key: 'status',
-		render: (status) => (
-			<>
-				{status === 'En Attente' && (
-					<Tag color="geekblue" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-				{status === 'En Cours' && (
-					<Tag color="green" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-				{status === 'Fermé' && (
-					<Tag color="volcano" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-			</>
-		),
+		render: (status) => <StatusTag status={status} />,
 		filters: [
 			{
 				text: 'En Attente',
@@ -69,25 +50,7 @@ const Admincolumns = [
 		title: 'Priorité',
 		dataIndex: 'priority',
 		key: 'priority',
-		render: (priority) => (
-			<>
-				{priority === 'Basse' && (
-					<Tag color="geekblue" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-				{priority === 'Normal' && (
-					<Tag color="green" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-				{priority === 'Haute' && (
-					<Tag color="volcano" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-			</>
-		),
+		render: (priority) => <PriorityTag priority={priority} />,
 		filters: [
 			{
 				text: 'Basse',
@@ -112,7 +75,7 @@ const Admincolumns = [
 		dataIndex: 'createdOn',
 		key: 'createdOn',
 		width: '15%',
-		render: (date) => <P>{formatDate(date)}</P>,
+		render: (date) => <>{formatDate(date)}</>,
 	},
 	{
 		title: 'Actions',
@@ -142,25 +105,7 @@ const columns = [
 		dataIndex: 'status',
 		key: 'status',
 		width: '15%',
-		render: (status) => (
-			<>
-				{status === 'En Attente' && (
-					<Tag color="geekblue" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-				{status === 'En Cours' && (
-					<Tag color="green" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-				{status === 'Fermé' && (
-					<Tag color="volcano" key={status} style={{ fontWeight: 'bold' }}>
-						{status}
-					</Tag>
-				)}
-			</>
-		),
+		render: (status) => <StatusTag status={status} />,
 		filters: [
 			{
 				text: 'En Attente',
@@ -186,25 +131,7 @@ const columns = [
 		dataIndex: 'priority',
 		key: 'priority',
 		width: '10%',
-		render: (priority) => (
-			<>
-				{priority === 'Basse' && (
-					<Tag color="geekblue" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-				{priority === 'Normal' && (
-					<Tag color="green" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-				{priority === 'Haute' && (
-					<Tag color="volcano" key={priority} style={{ fontWeight: 'bold' }}>
-						{priority}
-					</Tag>
-				)}
-			</>
-		),
+		render: (priority) => <PriorityTag priority={priority} />,
 		filters: [
 			{
 				text: 'Basse',
@@ -229,7 +156,7 @@ const columns = [
 		dataIndex: 'createdOn',
 		key: 'createdOn',
 		width: '15%',
-		render: (date) => <P>{formatDate(date)}</P>,
+		render: (date) => <>{formatDate(date)}</>,
 	},
 ]
 

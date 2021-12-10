@@ -24,6 +24,7 @@ import { ContentCard } from '../../../Components/Card'
 import { Spin } from '../../../Components/Spin'
 import Space from '../../../Components/Space'
 import { ContentHeader } from '../../../Components/ContentHeader'
+import { PriorityTag, StatusTag } from '../../../Components/Tag'
 
 export const Ticket = () => {
 	const { ticketID } = useParams()
@@ -103,7 +104,7 @@ export const Ticket = () => {
 				)}
 
 				{statusProgress && (
-					<Centered style={{ paddingBottom: '30px' }}>
+					<Centered style={{ paddingTop: '10px' }}>
 						<Alert
 							message="Vous avez pris le ticket en compte"
 							type="info"
@@ -128,7 +129,7 @@ export const Ticket = () => {
 					</Centered>
 				) : (
 					<>
-						<Flex className="action-container">
+						<Flex>
 							<Space
 								style={{
 									flexDirection: 'column',
@@ -139,16 +140,21 @@ export const Ticket = () => {
 									<strong>Sujet :</strong> {ticketSelected?.subject}
 								</P>
 								<P>
-									<strong>Ticket ouvert le :</strong>{' '}
+									<strong>Ticket ouvert le : </strong>
 									{formatDate(ticketSelected?.createdOn)}
 								</P>
-								<P>
-									<strong>Statut :</strong> {ticketSelected?.status}
-								</P>
-								<P>
-									<strong>Priorité :</strong> {ticketSelected?.priority}
-								</P>
+								<Flex>
+									<>
+										<strong>Statut :</strong>
+										<StatusTag status={ticketSelected?.status} />
+									</>
+									<>
+										<strong>Priorité :</strong>
+										<PriorityTag priority={ticketSelected?.priority} />
+									</>
+								</Flex>
 							</Space>
+
 							{isAdmin === true && (
 								<Space>
 									{ticketSelected?.status === 'Fermé' ? (
@@ -156,15 +162,25 @@ export const Ticket = () => {
 											style={{ padding: '0.5rem 1.5rem' }}
 											onClick={() => dispatch(ticketStatusProgress(ticketID))}
 										>
-											Prise en compte
+											Ré-ouverture
 										</Btn>
 									) : (
-										<Btn
-											style={{ padding: '0.5rem 1.5rem' }}
-											onClick={() => dispatch(ticketStatusClose(ticketID))}
-										>
-											Fermer le ticket
-										</Btn>
+										(ticketSelected?.status === 'En Cours' && (
+											<Btn
+												style={{ padding: '0.5rem 1.5rem' }}
+												onClick={() => dispatch(ticketStatusClose(ticketID))}
+											>
+												Fermer le ticket
+											</Btn>
+										)) ||
+										(ticketSelected?.status === 'En Attente' && (
+											<Btn
+												style={{ padding: '0.5rem 1.5rem' }}
+												onClick={() => dispatch(ticketStatusProgress(ticketID))}
+											>
+												Prise en compte
+											</Btn>
+										))
 									)}
 								</Space>
 							)}
@@ -178,10 +194,8 @@ export const Ticket = () => {
 							</ContentCard>
 						</Centered>
 
-						<Centered>
-							<Space>
-								<ReplyTicket ticketID={ticketID} />
-							</Space>
+						<Centered style={{ paddingTop: '25px' }}>
+							<ReplyTicket ticketID={ticketID} />
 						</Centered>
 					</>
 				)}

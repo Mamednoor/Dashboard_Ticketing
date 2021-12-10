@@ -12,7 +12,7 @@ export default function formatDate(date) {
 		minute = d.getMinutes()
 	if (month.length < 2) month = '0' + month
 	if (day.length < 2) day = '0' + day
-	return [[day, month, year].join('/'), [hour, minute].join(':')].join(' - ')
+	return [[day, month, year].join('/'), [hour, minute].join('h')].join(' - ')
 }
 // possibiliter de le faire d'une autre manière new Date (variable de la date).toLocalString()
 
