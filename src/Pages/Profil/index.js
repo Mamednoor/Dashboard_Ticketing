@@ -32,7 +32,7 @@ function Profil() {
 
 	const { _id, firstname, lastname, email, company, address, phone } =
 		useSelector((state) => state.user.user)
-	const { isLoading, status, message } = useSelector((state) => state.profil)
+	const { isLoading, status } = useSelector((state) => state.profil)
 	const [form] = Form.useForm()
 	const [validationError, setValidationError] = useState(VerificationError)
 
@@ -106,7 +106,7 @@ function Profil() {
 				<Centered style={{ paddingTop: '30px' }}>
 					<Alert
 						message="Ooops... Une erreur est survenue"
-						description={message}
+						description="Les caractères spéciaux ne sont pas autorisé dans vos noms et prénoms"
 						type="error"
 						showIcon
 					/>
@@ -116,7 +116,7 @@ function Profil() {
 			{status === 'success' && (
 				<Centered style={{ paddingTop: '30px' }}>
 					<Alert
-						message="Votre compte à été crée avec succes"
+						message="Vos modifications ont été effectuées avec succès"
 						type="success"
 						showIcon
 					/>
