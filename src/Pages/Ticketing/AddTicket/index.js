@@ -41,6 +41,7 @@ function AddTicket() {
 			message: values.message,
 			priority: values.priority,
 		}
+		console.log('formData', formData)
 		dispatch(openNewTicket({ ...formData, sender: firstname + ' ' + lastname }))
 	}
 
@@ -58,15 +59,20 @@ function AddTicket() {
 				]}
 			/>
 
-			{status && (
-				<Centered style={{ paddingTop: '30px' }}>
+			<Centered style={{ paddingTop: '30px' }}>
+				{status && (
 					<Alert
-						message={addMessage}
+						message={
+							status === 'success'
+								? 'Opération réussie'
+								: 'Ooops... Une erreur est survenue'
+						}
+						description={addMessage}
 						type={status === 'success' ? 'success' : 'error'}
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
+			</Centered>
 
 			<Centered style={{ paddingTop: ' 120px' }}>
 				<Flex style={{ padding: '50px', border: '1px solid' }}>

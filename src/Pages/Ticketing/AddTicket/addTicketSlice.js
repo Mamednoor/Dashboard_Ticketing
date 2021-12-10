@@ -20,7 +20,7 @@ const addTicketSlice = createSlice({
 		},
 		addNewTicketError: (state, { payload }) => {
 			state.isLoading = false
-			state.addMmessage = payload
+			state.addMessage = payload
 			state.status = 'error'
 		},
 		addNewTicketInit: (state) => {

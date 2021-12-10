@@ -145,8 +145,10 @@ function UpdateUser() {
 									rules={[
 										{
 											required: true,
-											message: 'Veuillez renseigner un prénom',
+											message:
+												'Veuillez renseigner un prénom avec au minimum 4 caractères et 30 maximun',
 											min: 4,
+											max: 30,
 										},
 									]}
 								>
@@ -159,8 +161,10 @@ function UpdateUser() {
 									rules={[
 										{
 											required: true,
-											message: 'Veuillez renseigner un nom',
+											message:
+												'Veuillez renseigner un nom avec au minimum 4 caractères et 30 maximun',
 											min: 2,
+											max: 30,
 										},
 									]}
 								>
@@ -173,8 +177,10 @@ function UpdateUser() {
 									rules={[
 										{
 											required: true,
-											message: 'Veuillez renseigner votre société',
+											message:
+												'Veuillez renseigner votre société au minimum 3 caractères et 50 maximun',
 											min: 3,
+											max: 50,
 										},
 									]}
 								>
