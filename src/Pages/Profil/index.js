@@ -102,26 +102,24 @@ function Profil() {
 					</Marquee>
 				}
 			/>
-			{status === 'error' && (
-				<Centered style={{ paddingTop: '30px' }}>
+			<Centered style={{ paddingTop: '30px' }}>
+				{status === 'error' && (
 					<Alert
 						message="Ooops... Une erreur est survenue"
 						description="Les caractères spéciaux ne sont pas autorisé dans vos noms et prénoms"
 						type="error"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
 
-			{status === 'success' && (
-				<Centered style={{ paddingTop: '30px' }}>
+				{status === 'success' && (
 					<Alert
 						message="Vos modifications ont été effectuées avec succès"
 						type="success"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
+			</Centered>
 
 			{isLoading ? (
 				<Centered>

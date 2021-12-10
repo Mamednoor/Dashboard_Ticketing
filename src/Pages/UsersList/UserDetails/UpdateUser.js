@@ -34,7 +34,7 @@ function UpdateUser() {
 
 	const { isLoading, userSelected } = useSelector((state) => state.userList)
 
-	const { condition, message } = useSelector((state) => state.profilUpdate)
+	const { condition } = useSelector((state) => state.profilUpdate)
 
 	useEffect(() => {
 		dispatch(fetchUserInfo(userID))
@@ -94,33 +94,31 @@ function UpdateUser() {
 				]}
 			/>
 
-			{condition === 'error' && (
-				<Centered>
+			<Centered style={{ paddingTop: '30px' }}>
+				{condition === 'error' && (
 					<Alert
 						message="Ooops... Une erreur est survenue"
-						description={message}
+						description="Les caractères spéciaux ne sont pas autorisé dans vos noms et prénoms"
 						type="error"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
 
-			{condition === 'success' && (
-				<Centered>
+				{condition === 'success' && (
 					<Alert
 						message="La modification a été effectuée"
 						type="success"
 						showIcon
 					/>
-				</Centered>
-			)}
+				)}
+			</Centered>
 
 			{isLoading ? (
 				<Centered>
 					<Spin />
 				</Centered>
 			) : (
-				<Centered style={{ paddingTop: ' 90px' }}>
+				<Centered style={{ paddingTop: ' 80px' }}>
 					<Space>
 						<Flex style={{ padding: '40px', border: '1px solid' }}>
 							<Form
