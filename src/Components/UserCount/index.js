@@ -13,16 +13,16 @@ function UserCount({ usersList }) {
 	return (
 		<Centered style={{ justifyContent: 'space-around' }}>
 			<P style={{ fontWeight: 'bold' }}>
-				<Tag>Nombre d'utilisateur: {usersList?.length}</Tag>
+				<Tag>Nombre d‘utilisateur: {usersList?.length}</Tag>
 			</P>
 			<P style={{ fontWeight: 'bold' }}>
 				<Tag color="green">
-					Nombre d'utilisateur validé: {verifiedUser?.length}
+					Nombre d‘utilisateur validé: {verifiedUser?.length}
 				</Tag>
 			</P>
 			<P style={{ fontWeight: 'bold' }}>
 				<Tag color="volcano">
-					Nombre d'utilisateur en attente: {pendingUser?.length}
+					Nombre d‘utilisateur en attente: {pendingUser?.length}
 				</Tag>
 			</P>
 		</Centered>

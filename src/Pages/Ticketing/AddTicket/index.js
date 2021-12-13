@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { openNewTicket } from './addTicketActions'
 import { addNewTicketInit } from './addTicketSlice'
@@ -17,7 +17,7 @@ const { Option } = Select
 
 function AddTicket() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { firstname, lastname } = useSelector((state) => state.user.user)
 	const { isLoading, addMessage, status } = useSelector(
 		(state) => state.addTicket,
@@ -31,9 +31,9 @@ function AddTicket() {
 	useEffect(() => {
 		if (status === 'success')
 			return setTimeout(() => {
-				dispatch(addNewTicketInit()) && history.push('/ticketing')
+				dispatch(addNewTicketInit()) && navigate('/ticketing')
 			}, 2000)
-	}, [dispatch, history, status])
+	}, [dispatch, navigate, status])
 
 	const handleSubmit = (values) => {
 		const formData = {

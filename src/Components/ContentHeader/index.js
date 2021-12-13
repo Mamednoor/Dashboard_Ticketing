@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
 import { Space } from 'antd'
 
@@ -18,3 +20,7 @@ export const ContentHeader = ({ breadcrumbItems = {} }) => (
 		<CustomDivider />
 	</Container>
 )
+
+ContentHeader.propTypes = {
+	breadcrumbItems: PropTypes.object.isRequired,
+}

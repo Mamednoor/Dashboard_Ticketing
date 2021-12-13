@@ -104,9 +104,9 @@ function Dashboard() {
 				{isAdmin && (
 					<Space>
 						<Wrapper>
-							<P>Nombre d'utilisateur: {usersList?.length}</P>
-							<P>Nombre d'utilisateur validé: {verifiedUser?.length}</P>
-							<P>Nombre d'utilisateur en attente: {pendingUser?.length}</P>
+							<P>Nombre d‘utilisateur: {usersList?.length}</P>
+							<P>Nombre d‘utilisateur validé: {verifiedUser?.length}</P>
+							<P>Nombre d‘utilisateur en attente: {pendingUser?.length}</P>
 						</Wrapper>
 						<Wrapper style={{ width: '300px' }}>
 							<Doughnut data={dataUsers} />

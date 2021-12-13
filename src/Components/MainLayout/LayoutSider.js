@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { userLogout } from '../../api'
@@ -24,7 +23,7 @@ import logo from '../../Assets/logo-MAK.png'
 const { Sider } = Layout
 
 export const LayoutSider = () => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { isAdmin } = useSelector((state) => state.user.user)
 
@@ -33,7 +32,7 @@ export const LayoutSider = () => {
 	const logOut = () => {
 		userLogout()
 		dispatch(loginInit())
-		history.push('/')
+		navigate('/')
 	}
 
 	return (

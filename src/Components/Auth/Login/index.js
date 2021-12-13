@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { userLogin } from '../../../api'
@@ -25,7 +25,7 @@ const layout = {
 
 function Login() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { isLoading, isAuth, error, message } = useSelector(
 		(state) => state.login,
 	)
@@ -35,8 +35,8 @@ function Login() {
 	const [password, setPassword] = useState('')
 
 	useEffect(() => {
-		sessionStorage.getItem('accessToken') && history.push('/dashboard')
-	}, [history])
+		sessionStorage.getItem('accessToken') && navigate('/dashboard')
+	}, [navigate])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
@@ -67,7 +67,7 @@ function Login() {
 
 			dispatch(loginSuccess())
 			dispatch(getUser())
-			history.push('/home')
+			navigate('/home')
 		} catch (error) {
 			dispatch(loginError(error.message))
 		}

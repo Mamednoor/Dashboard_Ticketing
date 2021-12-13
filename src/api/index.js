@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-/////// Ticket Part
+// Ticket Part
 
 export const getUserTickets = () => {
 	const URL = 'http://localhost:8080/tickets/'
@@ -71,7 +71,7 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 	})
 }
 
-/////// Registration Part
+// Registration Part
 
 export const registrationUser = (formData) => {
 	const URL = 'http://localhost:8080/users/'
@@ -90,7 +90,7 @@ export const registrationUser = (formData) => {
 	})
 }
 
-/////// Accounte verification Part
+// Accounte verification Part
 
 export const UserVerificationAccount = (formData) => {
 	const URL = 'http://localhost:8080/users/validation/'
@@ -108,7 +108,7 @@ export const UserVerificationAccount = (formData) => {
 	})
 }
 
-/////// User Part
+// User Part
 
 export const userLogin = (loginData) => {
 	const URL = 'http://localhost:8080/users/login'
@@ -233,7 +233,7 @@ export const profilUpdate = (_id) => {
 	})
 }
 
-/////// Password Part
+// Password Part
 
 export const resetPasswordRequest = (email) => {
 	const URL = 'http://localhost:8080/users/forget-password'
@@ -259,7 +259,7 @@ export const updatePasswordRequest = (formData) => {
 	})
 }
 
-//////////////// ADMIN /////////////////
+// ADMIN
 
 export const createNewUser = (formData) => {
 	const URL = 'http://localhost:8080/users/create-user'
@@ -465,5 +465,3 @@ export const deleteUser = (userID, _id) => {
 		}
 	})
 }
-
-//////////////// ADMIN /////////////////

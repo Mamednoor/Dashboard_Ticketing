@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { refreshAccessToken } from '../../../api'
@@ -10,7 +12,7 @@ import { Spin } from '../../Spin'
 import { Centered } from '../../Centered'
 import { getUser } from '../../../Pages/Dashboard/userAction'
 
-function PrivateRoute({ children, ...rest }) {
+function PrivateRoute({ children }) {
 	const dispatch = useDispatch()
 	const { isLoading, isAuth } = useSelector((state) => state.login)
 	const { user } = useSelector((state) => state.user)
@@ -35,25 +37,20 @@ function PrivateRoute({ children, ...rest }) {
 				<Centered>
 					<Spin />
 				</Centered>
+			) : isAuth ? (
+				<MainLayout> {children} </MainLayout>
 			) : (
-				<Route
-					{...rest}
-					render={({ location }) =>
-						isAuth ? (
-							<MainLayout> {children} </MainLayout>
-						) : (
-							<Redirect
-								to={{
-									pathname: '/',
-									state: { from: location },
-								}}
-							/>
-						)
-					}
-				/>
+				<Navigate to="/" />
 			)}
 		</>
 	)
 }
 
 export default PrivateRoute
+
+PrivateRoute.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
+}

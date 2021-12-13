@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { userRegistration } from './registrationActions'
 import { registrationInit } from './registrationSlice'
@@ -37,7 +37,7 @@ const VerificationError = {
 
 function Registration() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { isLoading, status, message } = useSelector(
 		(state) => state.registration,
 	)
@@ -47,10 +47,10 @@ function Registration() {
 	useEffect(() => {
 		if (status === 'success') {
 			return setTimeout(() => {
-				dispatch(registrationInit()) && history.push('/')
+				dispatch(registrationInit()) && navigate('/')
 			}, 2000)
 		}
-	}, [dispatch, history, status])
+	}, [dispatch, navigate, status])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target

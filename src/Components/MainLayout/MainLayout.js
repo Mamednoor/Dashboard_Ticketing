@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Layout } from 'antd'
 
 import { LayoutHeader } from './LayoutHeader'
@@ -29,4 +30,11 @@ export const MainLayout = ({ children }) => {
 			</Layout>
 		</Layout>
 	)
+}
+
+MainLayout.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
 }

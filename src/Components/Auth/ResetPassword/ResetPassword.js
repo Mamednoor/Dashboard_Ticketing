@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { sendInitPassword } from './passwordActions'
 import { passwordResetInit } from './passwordSlice'
@@ -18,7 +18,7 @@ import { FormItem } from '../../FormItem'
 
 function ResetPassword() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { isLoading, status, message } = useSelector(
 		(state) => state.resetPassword,
 	)
@@ -28,9 +28,9 @@ function ResetPassword() {
 	useEffect(() => {
 		if (status === 'success')
 			return setTimeout(() => {
-				dispatch(passwordResetInit()) && history.push('/')
+				dispatch(passwordResetInit()) && navigate('/')
 			}, 2000)
-	}, [dispatch, history, status])
+	}, [dispatch, navigate, status])
 
 	const handleChange = (e) => {
 		const { value } = e.target

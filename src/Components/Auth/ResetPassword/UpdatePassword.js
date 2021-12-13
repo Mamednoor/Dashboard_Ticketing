@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updatePassword } from './passwordActions'
 import { passwordResetInit } from './passwordSlice'
@@ -33,7 +33,7 @@ const VerificationError = {
 
 function UpdatePassword() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const [form] = Form.useForm()
 	const [validationError, setValidationError] = useState(VerificationError)
 	const { isLoading, message, status } = useSelector(
@@ -44,9 +44,9 @@ function UpdatePassword() {
 	useEffect(() => {
 		if (status === 'success')
 			return setTimeout(() => {
-				dispatch(passwordResetInit()) && history.push('/')
+				dispatch(passwordResetInit()) && navigate('/')
 			}, 2000)
-	}, [dispatch, history, status])
+	}, [dispatch, navigate, status])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target

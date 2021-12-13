@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { useDispatch } from 'react-redux'
 import { deletingUser } from '../usersListActions'
@@ -15,4 +16,8 @@ export function EraseUser({ userID }) {
 			</Button>
 		</>
 	)
+}
+
+EraseUser.propTypes = {
+	userID: PropTypes.string.isRequired,
 }

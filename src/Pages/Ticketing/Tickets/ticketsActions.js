@@ -93,14 +93,15 @@ export const replyTicketMessage =
 			if (result.status === 'error') {
 				return dispatch(updateTicketMessageError(result.message.status))
 			}
-			//dispatch(fetchTicketDetails(ticketID))
+			// dispatch(fetchTicketDetails(ticketID))
 			dispatch(updateTicketMessageSuccess())
 		} catch (error) {
 			dispatch(updateTicketMessageError(error.message))
 		}
 	}
 
-/////////// ADMIN ///////////////////////
+// ADMIN
+
 export const replyMessage = (ticketID, message, sender) => async (dispatch) => {
 	dispatch(updateTicketMessageLoading())
 
@@ -162,8 +163,6 @@ export const deletingTicket = (ticketID, _id) => async (dispatch) => {
 		dispatch(deleteTicketError(error.message))
 	}
 }
-
-/////////// ADMIN ///////////////////////
 
 export const searchingTicket = (searchTerm) => (dispatch) => {
 	dispatch(searchTicket(searchTerm))

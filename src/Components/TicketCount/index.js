@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { P } from '../P'
 import { Flex } from '../Flex'
 
@@ -45,3 +47,7 @@ function TicketCount({ tickets }) {
 	)
 }
 export default TicketCount
+
+TicketCount.propTypes = {
+	tickets: PropTypes.object.isRequired,
+}

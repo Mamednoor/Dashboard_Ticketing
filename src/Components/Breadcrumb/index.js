@@ -1,6 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import styled from 'styled-components'
 import { Breadcrumb } from 'antd'
 
 const Container = styled(Breadcrumb)`
@@ -40,4 +42,8 @@ export const BreadcrumbComponent = ({ items }) => {
 			))}
 		</Container>
 	)
+}
+
+BreadcrumbComponent.propTypes = {
+	items: PropTypes.object.isRequired,
 }

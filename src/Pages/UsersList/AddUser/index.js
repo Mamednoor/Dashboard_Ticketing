@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { addingUser } from './adduserActions'
 import { createUserInit } from './adduserSlice'
@@ -37,7 +37,7 @@ const VerificationError = {
 
 function AddUser() {
 	const dispatch = useDispatch()
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { isLoading, status, message } = useSelector(
 		(state) => state.addNewUser,
 	)
@@ -47,10 +47,10 @@ function AddUser() {
 	useEffect(() => {
 		if (status === 'success') {
 			return setTimeout(() => {
-				dispatch(createUserInit()) && history.push('/userslist')
+				dispatch(createUserInit()) && navigate('/userslist')
 			}, 2000)
 		}
-	}, [dispatch, history, status])
+	}, [dispatch, navigate, status])
 
 	const handleChange = (e) => {
 		const { name, value } = e.target

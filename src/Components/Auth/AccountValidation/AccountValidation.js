@@ -11,45 +11,45 @@ import { Spin } from '../../Spin'
 import { CustomLink } from '../../Link'
 
 function AccountValidation() {
-	const [response, setResponse] = useState({
-		status: '',
-		message: '',
-	})
-	const { _id, email } = useParams()
+  const [response, setResponse] = useState({
+    status: '',
+    message: '',
+  })
+  const { _id, email } = useParams()
 
-	const dataAccount = { _id, email }
+  const dataAccount = { _id, email }
 
-	useEffect(() => {
-		const apiCall = async () => {
-			const result = await UserVerificationAccount(dataAccount)
+  useEffect(() => {
+    const apiCall = async () => {
+      const result = await UserVerificationAccount(dataAccount)
 
-			setResponse(result)
-		}
+      setResponse(result)
+    }
 
-		!response.status && apiCall()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [response])
+    !response.status && apiCall()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response])
 
-	return (
-		<CenteringCard style={{ minHeight: '100vh' }}>
-			<Centered>
-				<H2>Activation de votre compte</H2>
-			</Centered>
-			<CustomDivider />
-			<Centered style={{ padding: ' 20px' }}>
-				{!response.status && <Spin />}
+  return (
+    <CenteringCard style={{ minHeight: '100vh' }}>
+      <Centered>
+        <H2>Activation de votre compte</H2>
+      </Centered>
+      <CustomDivider />
+      <Centered style={{ padding: ' 20px' }}>
+        {!response.status && <Spin />}
 
-				{response.status && (
-					<Alert
-						type={response.status === 'success' ? 'success' : 'error'}
-						message={response.message}
-						description={<CustomLink to="/">Page de connexion</CustomLink>}
-					/>
-				)}
-			</Centered>
-			<CustomDivider />
-		</CenteringCard>
-	)
+        {response.status && (
+          <Alert
+            type={response.status === 'success' ? 'success' : 'error'}
+            message={response.message}
+            description={<CustomLink to="/">Page de connexion</CustomLink>}
+          />
+        )}
+      </Centered>
+      <CustomDivider />
+    </CenteringCard>
+  )
 }
 
 export default AccountValidation

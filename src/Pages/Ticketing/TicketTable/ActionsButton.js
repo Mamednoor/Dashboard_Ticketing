@@ -1,4 +1,6 @@
 import { Button } from 'antd'
+import PropTypes from 'prop-types'
+
 import { useDispatch } from 'react-redux'
 import React from 'react'
 import {
@@ -30,4 +32,8 @@ export function UpdateStatus({ ticketID }) {
 			</Button>
 		</>
 	)
+}
+
+UpdateStatus.propTypes = {
+	ticketID: PropTypes.string.isRequired,
 }
