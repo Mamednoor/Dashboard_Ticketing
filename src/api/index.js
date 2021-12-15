@@ -265,12 +265,18 @@ export const createNewUser = (formData) => {
 	const URL = 'http://localhost:8080/users/create-user'
 	return new Promise(async (resolve, reject) => {
 		try {
-			const res = await axios.post(URL, formData)
+			const accessToken = sessionStorage.getItem('accessToken')
 
-			resolve(res.data)
+			const result = await axios.post(URL, formData, {
+				headers: {
+					Authorization: accessToken,
+				},
+			})
 
-			if (res.data.status === 'success') {
-				resolve(res.data)
+			resolve(result.data)
+
+			if (result.data.status === 'success') {
+				resolve(result.data)
 			}
 		} catch (error) {
 			reject(error.message)
@@ -384,7 +390,7 @@ export const deleteTicket = (ticketID, _id, isAdmin) => {
 }
 
 export const getUsersList = () => {
-	const URL = 'http://localhost:8080/users/all/'
+	const URL = 'http://localhost:8080/users/user-list/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -402,7 +408,7 @@ export const getUsersList = () => {
 }
 
 export const getUserDetails = (_id) => {
-	const URL = 'http://localhost:8080/users/all/'
+	const URL = 'http://localhost:8080/users/user-details/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -449,7 +455,7 @@ export const userUpdatedByAdmin = (_id) => {
 }
 
 export const deleteUser = (userID, _id) => {
-	const URL = 'http://localhost:8080/users/delete/'
+	const URL = 'http://localhost:8080/users/delete-user/'
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
