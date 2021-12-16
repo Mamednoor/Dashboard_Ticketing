@@ -84,7 +84,6 @@ function AddUser() {
 			isAdmin: values.isAdmin,
 		}
 		dispatch(addingUser({ ...formData }))
-		console.log('formData -----', formData)
 	}
 
 	return (

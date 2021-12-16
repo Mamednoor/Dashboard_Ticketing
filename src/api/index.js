@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+const baseURL = process.env.REACT_APP_API_URL
+
 // Ticket Part
 
 export const getUserTickets = () => {
-	const URL = 'http://localhost:8080/tickets/'
+	const URL = `${baseURL}/tickets/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -21,7 +23,7 @@ export const getUserTickets = () => {
 }
 
 export const getTicketDetails = (_id) => {
-	const URL = 'http://localhost:8080/tickets/'
+	const URL = `${baseURL}/tickets/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -38,7 +40,7 @@ export const getTicketDetails = (_id) => {
 }
 
 export const openNewIssue = (formData) => {
-	const URL = 'http://localhost:8080/tickets/add-ticket'
+	const URL = `${baseURL}/tickets/add-ticket`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -55,7 +57,7 @@ export const openNewIssue = (formData) => {
 }
 
 export const updateTicketMessage = (ticketID, issueObjt) => {
-	const URL = 'http://localhost:8080/tickets/'
+	const URL = `${baseURL}/tickets/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -74,7 +76,7 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 // Registration Part
 
 export const registrationUser = (formData) => {
-	const URL = 'http://localhost:8080/users/'
+	const URL = `${baseURL}/users/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.post(URL, formData)
@@ -93,7 +95,7 @@ export const registrationUser = (formData) => {
 // Accounte verification Part
 
 export const UserVerificationAccount = (formData) => {
-	const URL = 'http://localhost:8080/users/validation/'
+	const URL = `${baseURL}/users/validation/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.patch(URL, formData)
@@ -111,7 +113,7 @@ export const UserVerificationAccount = (formData) => {
 // User Part
 
 export const userLogin = (loginData) => {
-	const URL = 'http://localhost:8080/users/login'
+	const URL = `${baseURL}/users/login`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.post(URL, loginData)
@@ -136,7 +138,7 @@ export const userLogin = (loginData) => {
 }
 
 export const fetchUser = () => {
-	const URL = 'http://localhost:8080/users/profil/'
+	const URL = `${baseURL}/users/profil/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -157,7 +159,7 @@ export const fetchUser = () => {
 }
 
 export const userLogout = async () => {
-	const URL = 'http://localhost:8080/users/logout'
+	const URL = `${baseURL}/users/logout`
 
 	const logInfo = [
 		sessionStorage.removeItem('accessToken'),
@@ -176,7 +178,7 @@ export const userLogout = async () => {
 }
 
 export const refreshAccessToken = () => {
-	const URL = 'http://localhost:8080/tokens'
+	const URL = `${baseURL}/tokens`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const { refreshToken } = JSON.parse(localStorage.getItem('refreshToken'))
@@ -206,7 +208,7 @@ export const refreshAccessToken = () => {
 }
 
 export const profilUpdate = (_id) => {
-	const URL = 'http://localhost:8080/users/profil/'
+	const URL = `${baseURL}/users/profil/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -236,7 +238,7 @@ export const profilUpdate = (_id) => {
 // Password Part
 
 export const resetPasswordRequest = (email) => {
-	const URL = 'http://localhost:8080/users/forget-password'
+	const URL = `${baseURL}/users/forget-password`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const { data } = await axios.post(URL, { email })
@@ -248,7 +250,7 @@ export const resetPasswordRequest = (email) => {
 }
 
 export const updatePasswordRequest = (formData) => {
-	const URL = 'http://localhost:8080/users/reset-password'
+	const URL = `${baseURL}/users/reset-password`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const { data } = await axios.patch(URL, formData)
@@ -262,7 +264,7 @@ export const updatePasswordRequest = (formData) => {
 // ADMIN
 
 export const createNewUser = (formData) => {
-	const URL = 'http://localhost:8080/users/create-user'
+	const URL = `${baseURL}/users/create-user`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -285,7 +287,7 @@ export const createNewUser = (formData) => {
 }
 
 export const getAllTickets = () => {
-	const URL = 'http://localhost:8080/tickets/all/'
+	const URL = `${baseURL}/tickets/all/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -303,7 +305,7 @@ export const getAllTickets = () => {
 }
 
 export const TicketDetails = (_id) => {
-	const URL = 'http://localhost:8080/tickets/all/'
+	const URL = `${baseURL}/tickets/all/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -320,7 +322,7 @@ export const TicketDetails = (_id) => {
 }
 
 export const ReplyMessage = (ticketID, issueObjt) => {
-	const URL = 'http://localhost:8080/tickets/all/'
+	const URL = `${baseURL}/tickets/all/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -337,7 +339,7 @@ export const ReplyMessage = (ticketID, issueObjt) => {
 }
 
 export const closeTicket = (ticketID, _id, isAdmin, status) => {
-	const URL = 'http://localhost:8080/tickets/close-ticket/'
+	const URL = `${baseURL}/tickets/close-ticket/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -354,7 +356,7 @@ export const closeTicket = (ticketID, _id, isAdmin, status) => {
 }
 
 export const progressTicket = (ticketID, _id, isAdmin, status) => {
-	const URL = 'http://localhost:8080/tickets/inprogress-ticket/'
+	const URL = `${baseURL}/tickets/inprogress-ticket/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -372,7 +374,7 @@ export const progressTicket = (ticketID, _id, isAdmin, status) => {
 }
 
 export const deleteTicket = (ticketID, _id, isAdmin) => {
-	const URL = 'http://localhost:8080/tickets/delete/'
+	const URL = `${baseURL}/tickets/delete/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -390,7 +392,7 @@ export const deleteTicket = (ticketID, _id, isAdmin) => {
 }
 
 export const getUsersList = () => {
-	const URL = 'http://localhost:8080/users/user-list/'
+	const URL = `${baseURL}/users/user-list/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -408,7 +410,7 @@ export const getUsersList = () => {
 }
 
 export const getUserDetails = (_id) => {
-	const URL = 'http://localhost:8080/users/user-details/'
+	const URL = `${baseURL}/users/user-details/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -425,7 +427,7 @@ export const getUserDetails = (_id) => {
 }
 
 export const userUpdatedByAdmin = (_id) => {
-	const URL = 'http://localhost:8080/users/update-user/'
+	const URL = `${baseURL}/users/update-user/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
@@ -455,7 +457,7 @@ export const userUpdatedByAdmin = (_id) => {
 }
 
 export const deleteUser = (userID, _id) => {
-	const URL = 'http://localhost:8080/users/delete-user/'
+	const URL = `${baseURL}/users/delete-user/`
 	return new Promise(async (resolve, reject) => {
 		try {
 			const accessToken = sessionStorage.getItem('accessToken')
