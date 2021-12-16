@@ -114,6 +114,8 @@ export const UserVerificationAccount = (formData) => {
 
 export const userLogin = (loginData) => {
 	const URL = `${baseURL}/users/login`
+	console.log('------URL--------', URL)
+	console.log('------baseURL--------', baseURL)
 	return new Promise(async (resolve, reject) => {
 		try {
 			const res = await axios.post(URL, loginData)
