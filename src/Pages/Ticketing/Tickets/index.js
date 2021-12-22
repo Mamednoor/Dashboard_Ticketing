@@ -41,11 +41,34 @@ export const Ticket = () => {
 	const { isAdmin } = useSelector((state) => state.user.user)
 
 	useEffect(() => {
-		dispatch(fetchTicketDetails(ticketID)) &&
-			dispatch(fetchDetails(ticketID)) &&
-			setTimeout(() => {
-				dispatch(TicketMessageInit())
-			}, 2000)
+		if (isAdmin === true) {
+			return (
+				dispatch(fetchDetails(ticketID)) &&
+				setTimeout(() => {
+					if (
+						ticketMessageSuccess ||
+						ticketMessageError ||
+						statusClose ||
+						statusProgress
+					)
+						return dispatch(TicketMessageInit())
+				}, 2000)
+			)
+		}
+		if (isAdmin === false) {
+			return (
+				dispatch(fetchTicketDetails(ticketID)) &&
+				setTimeout(() => {
+					if (
+						ticketMessageSuccess ||
+						ticketMessageError ||
+						statusClose ||
+						statusProgress
+					)
+						return dispatch(TicketMessageInit())
+				}, 2000)
+			)
+		}
 	}, [
 		dispatch,
 		isAdmin,

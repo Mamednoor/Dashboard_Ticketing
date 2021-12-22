@@ -128,7 +128,6 @@ function UpdatePassword() {
 								min: 8,
 							},
 						]}
-						hasFeedback
 						onChange={handleChange}
 					>
 						<Input.Password name="newPassword" placeholder="Mot de passe" />
