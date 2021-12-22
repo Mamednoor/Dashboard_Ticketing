@@ -45,7 +45,13 @@ export const Ticket = () => {
 			return (
 				dispatch(fetchDetails(ticketID)) &&
 				setTimeout(() => {
-					dispatch(TicketMessageInit())
+					if (
+						ticketMessageSuccess ||
+						ticketMessageError ||
+						statusClose ||
+						statusProgress
+					)
+						return dispatch(TicketMessageInit())
 				}, 2000)
 			)
 		}
@@ -53,7 +59,13 @@ export const Ticket = () => {
 			return (
 				dispatch(fetchTicketDetails(ticketID)) &&
 				setTimeout(() => {
-					dispatch(TicketMessageInit())
+					if (
+						ticketMessageSuccess ||
+						ticketMessageError ||
+						statusClose ||
+						statusProgress
+					)
+						return dispatch(TicketMessageInit())
 				}, 2000)
 			)
 		}
