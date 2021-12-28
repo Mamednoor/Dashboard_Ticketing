@@ -25,12 +25,20 @@ En tant qu'administrateur
 
 - Visualisation rapide des différents états des tickets et utilisateurs
 
+## `Initialisation du projet`
+
+- Projet initialisé avec npx create-react-app
+- Gestionnaire de packet utilisé : [Yarn](https://yarnpkg.com/)
+
+Lancement du projet avec la commande : "yarn start"
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
+
 ## `Dépendances`
 
 ### Veuillez lancer Yarn ou npm install afin d'installer les dépendances
 
 - [antd](https://ant.design/)
-- [axios](https://ant.design/) 
+- [axios](https://ant.design/)
 - [chart.js](https://www.chartjs.org/)
 - [react-chartjs-2](https://react-chartjs-2.netlify.app/)
 - [react-redux](https://react-redux.js.org/)
@@ -38,7 +46,4 @@ En tant qu'administrateur
 - [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start)
 - [styled-components](https://styled-components.com/)
 
-## `Lancement du projet`
 
-Lancer le projet avec la commande : "yarn start"
-Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
