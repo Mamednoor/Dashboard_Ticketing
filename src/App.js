@@ -7,7 +7,6 @@ import ResetPassword from './Components/Auth/ResetPassword/ResetPassword'
 import UpdatePassword from './Components/Auth/ResetPassword/UpdatePassword'
 import AccountValidation from './Components/Auth/AccountValidation/AccountValidation'
 import Dashboard from './Pages/Dashboard'
-import Home from './Pages/Home'
 import Ticketing from './Pages/Ticketing'
 import UsersList from './Pages/UsersList'
 import NotFound from './Components/404'
@@ -22,7 +21,6 @@ import AddUser from './Pages/UsersList/AddUser'
 import Profil from './Pages/Profil'
 import UpdateUser from './Pages/UsersList/UserDetails/UpdateUser'
 
-import './App.css'
 import 'antd/dist/antd.css'
 
 function App() {
@@ -48,18 +46,9 @@ function App() {
 					/>
 					<Route
 						exact
-						path="/home"
-						element={
-							<PrivateRoute>
-								<Home />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						exact
 						path="/dashboard"
 						element={
-							<PrivateRoute>
+							<PrivateRoute keyPath="1">
 								<Dashboard />
 							</PrivateRoute>
 						}
@@ -68,7 +57,7 @@ function App() {
 						exact
 						path="/ticketing"
 						element={
-							<PrivateRoute>
+							<PrivateRoute keyPath="2">
 								<Ticketing />
 							</PrivateRoute>
 						}
@@ -95,7 +84,7 @@ function App() {
 						exact
 						path="/userslist"
 						element={
-							<PrivateRoute>
+							<PrivateRoute keyPath="3">
 								<UsersList />
 							</PrivateRoute>
 						}
@@ -122,7 +111,7 @@ function App() {
 						exact
 						path="/profil"
 						element={
-							<PrivateRoute>
+							<PrivateRoute keyPath="4">
 								<Profil />
 							</PrivateRoute>
 						}

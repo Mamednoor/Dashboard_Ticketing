@@ -1,0 +1,11 @@
+.dashboardContent {
+	padding-top: 20vh;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+	.dashboardContent {
+		padding: 6vh;
+		flex-wrap: wrap;
+	}
+}

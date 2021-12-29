@@ -37,7 +37,8 @@ body {
    font-size: 1.1rem;
    font-family: 'Roboto', sans-serif;
    font-weight:300;
-   transition: all ${(props) => props.theme.transitionTime};
+	 -webkit-font-smoothing: antialiased;
+	 -moz-osx-font-smoothing: grayscale;
  }
 
  .index-logo {

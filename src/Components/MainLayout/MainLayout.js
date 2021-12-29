@@ -10,10 +10,10 @@ import 'antd/dist/antd.css'
 
 const { Content } = Layout
 
-export const MainLayout = ({ children }) => {
+export const MainLayout = ({ children, keyPath }) => {
 	return (
 		<Layout>
-			<LayoutSider />
+			<LayoutSider keyPath={keyPath} />
 			<Layout>
 				<LayoutHeader />
 				<Content
@@ -37,4 +37,5 @@ MainLayout.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
+	keyPath: PropTypes.string,
 }

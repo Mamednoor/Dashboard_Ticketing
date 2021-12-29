@@ -37,7 +37,7 @@ function Ticketing() {
 	}, [deleting, dispatch, isAdmin, statusClose, statusProgress])
 
 	return (
-		<>
+		<Centered style={{ flexDirection: 'column' }}>
 			<ContentHeader
 				breadcrumbItems={[
 					{
@@ -49,7 +49,7 @@ function Ticketing() {
 					},
 				]}
 			/>
-			<Space>
+			<Space style={{ flexWrap: 'wrap' }}>
 				<SearchFieldTicket />
 				<Link to="/add-ticket">
 					<Btn style={{ padding: '0.5rem 1rem' }}>
@@ -83,7 +83,7 @@ function Ticketing() {
 				</Centered>
 			)}
 			<Table />
-		</>
+		</Centered>
 	)
 }
 

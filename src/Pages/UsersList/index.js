@@ -53,7 +53,7 @@ function UserList() {
 					/>
 				</Centered>
 			)}
-			<Space>
+			<Space style={{ flexWrap: 'wrap' }}>
 				<SearchFieldUser />
 				<Link to="/adduser">
 					<Btn style={{ padding: '0.5rem 1rem' }}>

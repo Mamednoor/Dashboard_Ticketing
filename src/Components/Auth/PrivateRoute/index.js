@@ -12,7 +12,7 @@ import { Spin } from '../../Spin'
 import { Centered } from '../../Centered'
 import { getUser } from '../../../Pages/Dashboard/userAction'
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ children, keyPath }) {
 	const dispatch = useDispatch()
 	const { isLoading, isAuth } = useSelector((state) => state.login)
 	const { user } = useSelector((state) => state.user)
@@ -38,7 +38,7 @@ function PrivateRoute({ children }) {
 					<Spin />
 				</Centered>
 			) : isAuth ? (
-				<MainLayout> {children} </MainLayout>
+				<MainLayout keyPath={keyPath}> {children} </MainLayout>
 			) : (
 				<Navigate to="/" />
 			)}
@@ -53,4 +53,5 @@ PrivateRoute.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
+	keyPath: PropTypes.string,
 }

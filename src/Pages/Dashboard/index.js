@@ -16,6 +16,8 @@ import { ContentHeader } from '../../Components/ContentHeader'
 import { Centered } from '../../Components/Centered'
 import { Wrapper } from '../../Components/Wrapper'
 
+import './style.css'
+
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 function Dashboard() {
@@ -82,14 +84,8 @@ function Dashboard() {
 					},
 				]}
 			/>
-			<Centered
-				style={{
-					paddingTop: '20vh',
-					justifyContent: 'space-evenly',
-					flexWrap: 'wrap',
-				}}
-			>
-				<Space>
+			<Centered className="dashboardContent">
+				<Space style={{ flexWrap: 'wrap' }}>
 					<Wrapper>
 						<P>Nombre de tickets total: {tickets?.length}</P>
 						<P>Nombre de tickets en attente: {pendingTicket?.length}</P>
@@ -102,7 +98,7 @@ function Dashboard() {
 				</Space>
 
 				{isAdmin && (
-					<Space>
+					<Space style={{ flexWrap: 'wrap' }}>
 						<Wrapper>
 							<P>Nombre d‘utilisateur: {usersList?.length}</P>
 							<P>Nombre d‘utilisateur validé: {verifiedUser?.length}</P>

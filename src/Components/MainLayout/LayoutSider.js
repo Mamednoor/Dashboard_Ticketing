@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,7 +10,6 @@ import { Layout, Menu, Button } from 'antd'
 import {
 	DashboardOutlined,
 	TeamOutlined,
-	// AppstoreOutlined,
 	FolderOutlined,
 	UserOutlined,
 	LogoutOutlined,
@@ -21,7 +21,7 @@ import logo from '../../Assets/logo-MAK.png'
 
 const { Sider } = Layout
 
-export const LayoutSider = () => {
+export const LayoutSider = ({ keyPath }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { isAdmin } = useSelector((state) => state.user.user)
@@ -52,14 +52,7 @@ export const LayoutSider = () => {
 					<img src={logo} alt="Logo de la societé MAK" />
 				</Link>
 			</Wrapper>
-			<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-				{/* <Menu.Item key="1">
-					<Link to="/home">
-						<AppstoreOutlined />
-						<span className="nav-text">Acceuil</span>
-					</Link>
-				</Menu.Item> */}
-
+			<Menu theme="dark" mode="inline" selectedKeys={keyPath}>
 				<Menu.Item key="1">
 					<Link to="/dashboard">
 						<DashboardOutlined />
@@ -91,7 +84,7 @@ export const LayoutSider = () => {
 						<span className="nav-text">Profil</span>
 					</Link>
 				</Menu.Item>
-				<Menu.Item key="5">
+				<Menu.Item>
 					<Button style={{ padding: 0 }} onClick={() => logOut()} type="link">
 						<LogoutOutlined />
 						<span className="nav-text">Déconnexion</span>
@@ -100,4 +93,8 @@ export const LayoutSider = () => {
 			</Menu>
 		</Sider>
 	)
+}
+
+LayoutSider.propTypes = {
+	keyPath: PropTypes.string,
 }

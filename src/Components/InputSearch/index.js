@@ -8,6 +8,13 @@ import { Input } from 'antd'
 const InputSearch = styled(Input.Search)`
 	width: 550px;
 	margin: 10px;
+	padding: 20px;
+
+	@media (max-width: 768px) {
+		width: 300px;
+		margin: 0px;
+		padding: 0px;
+	}
 `
 
 export const SearchFieldTicket = () => {
