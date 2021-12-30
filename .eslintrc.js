@@ -21,11 +21,11 @@ module.exports = {
   },
   plugins: ['react', 'jsx-a11y'],
   rules: {
+    'prettier/prettier': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'no-var': 'error',
     'brace-style': 'error',
     'prefer-template': 'error',
-    radix: 'error',
     'space-before-blocks': 'error',
     'import/prefer-default-export': 'off',
   },
