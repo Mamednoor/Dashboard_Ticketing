@@ -7,17 +7,17 @@ import { deletingUser } from '../usersListActions'
 import { Button } from 'antd'
 
 export function EraseUser({ userID }) {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-	return (
-		<>
-			<Button danger type="link" onClick={() => dispatch(deletingUser(userID))}>
-				Suppression
-			</Button>
-		</>
-	)
+  return (
+    <>
+      <Button danger type="link" onClick={() => dispatch(deletingUser(userID))}>
+        Suppression
+      </Button>
+    </>
+  )
 }
 
 EraseUser.propTypes = {
-	userID: PropTypes.string.isRequired,
+  userID: PropTypes.string.isRequired,
 }

@@ -12,18 +12,18 @@ import profilReducer from './Pages/Profil/profilSlice'
 import profilUpdateReducer from './Pages/UsersList/UserDetails/updateUserSlice'
 
 const store = configureStore({
-	reducer: {
-		tickets: ticketsReducer,
-		login: loginReducer,
-		user: userReducer,
-		addTicket: newTicketReducer,
-		registration: registrationReducer,
-		resetPassword: resetPasswordReducer,
-		userList: usersListReducer,
-		addNewUser: addNewUserReducer,
-		profil: profilReducer,
-		profilUpdate: profilUpdateReducer,
-	},
+  reducer: {
+    tickets: ticketsReducer,
+    login: loginReducer,
+    user: userReducer,
+    addTicket: newTicketReducer,
+    registration: registrationReducer,
+    resetPassword: resetPasswordReducer,
+    userList: usersListReducer,
+    addNewUser: addNewUserReducer,
+    profil: profilReducer,
+    profilUpdate: profilUpdateReducer,
+  },
 })
 
 export default store

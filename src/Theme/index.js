@@ -1,26 +1,26 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const lightTheme = {
-	bodyBg: 'whitesmoke',
-	text: 'black',
-	borderColor: '#ededed',
-	mutedText: '#b1b1b1',
-	transitionTime: '.25s',
-	links: '#212121',
-	Btn: '#1890ff',
-	BtnHov: '#1d39c4',
-	Shadow: 'black',
+  bodyBg: 'whitesmoke',
+  text: 'black',
+  borderColor: '#ededed',
+  mutedText: '#b1b1b1',
+  transitionTime: '.25s',
+  links: '#212121',
+  Btn: '#1890ff',
+  BtnHov: '#1d39c4',
+  Shadow: 'black',
 }
 export const darkTheme = {
-	bodyBg: '#141a2c',
-	text: '#c1c1c1',
-	borderColor: '#212121',
-	mutedText: '#515151',
-	transitionTime: '.25s',
-	links: '#ededed',
-	Btn: '#1890ff',
-	BtnHovValidate: '#52c41a',
-	Shadow: 'white',
+  bodyBg: '#141a2c',
+  text: '#c1c1c1',
+  borderColor: '#212121',
+  mutedText: '#515151',
+  transitionTime: '.25s',
+  links: '#ededed',
+  Btn: '#1890ff',
+  BtnHovValidate: '#52c41a',
+  Shadow: 'white',
 }
 
 export const GlobalStyle = createGlobalStyle`

@@ -16,55 +16,55 @@ import { Btn } from '../../Components/Button'
 import Space from '../../Components/Space'
 
 function UserList() {
-	const dispatch = useDispatch()
-	const { usersList, searchTerm, deleting } = useSelector(
-		(state) => state.userList,
-	)
+  const dispatch = useDispatch()
+  const { usersList, searchTerm, deleting } = useSelector(
+    (state) => state.userList,
+  )
 
-	useEffect(() => {
-		dispatch(fetchAllUsers())
+  useEffect(() => {
+    dispatch(fetchAllUsers())
 
-		if (deleting)
-			return setTimeout(() => {
-				dispatch(UserMessageInit())
-			}, 2000)
-	}, [deleting, dispatch])
+    if (deleting)
+      return setTimeout(() => {
+        dispatch(UserMessageInit())
+      }, 2000)
+  }, [deleting, dispatch])
 
-	return (
-		<>
-			<ContentHeader
-				breadcrumbItems={[
-					{
-						name: 'Dashboard',
-						path: `/dashboard`,
-					},
-					{
-						name: 'Liste des utilisateurs',
-					},
-				]}
-			/>
+  return (
+    <>
+      <ContentHeader
+        breadcrumbItems={[
+          {
+            name: 'Dashboard',
+            path: `/dashboard`,
+          },
+          {
+            name: 'Liste des utilisateurs',
+          },
+        ]}
+      />
 
-			{deleting && (
-				<Centered style={{ paddingTop: '10px' }}>
-					<Alert
-						message="L'utilisateur à été supprimé, cette action est irréversible"
-						type="error"
-						showIcon
-					/>
-				</Centered>
-			)}
-			<Space style={{ flexWrap: 'wrap' }}>
-				<SearchFieldUser />
-				<Link to="/adduser">
-					<Btn style={{ padding: '0.5rem 1rem' }}>
-						Ajouter un nouvel utilisateur
-					</Btn>
-				</Link>
-			</Space>
-			<UserCount usersList={usersList} />
-			<UserTable searchTerm={searchTerm} />
-		</>
-	)
+      {deleting && (
+        <Centered style={{ paddingTop: '10px' }}>
+          <Alert
+            message="L'utilisateur à été supprimé, cette action est irréversible"
+            type="error"
+            showIcon
+          />
+        </Centered>
+      )}
+      <Space style={{ flexWrap: 'wrap' }}>
+        <SearchFieldUser />
+        <Link to="/adduser">
+          <Btn style={{ padding: '0.5rem 1rem' }}>
+            Ajouter un nouvel utilisateur
+          </Btn>
+        </Link>
+      </Space>
+      <UserCount usersList={usersList} />
+      <UserTable searchTerm={searchTerm} />
+    </>
+  )
 }
 
 export default UserList

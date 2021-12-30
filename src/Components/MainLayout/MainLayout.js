@@ -11,31 +11,31 @@ import 'antd/dist/antd.css'
 const { Content } = Layout
 
 export const MainLayout = ({ children, keyPath }) => {
-	return (
-		<Layout>
-			<LayoutSider keyPath={keyPath} />
-			<Layout>
-				<LayoutHeader />
-				<Content
-					style={{
-						minHeight: '83vh',
-						margin: '24px 16px 0',
-						overflow: 'initial',
-						background: '#fff',
-					}}
-				>
-					{children}
-				</Content>
-				<LayoutFooter />
-			</Layout>
-		</Layout>
-	)
+  return (
+    <Layout>
+      <LayoutSider keyPath={keyPath} />
+      <Layout>
+        <LayoutHeader />
+        <Content
+          style={{
+            minHeight: '83vh',
+            margin: '24px 16px 0',
+            overflow: 'initial',
+            background: '#fff',
+          }}
+        >
+          {children}
+        </Content>
+        <LayoutFooter />
+      </Layout>
+    </Layout>
+  )
 }
 
 MainLayout.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-	keyPath: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  keyPath: PropTypes.string,
 }

@@ -8,19 +8,19 @@ import { BreadcrumbComponent } from '../Breadcrumb'
 import { CustomDivider } from '../Divider'
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `
 
 export const ContentHeader = ({ breadcrumbItems = {} }) => (
-	<Container>
-		<Space direction="vertical" size="large">
-			<BreadcrumbComponent items={breadcrumbItems} />
-		</Space>
-		<CustomDivider />
-	</Container>
+  <Container>
+    <Space direction="vertical" size="large">
+      <BreadcrumbComponent items={breadcrumbItems} />
+    </Space>
+    <CustomDivider />
+  </Container>
 )
 
 ContentHeader.propTypes = {
-	breadcrumbItems: PropTypes.object.isRequired,
+  breadcrumbItems: PropTypes.object.isRequired,
 }
