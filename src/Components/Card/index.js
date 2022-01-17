@@ -4,6 +4,8 @@ import { Card } from 'antd'
 
 export const ContentCard = styled(Card)`
   margin: 0 auto;
+  box-shadow: 9px 7px 20px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
   .ant-card-body {
     border-radius: 0.25rem;
     overflow: auto;
