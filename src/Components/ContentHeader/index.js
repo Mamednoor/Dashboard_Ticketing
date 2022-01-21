@@ -12,15 +12,17 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-export const ContentHeader = ({ breadcrumbItems = {} }) => (
-  <Container>
-    <Space direction="vertical" size="large">
-      <BreadcrumbComponent items={breadcrumbItems} />
-    </Space>
-    <CustomDivider />
-  </Container>
-)
+export const ContentHeader = ({ breadcrumbItems }) => {
+  return (
+    <Container>
+      <Space direction="vertical" size="large">
+        <BreadcrumbComponent items={breadcrumbItems} />
+      </Space>
+      <CustomDivider />
+    </Container>
+  )
+}
 
 ContentHeader.propTypes = {
-  breadcrumbItems: PropTypes.object.isRequired,
+  breadcrumbItems: PropTypes.array.isRequired,
 }

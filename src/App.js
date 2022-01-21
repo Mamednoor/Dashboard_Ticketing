@@ -66,7 +66,7 @@ function App() {
             exact
             path="/ticket/:ticketID"
             element={
-              <PrivateRoute>
+              <PrivateRoute keyPath="2">
                 <Ticket />
               </PrivateRoute>
             }
@@ -75,7 +75,7 @@ function App() {
             exact
             path="/add-ticket"
             element={
-              <PrivateRoute>
+              <PrivateRoute keyPath="2">
                 <AddTicket />
               </PrivateRoute>
             }
@@ -93,7 +93,7 @@ function App() {
             exact
             path="/user/:userID"
             element={
-              <PrivateRoute>
+              <PrivateRoute keyPath="3">
                 <UserDetails />
               </PrivateRoute>
             }
@@ -102,7 +102,7 @@ function App() {
             exact
             path="/adduser"
             element={
-              <PrivateRoute>
+              <PrivateRoute keyPath="3">
                 <AddUser />
               </PrivateRoute>
             }
@@ -120,7 +120,7 @@ function App() {
             exact
             path="/update-user/:userID"
             element={
-              <PrivateRoute>
+              <PrivateRoute keyPath="3">
                 <UpdateUser />
               </PrivateRoute>
             }

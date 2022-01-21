@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,9 +24,6 @@ function AddTicket() {
   )
 
   const [form] = Form.useForm()
-  const [subject] = useState('')
-  const [message] = useState('')
-  const [priority] = useState('Normal')
 
   useEffect(() => {
     if (status === 'success')
@@ -82,6 +79,7 @@ function AddTicket() {
             onFinish={handleSubmit}
             autoComplete="off"
             style={{ width: '500px' }}
+            initialValues={{ subject: '', message: '', priority: 'Normal' }}
           >
             <FormItem
               name="subject"
@@ -95,11 +93,11 @@ function AddTicket() {
                 },
               ]}
             >
-              <Input name="subject" value={subject} />
+              <Input name="subject" />
             </FormItem>
 
             <FormItem name="priority" label="Priorité">
-              <Select defaultValue="Normal" value={priority}>
+              <Select defaultValue="Normal">
                 <Option value="Basse">Basse</Option>
                 <Option value="Normal">Normal</Option>
                 <Option value="Haute">Haute</Option>
@@ -120,7 +118,6 @@ function AddTicket() {
             >
               <Input.TextArea
                 name="message"
-                value={message}
                 maxLength="500"
                 showCount
                 style={{ width: '500px' }}

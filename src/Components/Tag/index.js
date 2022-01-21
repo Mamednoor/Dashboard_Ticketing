@@ -48,9 +48,9 @@ export const PriorityTag = ({ priority }) => {
 }
 
 StatusTag.propTypes = {
-  status: PropTypes.object.isRequired,
+  status: PropTypes.string,
 }
 
 PriorityTag.propTypes = {
-  priority: PropTypes.object.isRequired,
+  priority: PropTypes.string,
 }

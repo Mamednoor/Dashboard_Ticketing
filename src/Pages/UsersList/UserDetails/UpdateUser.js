@@ -32,7 +32,7 @@ function UpdateUser() {
   const [form] = Form.useForm()
   const [validationError, setValidationError] = useState(VerificationError)
 
-  const { isLoading, userSelected } = useSelector((state) => state.userList)
+  const { isLoading, userselected } = useSelector((state) => state.userList)
 
   const { condition } = useSelector((state) => state.profilUpdate)
 
@@ -85,7 +85,15 @@ function UpdateUser() {
       <ContentHeader
         breadcrumbItems={[
           {
-            name: "Détails d'un l'utilisateur",
+            name: 'Dashboard',
+            path: '/dashboard',
+          },
+          {
+            name: 'Liste des utilisateurs',
+            path: `/userslist`,
+          },
+          {
+            name: `Profil de ${userselected?.firstname} ${userselected?.lastname}`,
             path: `/user/${userID}`,
           },
           {
@@ -129,14 +137,14 @@ function UpdateUser() {
                 onFinishFailed={onFinishFailed}
                 {...layout}
                 initialValues={{
-                  newFirstname: userSelected?.firstname,
-                  newLastname: userSelected?.lastname,
-                  newEmail: userSelected?.email,
-                  newPhone: userSelected?.phone,
-                  newCompany: userSelected?.company,
-                  newAddress: userSelected?.address,
-                  newisAdmin: userSelected?.isAdmin,
-                  newisVerified: userSelected?.isVerified,
+                  newFirstname: userselected?.firstname,
+                  newLastname: userselected?.lastname,
+                  newEmail: userselected?.email,
+                  newPhone: userselected?.phone,
+                  newCompany: userselected?.company,
+                  newAddress: userselected?.address,
+                  newisAdmin: userselected?.isAdmin,
+                  newisVerified: userselected?.isVerified,
                 }}
               >
                 <FormItem

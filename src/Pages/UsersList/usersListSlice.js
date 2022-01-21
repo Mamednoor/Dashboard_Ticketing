@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   usersList: [],
   isLoading: false,
-  userSelected: {},
+  userselected: {},
   success: false,
   fail: '',
   error: false,
@@ -34,7 +34,7 @@ const UsersListSlice = createSlice({
     },
     fetchUserDetailsSuccess: (state, { payload }) => {
       state.isLoading = false
-      state.userSelected = payload
+      state.userselected = payload
       state.error = false
     },
     fetchUserDetailsError: (state) => {

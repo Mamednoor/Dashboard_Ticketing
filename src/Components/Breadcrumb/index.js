@@ -45,5 +45,5 @@ export const BreadcrumbComponent = ({ items }) => {
 }
 
 BreadcrumbComponent.propTypes = {
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
 }

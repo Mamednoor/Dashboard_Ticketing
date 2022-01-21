@@ -84,7 +84,7 @@ export const LayoutSider = ({ keyPath }) => {
             <span className="nav-text">Profil</span>
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key="5">
           <Button style={{ padding: 0 }} onClick={() => logOut()} type="link">
             <LogoutOutlined />
             <span className="nav-text">Déconnexion</span>

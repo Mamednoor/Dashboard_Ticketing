@@ -49,5 +49,5 @@ function TicketCount({ tickets }) {
 export default TicketCount
 
 TicketCount.propTypes = {
-  tickets: PropTypes.object.isRequired,
+  tickets: PropTypes.array.isRequired,
 }

@@ -27,7 +27,7 @@ function UserDetails() {
   const dispatch = useDispatch()
 
   const { tickets } = useSelector((state) => state.tickets)
-  const { isLoading, error, userSelected } = useSelector(
+  const { isLoading, error, userselected } = useSelector(
     (state) => state.userList,
   )
 
@@ -77,11 +77,15 @@ function UserDetails() {
       <ContentHeader
         breadcrumbItems={[
           {
+            name: 'Dashboard',
+            path: `/dashboard`,
+          },
+          {
             name: 'Liste des utilisateurs',
             path: `/userslist`,
           },
           {
-            name: "Détails d'un utilisateur",
+            name: `Profil de ${userselected?.firstname} ${userselected?.lastname}`,
           },
         ]}
       />
@@ -112,31 +116,31 @@ function UserDetails() {
             title={
               <Flex>
                 <Tag
-                  color={userSelected?.isAdmin ? 'purple' : 'geekblue'}
-                  key={userSelected?.isAdmin}
+                  color={userselected?.isAdmin ? 'purple' : 'geekblue'}
+                  key={userselected?.isAdmin}
                 >
-                  {userSelected?.isAdmin ? 'Admin' : 'Utilisateur'}
+                  {userselected?.isAdmin ? 'Admin' : 'Utilisateur'}
                 </Tag>
 
                 <Tag
-                  color={userSelected?.isVerified ? 'green' : 'volcano'}
-                  key={userSelected?.isVerified}
+                  color={userselected?.isVerified ? 'green' : 'volcano'}
+                  key={userselected?.isVerified}
                 >
-                  {userSelected?.isVerified ? 'Validé' : 'En attente'}
+                  {userselected?.isVerified ? 'Validé' : 'En attente'}
                 </Tag>
-                <Link to={`/update-user/${userID}`} userSelected={userSelected}>
+                <Link to={`/update-user/${userID}`} userselected={userselected}>
                   Modifier
                 </Link>
               </Flex>
             }
           >
-            <P>Prénom : {userSelected?.firstname}</P>
-            <P>Nom : {userSelected?.lastname}</P>
-            <P>Email : {userSelected?.email}</P>
-            <P>Téléphone : {userSelected?.phone}</P>
-            <P>Entreprise : {userSelected?.company}</P>
-            <P>Adresse : {userSelected?.address}</P>
-            <P>Crée le : {formatDate(userSelected?.createdOn)}</P>
+            <P>Prénom : {userselected?.firstname}</P>
+            <P>Nom : {userselected?.lastname}</P>
+            <P>Email : {userselected?.email}</P>
+            <P>Téléphone : {userselected?.phone}</P>
+            <P>Entreprise : {userselected?.company}</P>
+            <P>Adresse : {userselected?.address}</P>
+            <P>Crée le : {formatDate(userselected?.createdOn)}</P>
           </UserCard>
           <Space>
             <Wrapper>
