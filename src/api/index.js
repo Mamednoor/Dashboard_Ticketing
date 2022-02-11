@@ -77,7 +77,7 @@ export const updateTicketMessage = (ticketID, issueObjt) => {
 // Registration Part
 
 export const registrationUser = (formData) => {
-  const URL = `${baseURL}/users/`
+  const URL = `${baseURL}/users/registration/`
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(URL, formData)
